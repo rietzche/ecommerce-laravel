@@ -27,7 +27,7 @@
 					<div class="tab-content">			
 						<!-- Belum Bayar -->
 						<div class="tab-pane active" id="highlighted-justified-tab1">
-							<div class="table-responsive">
+							@for($i=0; $i<=2; $i++)
 								<table class="table">
 									<thead>
 										<tr>
@@ -40,7 +40,7 @@
 									<tbody>
 										@for($i=0; $i<=1; $i++)
 										<tr>
-											<td style="width: 600px">
+											<td style="width: 50%">
 												<div class="detail-cart">
 													<img src="/assets/images/1.jpg" style="width: 50px; height: 50px">
 													<p>SWEATER SUPREME VM Sweater Cardigan Polos Rajut ZIpper Hoodie Long Knitt Abu Muda X7O6Z (<b>Ukuran : 210x100</b> ) (<b>warna : merah</b>)</p>
@@ -57,39 +57,110 @@
 									</tbody>
 								</table>
 
-								<div style="background-color: #fafdff;">
-									<div style="padding: 20px; float: right;">
-										<h1 style="color: #ff6600;float: right; margin-top: -1px; margin-right: 85px"><b>Rp 11.000</b></h1>
-										<h6 style="color: #999999;float: right; margin-right: 10px">Jumlah Harus Dibayar :</h6>
+								<div class="foot-table">
+									<div class="header">
+										<h1>Rp 11.000</h1>
+										<h6>Jumlah Harus Dibayar :</h6>
 									</div>
 									<div class="clear"></div>
 
-									<div style="float: right; margin: 0px 80px 30px 0px">
-										<a href="/info pembayaran" style="margin:0px 3px" class="btn btn-info">Transfer Sekarang</a>
-										<!-- <a href="/rincian pesanan" style="margin:0px 3px" class="btn btn-default">Tampilkan Rincian Pesanan</a> -->
+									<div class="footer-table">
+										<a href="/pembayaran" class="btn btn-info">Transfer Sekarang</a>
 										<a href="" onclick="ConfirmDelete()" style="margin:0px 3px" class="btn btn-default">Batalkan Pesanan</a>
 									</div>
 									
 									<div class="clear"></div>
 								</div>
-							</div>
+							@endfor
 						</div>
 						<!-- /Belum Bayar -->
 						
 						<!-- Belum Dikirimkan -->
 						<div class="tab-pane" id="highlighted-justified-tab2">
+							<!-- jika tidak ada orderan -->
 							<div class="panel-no-orders">
 								<img src="/assets/images/icon_list.png" >
 								<p class="text-muted">Belum ada pesanan</p>
+							</div>
+							<!-- jika ada orderan -->
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr>
+											<th><h6>Produk</h6></th>
+											<th class="text-muted">Harga Satuan</th>
+											<th class="text-muted">Jumlah</th>
+											<th class="text-muted">Subtotal Produk</th>
+											<th class="text-muted">Keterangan</th>
+										</tr>
+									</thead>
+									<tbody>
+										@for($i=0; $i<=1; $i++)
+										<tr>
+											<td style="width: 50%">
+												<div class="detail-cart">
+													<img src="/assets/images/1.jpg" style="width: 50px; height: 50px">
+													<p>SWEATER SUPREME VM Sweater Cardigan Polos Rajut ZIpper Hoodie Long Knitt Abu Muda X7O6Z (<b>Ukuran : 210x100</b> ) (<b>warna : merah</b>)</p>
+													<div class="clear"></div>
+												</div>
+											</td>
+											<td>Rp. 150.000</td>
+											<td>
+												<p>1</p>
+											</td>
+											<td>Rp. 120.000</td>
+											<td>
+												<span class="label label-info">sedang dikemas</span>
+											</td>
+										</tr>
+										@endfor
+									</tbody>
+								</table>
 							</div>
 						</div>
 						<!-- /Belum Dikirimkan -->
 
 						<!-- Belum Diterima -->
 						<div class="tab-pane" id="highlighted-justified-tab3">
+							<!-- jika tidak ada orderan -->
 							<div class="panel-no-orders">
 								<img src="/assets/images/icon_list.png" >
 								<p class="text-muted">Belum ada pesanan</p>
+							</div>
+							<!-- jika ada orderan -->
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr>
+											<th><h6>Produk</h6></th>
+											<th class="text-muted">Harga Satuan</th>
+											<th class="text-muted">Jumlah</th>
+											<th class="text-muted">Subtotal Produk</th>
+											<th class="text-muted">Keterangan</th>
+										</tr>
+									</thead>
+									<tbody>
+										@for($i=0; $i<=1; $i++)
+										<tr>
+											<td style="width: 50%">
+												<div class="detail-cart">
+													<img src="/assets/images/1.jpg" style="width: 50px; height: 50px">
+													<p>SWEATER SUPREME VM Sweater Cardigan Polos Rajut ZIpper Hoodie Long Knitt Abu Muda X7O6Z (<b>Ukuran : 210x100</b> ) (<b>warna : merah</b>)</p>
+													<div class="clear"></div>
+												</div>
+											</td>
+											<td>Rp. 150.000</td>
+											<td>
+												<p>1</p>
+											</td>
+											<td>Rp. 120.000</td>
+											<td>
+												<span class="label label-info">sedang dikirim</span>
+											</td>
+										</tr>
+										@endfor
+									</tbody>
+								</table>
 							</div>
 						</div>
 						<!-- /Belum Diterima -->

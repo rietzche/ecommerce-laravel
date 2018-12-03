@@ -28,13 +28,14 @@
 						<td>Peralatan Dapur</td>
 						<td>120</td>
 						<td>
-							<div class="text-nowrap">
-								<i class="icon-star-full2 text-size-base text-warning-300"></i>
-								<i class="icon-star-full2 text-size-base text-warning-300"></i>
-								<i class="icon-star-full2 text-size-base text-warning-300"></i>
-								<i class="icon-star-full2 text-size-base text-warning-300"></i>
-								<i class="icon-star-full2 text-size-base text-warning-300"></i>
-							</div>
+							<fieldset class="rating-sm">
+						       	<input type="radio" id="star5" name="rating" disabled="" value="5" /><label class = "full" for="star5" title="Sangat Baik"></label>
+							    <input type="radio" id="star4" name="rating" disabled="" value="4" /><label class = "full" for="star4" title="Baik"></label>
+							    <input type="radio" id="star3" name="rating" disabled="" value="3" checked="" /><label class = "full" for="star3" title="Standar"></label>
+							    <input type="radio" id="star2" name="rating" disabled="" value="2" /><label class = "full" for="star2" title="Kurang Baik"></label>
+							    <input type="radio" id="star1" name="rating" disabled="" value="1" /><label class = "full" for="star1" title="Tidak Baik"></label>
+							</fieldset>
+							<div class="clear"></div>
 							<div class="text-muted">85 reviews</div>
 						</td>
 						<td>3 Orders</td>

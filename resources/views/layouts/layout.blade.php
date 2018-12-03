@@ -15,7 +15,8 @@
 		<link href="/assets/css/colors.css" rel="stylesheet" type="text/css">
 		<!-- /global stylesheets -->
 		<link rel="stylesheet" type="text/css" href="/css/styleme.css">
-
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
 		<!-- Core JS files -->
 		<script type="text/javascript" src="/assets/js/plugins/loaders/pace.min.js"></script>
 		<script type="text/javascript" src="/assets/js/core/libraries/jquery.min.js"></script>
@@ -25,7 +26,6 @@
 
 		<!-- Theme JS files -->
 		<script type="text/javascript" src="/assets/js/plugins/ui/prism.min.js"></script>
-		<script type="text/javascript" src="/assets/js/core/app.js"></script>
 		<!-- /theme JS files -->
 
 		<!-- Theme JS files -->
@@ -41,6 +41,8 @@
 		<script type="text/javascript" src="/assets/js/pages/uploader_bootstrap.js"></script>
 		<!-- /theme JS files -->
 
+		<script type="text/javascript" src="/assets/js/core/app.js"></script>
+
 		<!-- sweet_alert -->
 		<link rel="stylesheet" href="/assets/sweetalert2/sweetalert2.min.css">
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -53,8 +55,8 @@
 	<div class="navbar navbar-default navbar-component" style="padding: 15px">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="">
-				<img src="assets/images/logo.jpg" class="logoSO" alt="">
-				<img src="assets/images/logo_dark.png" alt="">
+				<img src="/assets/images/logo.jpg" class="logoSO" alt="">
+				<img src="/assets/images/logo_dark.png" alt="">
 			</a>
 
 			<ul class="nav navbar-nav pull-right visible-xs-block">
@@ -147,7 +149,7 @@
 			
 			<div style="padding-top: 40px; float:right">
 				<div style="margin-left: 30px; float: left;">
-					<img src="assets/images/logo_dark.png" alt="" style="float: left;width:220px; height:35px">
+					<img src="/assets/images/logo_dark.png" alt="" style="float: left;width:220px; height:35px">
 				</div>
 
 				<div class="foot-element capitalize" style="margin-top: -10px; margin-left: 30px">

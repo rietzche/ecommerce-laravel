@@ -50,7 +50,7 @@
 						<tr>
 							<form action="{{ route('category.update', $category->id) }}" method="post">
 								<td>{{$i}}</td>
-								<td>KSO{{$i}}</td>
+								<td>KSO{{$category->id}}</td>
 								@csrf
 								@method('PUT')
 								<td><input type="text" value="{{ $category->name }}" name="name" class="form-control"></td>

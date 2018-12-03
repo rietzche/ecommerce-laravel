@@ -84,23 +84,39 @@ class ProductController extends BaseController
             'description' => $req->description,
             'price' => $req->price,
         ]);
-        if (is_array($pict) || is_object($pict))
-        {
-            foreach ($pict as $p)
-            {
-                $this->picture->create([
-                    'id_product' => $product->id,
-                    'picture' => base64_encode(file_get_contents($p)),
-                ]);
-            }
-        }
-        else
-        {
-            $this->picture->create([
-                'id_product' => $product->id,
-                'picture' => base64_encode(file_get_contents($pict)),
-            ]);
-        }
+
+        $file = $req->file('pictures');
+        $ext  = $file->getClientOriginalExtension();
+        $newName = rand(100000,1001238912).".".$ext;
+        $file->move('uploads/foto-produk',$newName);
+
+        $this->picture->create([
+            'id_product' => $product->id,
+            'picture' => $newName, //base64_encode(file_get_contents($p)),
+
+        ]);
+
+        // if (is_array($pict) || is_object($pict))
+        // {
+        //     foreach ($pict as $p)
+        //     {
+        //         $this->picture->create([
+        //             'id_product' => $product->id,
+        //             'picture' => $newName, //base64_encode(file_get_contents($p)),
+
+        //         ]);
+        //     }
+        // }
+        // else
+        // {
+        //     $this->picture->create([
+        //         'id_product' => $product->id,
+                
+        //         'picture' => $newName, //base64_encode(file_get_contents($pict)),
+
+        //     ]);
+        // }
+
         $this->stock->create([
             'id_product' => $product->id,
             'stock' => $req->stock,
@@ -117,12 +133,21 @@ class ProductController extends BaseController
     }
 
     public function update(Request $req, $id)
-    {
+{
+        $file = $req->file('pictures');
+        $ext  = $file->getClientOriginalExtension();
+        $newName = rand(100000,1001238912).".".$ext;
+        $file->move('uploads/foto-produk',$newName);
+
         $product = $this->product->find($id);
         $product->update([
             'name' => $req->name,
             'id_category' => $req->category,
-            'pictures' => $picts,
+            
+            // 'pictures' => $picts,
+
+            'picture' => $newName, //base64_encode(file_get_contents($p)),
+        
             'description' => $req->description,
             'price' => $req->price,
         ]);

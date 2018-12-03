@@ -4,7 +4,7 @@
 
 	<h5 class="panel-title">Tambah Data Produk</h5>
 
-	<form action="{{ route('product.create') }}" method="post">
+	<form action="{{ route('product.create') }}" method="post" enctype="multipart/form-data">
 		@csrf
 		<div class="row">
 			<div class="col-lg-6">
@@ -17,7 +17,6 @@
 
 						<div class="form-group">
 							<label>Deskripsi Produk :</label>
-							<!-- <textarea name="editor-full" id="editor-full" rows="4" cols="4"></textarea> -->
 							<textarea name="description" required="" class="ckeditor" id="ckedtor"></textarea>
 						</div>
 					</div>
@@ -55,12 +54,12 @@
 						<div class="form-group">
 							<label>Gambar Produk :</label>
 							<input type="file" accept="*/images" name="pictures" class="form-control">
+							<input type="file" class="file-input-ajax" multiple="multiple">
 						</div>
 
-					<div class="form-group">
+						<!--<div class="form-group">
 							<label>Preview Gambar :</label>
-						</div>
-						
+						</div> -->					
 						<div class="form-group right">
 							<a href="{{URL::previous()}}" class="btn btn-danger">Batal</a>
 							<input type="submit" value="Tambahkan" class="btn btn-info">

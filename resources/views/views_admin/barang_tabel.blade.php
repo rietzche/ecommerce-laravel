@@ -31,11 +31,11 @@
 					@foreach($products as $product)
 					<tr>
 						<td>{{$i}}</td>
-						<td>PSO{{$i}}</td>
+						<td>PSO{{$product->id}}</td>
 						<td>{{ $product->name }}</td>
 						<td>{{ App\Category::find($product->id_category)->name }}</td>
 						<td>Rp. {{ $product->price }}</td>
-						<td><span class="label label-info">{{ App\Stock::where('id_product', $product->id)->first()->stock }}</span></td>
+						<td><span class="label label-info">{{ App\Stock::where('id_product', $product->id)->value('stock') }}</span></td>
 						<td class="text-center">
 							<a href="" class="btn btn-info btn-sm"><i class="icon-pencil7"></i> Update</a>
 							<a class="btn btn-danger btn-sm"

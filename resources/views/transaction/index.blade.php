@@ -34,8 +34,8 @@
 				<!-- Multiple file upload -->
 				<div class="panel-body">
 					<p class="text-semibold">Upload bukti transfer:</p>
-					<div class="dropzone" id="dropzone_multiple" style="width: 280px; margin: 0px auto">
-						<input type="file" name="bukti">
+					<div class="dropzone" id="dropzone_multiple" style="width: 260px; margin: 0px auto">
+						<input type="file" class="file-input" data-show-caption="false" data-show-upload="false">
 					</div>
 				</div>
 				<!-- /multiple file upload -->

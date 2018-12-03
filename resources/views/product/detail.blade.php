@@ -5,10 +5,13 @@
 	<div class="bg-detail">
 		<!-- foto detail produk -->
 		<div class="detail-gambar">
-			<img src="/assets/images/gambar1.jpg" class="gambar-utama">
+			<div class="gambar-utama">
+				<img src="/uploads/foto-produk/{{(App\Picture::where('id_product', '=', $product->id))->value('picture')}}">
+			</div>
 			<div class="gambar-kecil">
-				@foreach((App\Picture::where('id_product', '=', $product->id)) as $picture)
-				<img src="{{ base64_decode(App\Picture::find($product->id)) }}">
+				{{! $pict = (App\Picture::where('id_product', '=', $product->id))->get() }}
+				@foreach($pict as $p)
+				<img src="/uploads/foto-produk/{{ $p->picture }}">
 				@endforeach
 				<div class="clear"></div>
 			</div>
@@ -22,13 +25,15 @@
 				<h4>{{ $product->name }}</h4>
 				<div style="float: right;">
 					<p style="margin-bottom: -5px">Penilaian produk</p>
-					<div class="text-nowrap" style="float:left;">
-						<i class="icon-star-full2 text-size-base text-warning-300"></i>
-						<i class="icon-star-full2 text-size-base text-warning-300"></i>
-						<i class="icon-star-full2 text-size-base text-warning-300"></i>
-						<i class="icon-star-full2 text-size-base text-warning-300"></i>
-						<i class="icon-star-full2 text-size-base text-warning-300"></i>
-						<p class="text-muted text-star2">(30)</p>
+					<div class="text-nowrap" style="float:left; margin-top: 5px">
+						<fieldset class="rating-sm">
+							<p class="text-muted text-star">(30)</p>
+						    <input type="radio" id="star5" name="rating" disabled="" value="5" /><label class = "full" for="star5" title="Sangat Baik"></label>
+						    <input type="radio" id="star4" name="rating" disabled="" value="4" /><label class = "full" for="star4" title="Baik"></label>
+						    <input type="radio" id="star3" name="rating" disabled="" value="3" checked="" /><label class = "full" for="star3" title="Standar"></label>
+						    <input type="radio" id="star2" name="rating" disabled="" value="2" /><label class = "full" for="star2" title="Kurang Baik"></label>
+						    <input type="radio" id="star1" name="rating" disabled="" value="1" /><label class = "full" for="star1" title="Tidak Baik"></label>
+						</fieldset>
 					</div>
 				</div>
 				<div class="clear"></div>
@@ -103,13 +108,43 @@
 				<hr>
 				<div style="">
 					<h6 class="text-muted">Deskripsi Produk : </h6>
-					<p>{{ $product->description }}</p>
+					<p>{!! $product->description !!}</p>
 				</div>
 			</div>
 		</form>
 		<!-- deskripsi produk -->
 		<div class="clear"></div>
+	</div>
 
+	<div class="bg-detail">
+		<div class="panel panel-flat">
+			<div class="panel-heading">
+				<h5 class="panel-title">Penilaian Produk</h5>
+			</div>
+		</div>
+		@for($i=0;$i<=2;$i++)
+		<div class="review-panel">
+			<img src="/assets/images/placeholder.jpg">		
+			<div class="review-coment">			
+				<p>Febri Ardi Saputra</p>
+				<div class="text-nowrap" style="margin-top: -10px">
+					<fieldset class="rating-sm">
+					    <input type="radio" id="star5" name="rating" disabled="" value="5" /><label class = "full" for="star5" title="Sangat Baik"></label>
+					    <input type="radio" id="star4" name="rating" disabled="" value="4" /><label class = "full" for="star4" title="Baik"></label>
+					    <input type="radio" id="star3" name="rating" disabled="" value="3" checked="" /><label class = "full" for="star3" title="Standar"></label>
+					    <input type="radio" id="star2" name="rating" disabled="" value="2" /><label class = "full" for="star2" title="Kurang Baik"></label>
+					    <input type="radio" id="star1" name="rating" disabled="" value="1" /><label class = "full" for="star1" title="Tidak Baik"></label>
+					</fieldset>
+					<div class="clear"></div>
+				</div>
+				<p style="margin-top: 5px">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. </p>
+				<p class="text-muted">{{date('Y-m-d G:i')}}</p>
+			</div>
+			<div class="clear"></div>
+			<hr>
+		</div>
+		@endfor
 	</div>
 </div>
 @endsection

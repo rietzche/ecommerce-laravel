@@ -235,15 +235,15 @@ a.btn-belanja:hover{
 }
 
 /*list produk---------------------------------------------------*/
-.produk-content {
+/*.produk-content {
   width: 80%; 
   float: right;
-}
+}*/
 
 .panel-produk {
   float: left; 
   color: #000;
-  margin: 10px; 
+  margin: 9px; 
   border: 1px solid #cccccc; 
   background-color: #ffffff; 
   width: 210px;
@@ -268,7 +268,7 @@ a.btn-belanja:hover{
 }
 
 .p-produk {
-  height: 45px;
+  /*height: 45px;*/
 }
 
 .p-harga {
@@ -296,8 +296,13 @@ a.btn-belanja:hover{
   float: left;
 }
 
-img.gambar-utama {
+.gambar-utama {
   border: 1px solid #cccccc; 
+  width: 100%; 
+  height: 500px
+}
+
+.gambar-utama img{
   width: 100%; 
   height: 100%
 }
@@ -631,11 +636,11 @@ a.text-tab {
 /****** Style untuk rating star *****/
 
 .rating { 
-  float:left;
-  /* text-align: center; */
-  /* width: 57%;
-  margin: 0px auto; */
-  border: none;
+  float: left;
+  /*text-align: center;*/
+  /*width: 57%;*/
+  /*margin: 0px auto;*/
+  /*border: none;*/
 }
 
 .rating > input { display: none; } 
@@ -668,4 +673,86 @@ a.text-tab {
 .rating > label:hover ~ input:checked ~ label, /* seleksi hover */
 .rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
 
+
+/*rate start mini*/
+.rating-sm { 
+  float: left;
+  /*text-align: center;*/
+  /*width: 57%;*/
+  /*margin: 0px auto;*/
+  /*border: none;*/
+}
+
+.rating-sm > input { display: none; } 
+.rating-sm > label:before { 
+  margin-right: 5px;
+  font-size: 0.9em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating-sm > .half:before { 
+  content: "\f089";
+  position: absolute;
+}
+
+.rating-sm > label { 
+  color: #ddd; 
+  float: right;
+}
+
+/***** CSS untuk hover nya *****/
+
+.rating-sm > input:checked ~ label, /* memperlihatkan warna emas pada saat di klik */
+/*.rating-sm:not(:checked) > label:hover, /* hover untuk star berikutnya */
+/*.rating-sm:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover untuk star sebelumnya  */
+
+/*.rating-sm > input:checked + label:hover, /* hover ketika mengganti rating
+.rating-sm > input:checked ~ label:hover,
+.rating-sm > label:hover ~ input:checked ~ label, /* seleksi hover */
+.rating-sm > input:checked ~ label:hover ~ label { color: #FFE700;  }
+
+
+/*/rate start mini*/
+
 /*rate start*/
+
+
+
+/*foot table*/
+
+.foot-table {
+  background-color: #fafdff;
+}
+
+.foot-table > .header {
+  padding: 20px; 
+  float: right;
+}
+
+.foot-table > .header > h1{
+  color: #ff6600;
+  float: right; 
+  font-weight: bold;
+  margin-top: -1px; 
+  margin-right: 85px  
+}
+
+.foot-table > .header > h6{
+  color: #999999;
+  float: right;
+  margin-right: 10px;
+}
+
+.footer-table{
+  float: right; 
+  margin: 0px 80px 30px 0px;
+}
+
+.footer-table > a{
+  margin:0px 3px
+}
+
+
+/*foot table*/

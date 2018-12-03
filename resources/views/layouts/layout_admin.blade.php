@@ -8,6 +8,7 @@
 	<title>Shabby Organizer - Admin</title>
 
 	<link rel="stylesheet" type="text/css" href="/css/styleme.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
 	<!-- Global stylesheets -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
@@ -41,7 +42,15 @@
 	<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
 
 	<!-- Theme JS files -->
+	<script type="text/javascript" src="/assets/js/plugins/uploaders/fileinput/plugins/purify.min.js"></script>
+	<script type="text/javascript" src="/assets/js/plugins/uploaders/fileinput/plugins/sortable.min.js"></script>
+	<script type="text/javascript" src="/assets/js/plugins/uploaders/fileinput/fileinput.min.js"></script>
+
+	<!-- /theme JS files -->
+
+	<!-- Theme JS files -->
 	<script type="text/javascript" src="/assets/js/core/app.js"></script>
+	<script type="text/javascript" src="/assets/js/pages/uploader_bootstrap.js"></script>
 	<script type="text/javascript" src="/assets/js/pages/editor_ckeditor.js"></script>
 	<script type="text/javascript" src="/assets/js/pages/layout_fixed_custom.js"></script>
 	<!-- /theme JS files -->
@@ -114,7 +123,7 @@
 					<div class="sidebar-user">
 						<div class="category-content">
 							<div class="media">
-								<a href="#" class="media-left"><img src="assets/images/placeholder.jpg" class="img-circle img-sm" alt=""></a>
+								<a href="#" class="media-left"><img src="/assets/images/placeholder.jpg" class="img-circle img-sm" alt=""></a>
 								<div class="media-body">
 									<span class="media-heading text-semibold">Victoria Baker</span>
 									<div class="text-size-mini text-muted">
@@ -143,7 +152,17 @@
 								<!-- Main -->
 								<li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
 								<li {{{ (Request::is('admin/dashboard') ? 'class=active' : '') }}}><a href="/admin/dashboard"><i class="icon-home4"></i><span>Dashboard</span></a></li>
-								<li {{{ (Request::is('admin/tabel pesanan') ? 'class=active' : '') }}}><a href="/admin/tabel pesanan"><i class="glyphicon glyphicon-list-alt"></i> <span>Pesanan</span></a></li>
+								
+								<li>
+									<a href="javascript:void(0)"><i class="glyphicon glyphicon-list-alt"></i> <span>Pesanan</span></a>
+									<ul>
+										<li {{{ (Request::is('admin/tabel pesanan') ? 'class=active' : '') }}}>
+											<a href="/admin/tabel pesanan">Terbaru</a></li>
+										<li><a href="/admin/tabel pesanan">Sedang Dikirim</a></li>
+										<li><a href="/admin/tabel pesanan">Terkirim</a></li>
+									</ul>
+								</li>
+
 								<li {{{ (Request::is('admin/tabel pelanggan') ? 'class=active' : '') }}}><a href="/admin/tabel pelanggan"><i class="icon-user-check"></i><span>Pelanggan</span></a></li>
 								<li {{{ (Request::is('admin/tabel kategori') ? 'class=active' : '') }}}><a href="/admin/tabel kategori"><i class="glyphicon glyphicon-tag"></i> <span>Kategori</span></a></li>
 								<li>
