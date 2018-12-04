@@ -86,7 +86,7 @@
 					<a href="/carts">
 						<i class="icon-cart text-info"></i>
 						<span class="visible-xs-inline-block position-right text-info">Keranjang</span>
-						<span class="badge bg-warning-400">2</span>
+						
 					</a>
 				</li>
 				<li><a href="/login" class="text-info">Login</a></li>

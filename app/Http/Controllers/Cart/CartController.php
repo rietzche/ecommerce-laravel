@@ -91,22 +91,19 @@ class CartController extends BaseController
         }
     }
 
-    public function edit()
+    public function update()
     {
-        $cart = $this->cart->find($id);
-        return view('cart.edit', $cart);
-    }
+        $jum = $req->jum;
 
-    public function update(Request $req, $id)
-    {
-        $cart = $this->cart->find($id);
-        $cart->update([
-            'id_product' => $req->product,
-            'id_user' => Auth::user()->id,
-            'quantity' => $req->quantity,
-        ]);
+        foreach($jum as $key => $q)
+        {
+            $cart = $this->cart->find($key);
+            $cart->update([
+                'quantity' => $q,
+            ]);
+        }
 
-        return redirect('carts');
+        return redirect('/checkout');
     }
 
     public function delete($id)
