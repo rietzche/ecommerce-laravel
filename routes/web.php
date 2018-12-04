@@ -63,6 +63,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function()
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/carts', 'Cart\CartController@index')->name('carts');
     Route::post('/cart', 'Cart\CartController@create')->name('cart.create');
+    Route::put('/cart', 'Cart\CartController@update')->name('cart.update');
     Route::delete('/cart/{id}', 'Cart\CartController@delete')->name('cart.delete');
 });
 
