@@ -21,8 +21,13 @@ class PictureService extends Controller
         return $this->newPicture()->create($req);
     }
 
-    public function update($id, $req)
+    public function where($id)
     {
-        return $this->find($id)->update($req);
+        return $this->newPicture()->where('id_product', $id)->first(); //find($id)->update($req);
+    }
+
+    public function whereAll($id)
+    {
+        return $this->newPicture()->where('id_product', $id); //find($id)->update($req);
     }
 }

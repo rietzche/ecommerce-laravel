@@ -15,9 +15,13 @@ class CreateStocksTable extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_product');
+            $table->unsignedInteger('id_product');
             $table->integer('stock');
             $table->timestamps();
+        });
+
+        Schema::table('stocks', function(Blueprint $kolom) {
+            $kolom->foreign('id_product')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

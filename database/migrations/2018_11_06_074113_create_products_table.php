@@ -16,10 +16,14 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('id_category');
+            $table->unsignedInteger('id_category');
             $table->string('description');
             $table->integer('price');
             $table->timestamps();
+        });
+
+        Schema::table('products', function(Blueprint $kolom) {
+            $kolom->foreign('id_category')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

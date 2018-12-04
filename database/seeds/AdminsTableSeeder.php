@@ -14,7 +14,6 @@ class AdminsTableSeeder extends Seeder
         \App\Admin::insert([
           [
             'name'		  => 'Febri Ardi Saputra',
-            'no_rekening' => '4213102392312',
             'email'		  => 'febri@gmail.com',
             'password'    => bcrypt('febri1234'),
             'created_at'  => \Carbon\Carbon::now('Asia/Jakarta'),

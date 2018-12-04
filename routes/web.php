@@ -37,6 +37,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function()
     Route::get('tabel barang', 'Product\ProductController@indexadmin')->name('product.index');
     Route::get('/tambah barang', 'Product\ProductController@new')->name('product.new');
     Route::post('/product', 'Product\ProductController@create')->name('product.create');
+    Route::get('/edit barang/{id}', 'Product\ProductController@edit')->name('product.edit');
+    Route::post('/product update/{id}', 'Product\ProductController@update')->name('product.update');
     Route::delete('/product/{id}', 'Product\ProductController@delete')->name('product.delete');
 
     Route::get('edit barang', function(){
