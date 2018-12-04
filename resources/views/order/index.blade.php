@@ -60,22 +60,27 @@
 					</tr>
 				</thead>
 				<tbody>
-					@for($i=0; $i<=3; $i++)
+					{{!! $tmp = 0 }}
+					{{!! $jum = 0 }}
+					@foreach($carts as $cart)
+					{{! $product = App\Product::find($cart->id_product) }}
 					<tr>
 						<td style="width: 600px">
 							<div class="detail-cart">
-								<img src="/assets/images/1.jpg" style="width: 50px; height: 50px">
-								<p>SWEATER SUPREME VM Sweater Cardigan Polos Rajut ZIpper Hoodie Long Knitt Abu Muda X7O6Z (<b>Ukuran : 210x100</b> ) (<b>warna : merah</b>)</p>
+								<img src="/uploads/foto-produk/{{ App\Picture::where('id_product', $product->id)->first()->picture }}" style="width: 50px; height: 50px">
+								<p>{{ $product->name }} (<b>Ukuran : 210x100</b> ) (<b>warna : merah</b>)</p>
 								<div class="clear"></div>
 							</div>
 						</td>
-						<td>Rp. 150.000</td>
+						<td>Rp. {{ $product->price }}</td>
 						<td>
-							<p>1</p>
+							<p>{{ $cart->quantity }}</p>
 						</td>
-						<td>Rp. 120.000</td>
+						<td>Rp. {{ number_format($tmp = $product->price * $cart->quantity, 0, ",", ".") }}</td>
+						{{! $jum = $jum + $tmp }}
+						{{!! $tmp = 0 }}
 					</tr>
-					@endfor
+					@endforeach
 					<tr style="background-color: #fafdff;">
 						<td><h6 style="float: right;color:#269900;margin-top: -20px">Opsi Pengiriman :</h6></td>
 						<td>
@@ -84,13 +89,13 @@
 						</td>
 						<td><a href="" data-toggle="modal" data-target="#modal_default">UBAH</a>
 						</td>
-						<td>Rp. 11.000</td>
+						<td>Rp. 2.000</td>
 					</tr>
 					<tr style="background-color: #fafdff;">
 						<td></td>
 						<td></td>
-						<td><p style="color: #999999"><b>Total Pesanan (2 Produk)</b><p></td>
-						<td><h5 style="color: #ff6600; margin-top:-2px;">Rp. 11.000</h5></td>
+						<td><p style="color: #999999"><b>Total Pesanan ({{ count($carts) }} Produk)</b><p></td>
+						<td><h5 style="color: #ff6600; margin-top:-2px;">Rp. {{ number_format($jum, 0, ",", ".") }}</h5></td>
 					</tr>
 				</tbody>
 			</table>
@@ -180,7 +185,7 @@
 				<table style="width: 100%">
 					<tr>
 						<td><h6>Subtotal untuk Produk</h6></td>
-						<td><h6>Rp. 10000</h6></td>
+						<td><h6>Rp. {{ number_format($jum, 0, ",", ".") }}</h6></td>
 					</tr>
 					<tr>
 						<td><h6>Total Ongkos Kirim</h6></td>
@@ -188,7 +193,7 @@
 					</tr>
 					<tr>
 						<td><h6>Total Pembayaran</h6></td>
-						<td><h4 style="font-weight: bold; color:#ff6600;">Rp. 2000000</h4></td>
+						<td><h4 style="font-weight: bold; color:#ff6600;">Rp. {{ number_format($jum+2000, 0, ",", ".") }}</h4></td>
 					</tr>
 					<tr>
 						<td></td>

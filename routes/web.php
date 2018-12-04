@@ -64,13 +64,19 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/carts', 'Cart\CartController@index')->name('carts');
     Route::post('/cart', 'Cart\CartController@create')->name('cart.create');
     Route::put('/cart', 'Cart\CartController@update')->name('cart.update');
-    Route::post('/buy now', 'Cart\CartController@buyNow')->name('cart.buyNow');
     Route::delete('/cart/{id}', 'Cart\CartController@delete')->name('cart.delete');
+
+    Route::get('/checkout', 'Order\OrderController@index')->name('order');
+
+    Route::post('/address', 'Address\AddressController@create')->name('address.create');
+    Route::put('/address/{id}', 'Address\AddressController@update')->name('address.update');
+    Route::delete('/address{id}', 'Address\AddressController@delete')->name('address.delete');
+
+    Route::get('/pembayaran', 'Order\OrderController@pembayaran')->name('pembayaran');
+    Route::post('/buy now', 'Cart\CartController@buyNow')->name('cart.buyNow');
+    Route::get('/transaction', 'Transaction\TransactionController@index')->name('transaction');
 });
 
-Route::get('/checkout', 'Order\OrderController@index')->name('order');
-Route::get('/pembayaran', 'Order\OrderController@pembayaran')->name('pembayaran');
-Route::get('/transaction', 'Transaction\TransactionController@index')->name('transaction');
 Route::get('/belanjaanku', 'Belanjaan\BelanjaanController@index')->name('belanjaanku');
 
 // ===============================ROUTE ADMIN====================================
