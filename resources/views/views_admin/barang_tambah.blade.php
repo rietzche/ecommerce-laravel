@@ -46,14 +46,14 @@
 								<label>Harga :</label>
 								<div class="input-group">
 									<span class="input-group-addon"><b>Rp</b></span>
-									<input type="number" name="price" class="form-control" required="" placeholder="">
+									<input type="text" name="price" class="form-control" required="" placeholder="">
 								</div>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label>Gambar Produk :</label>
-							<input type="file" accept="*/images" name="pictures" class="form-control">
+							<input type="file" accept="image/x-png,image/gif,image/jpeg/*" name="pictures" class="form-control">
 							<input type="file" class="file-input-ajax" multiple="multiple">
 						</div>
 

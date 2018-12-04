@@ -64,6 +64,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/carts', 'Cart\CartController@index')->name('carts');
     Route::post('/cart', 'Cart\CartController@create')->name('cart.create');
     Route::put('/cart', 'Cart\CartController@update')->name('cart.update');
+    Route::post('/buy now', 'Cart\CartController@buyNow')->name('cart.buyNow');
     Route::delete('/cart/{id}', 'Cart\CartController@delete')->name('cart.delete');
 });
 
