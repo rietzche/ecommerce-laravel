@@ -156,10 +156,12 @@
 								<li>
 									<a href="javascript:void(0)"><i class="glyphicon glyphicon-list-alt"></i> <span>Pesanan</span></a>
 									<ul>
-										<li {{{ (Request::is('admin/tabel pesanan') ? 'class=active' : '') }}}>
+										<li {{{ (Request::is('admin/tabel pesanan/*') ? 'class=active' : '') }}}>
 											<a href="/admin/tabel pesanan">Terbaru</a></li>
-										<li><a href="/admin/tabel pesanan">Sedang Dikirim</a></li>
-										<li><a href="/admin/tabel pesanan">Terkirim</a></li>
+										<li {{{ (Request::is('admin/tabel pesanan/*') ? 'class=active' : '') }}}>
+											<a href="/admin/tabel pesanan">Sedang Dikirim</a></li>
+										<li {{{ (Request::is('admin/tabel pesanan/*') ? 'class=active' : '') }}}>
+											<a href="/admin/tabel pesanan">Terkirim</a></li>
 									</ul>
 								</li>
 

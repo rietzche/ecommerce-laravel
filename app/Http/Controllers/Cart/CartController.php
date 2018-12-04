@@ -59,6 +59,38 @@ class CartController extends BaseController
         }
     }
 
+    public function buyNow(Request $req)
+    {
+        $products = Cart::select('id_product')->where('id_user', Auth::user()->id)->get();
+        $condition = true;
+
+        foreach($products as $product)
+        {
+            if($req->product == $product->id_product)
+            {
+                $condition = false;
+            }
+        }
+
+        if( $condition == true )
+        {
+            $this->cart->create([
+                'id_product' => $req->product,
+                'id_user' => Auth::user()->id,
+                'quantity' => $req->quantity,
+            ]);
+    
+            alert()->success('Menambahkan ke keranjang!', 'Berhasil');
+            return redirect('carts');
+        }
+        elseif( $condition == false )
+        {
+            alert()->warning('Barang sudah ada di keranjang!', 'Warning');
+            $condition = true;
+            return redirect()->back();
+        }
+    }
+
     public function edit()
     {
         $cart = $this->cart->find($id);

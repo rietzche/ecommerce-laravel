@@ -52,7 +52,7 @@
 				</div>
 				<div class="body-panel-produk">
 					<p class="p-produk">{{ $product->name }} </p>
-					<p class="p-harga">Rp. {{ $product->price }}</p>
+					<p class="p-harga">Rp. {{ number_format($product->price,0 , "," , ".") }}</p>
 					<div style="float: right;">
 						<fieldset class="rating-sm">
 							<p class="text-muted text-star">(30)</p>
