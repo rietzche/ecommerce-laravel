@@ -6,12 +6,17 @@
 		<!-- foto detail produk -->
 		<div class="detail-gambar">
 			<div class="gambar-utama">
-				<img src="/uploads/foto-produk/{{(App\Picture::where('id_product', '=', $product->id))->value('picture')}}">
+				<img src="/uploads/foto-produk/{{(App\Picture::where('id_product', '=', $product->id))->value('picture')}}" id="myImg">
 			</div>
 			<div class="gambar-kecil">
 				{{! $pict = (App\Picture::where('id_product', '=', $product->id))->get() }}
 				@foreach($pict as $p)
-				<img src="/uploads/foto-produk/{{ $p->picture }}">
+				<img onclick="myFunct{{$p->id}}()" src="/uploads/foto-produk/{{ $p->picture }}">
+				<script>
+					function myFunct{{$p->id}}() {
+					    document.getElementById("myImg").src = "/uploads/foto-produk/{{ $p->picture }}";
+					}
+				</script>
 				@endforeach
 				<div class="clear"></div>
 			</div>

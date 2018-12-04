@@ -38,7 +38,7 @@
 				<a href="">Terbaru</a>
 				<a href="">Terlaris</a>
 				<select class="dropdown-harga">
-					<option>Harga</option>
+					<option hidden>Harga</option>
 					<option>Harga Tertinggi</option>
 					<option>Harga Terendah</option>
 				</select>
