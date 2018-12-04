@@ -91,7 +91,7 @@ class CartController extends BaseController
         }
     }
 
-    public function update()
+    public function update(Request $req)
     {
         $jum = $req->jum;
 
