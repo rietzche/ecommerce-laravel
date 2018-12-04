@@ -9,4 +9,8 @@ class Stock extends Model
     protected $fillable = [
         'id_product', 'stock',
     ];
+
+    function FKStock(){
+    	return $this->belongsTo(Product::class);
+    }
 }

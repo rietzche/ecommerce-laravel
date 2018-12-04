@@ -15,9 +15,12 @@ class CreatePicturesTable extends Migration
     {
         Schema::create('pictures', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_product');
+            $table->unsignedInteger('id_product');
             $table->string('picture');
             $table->timestamps();
+        });
+        Schema::table('pictures', function(Blueprint $kolom) {
+            $kolom->foreign('id_product')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

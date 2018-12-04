@@ -15,11 +15,16 @@ class CreateRatingsTable extends Migration
     {
         Schema::create('ratings', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_product');
-            $table->integer('id_user');
+            $table->unsignedInteger('id_product');
+            $table->unsignedInteger('id_user');
             $table->integer('rate');
             $table->string('review');
             $table->timestamps();
+        });
+
+        Schema::table('ratings', function(Blueprint $kolom) {
+            $kolom->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $kolom->foreign('id_product')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

@@ -36,10 +36,10 @@
 			</div>
 			<div class="clear"></div>
 			<div class="bar-harga">
-				<h4 style="font-weight: bold;">Rp. {{ number_format($product->price,0 , "," , ".") }}</h4>
+				<h4 style="font-weight: bold;">Rp. {{ number_format($product->price, 0, "," , ".") }}</h4>
 			</div>
 
-			<div class="actgroup">
+			<!-- <div class="actgroup">
 				<h6 class="text-muted">Pilihan warna :</h6>
 				@for($i=1;$i<=3;$i++)
 				<div class="radio">
@@ -62,7 +62,8 @@
 					</label>
 				</div>
 				@endfor
-			</div>
+			</div> -->
+			
 			<div class="clear"></div>
 			<form action="/cart" method="post" style="float: left; margin-right: -40px">
 			@csrf
