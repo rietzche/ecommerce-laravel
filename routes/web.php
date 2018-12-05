@@ -21,6 +21,12 @@ Route::get('/product/{id}', 'Product\ProductController@detail')->name('product')
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/panduan', function () {
+    return view('panduan');
+});
+Route::get('/kontak', function () {
+    return view('kontak');
+});
 
 Route::get('/admin/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
 Route::post('/admin/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
