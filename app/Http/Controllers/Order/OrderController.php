@@ -20,9 +20,9 @@ class OrderController extends Controller
     public function index()
     {
         $carts = $this->cart->where(Auth::user()->id);
-        $addresses = $this->address->where(Auth::user()->id);
-        return view('order.index')->with('carts', $carts)
-                                ->with('addresses', $addresses);
+        // $addresses = $this->address->where(Auth::user()->id);
+        return view('order.index')->with('carts', $carts);
+                                // ->with('addresses', $addresses);
     }
 
     public function pembayaran()
