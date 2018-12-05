@@ -758,3 +758,24 @@ a.text-tab {
 
 
 /*foot table*/
+
+/*contact*/
+.contact {
+  float: left; 
+  color: #595959;
+  margin-top: 3px;
+  margin-left: 10px
+}
+
+.contact a{
+  color: #595959;
+}
+
+.contact img{
+  border-radius: 100%; 
+  width: 30px;
+  height: 30px; 
+  margin: 4px
+}
+
+/*contact*/

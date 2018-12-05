@@ -27,4 +27,20 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    function PKUser1() {
+        return $this->hasMany(Cart::class);
+    }
+    
+    function PKUser2() {
+        return $this->hasMany(Order::class);
+    }
+    
+    function PKUser3() {
+        return $this->hasMany(Rating::class);
+    }
+    
+    function PKUser4() {
+        return $this->hasMany(Transaction::class);
+    }
 }

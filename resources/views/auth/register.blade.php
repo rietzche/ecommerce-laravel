@@ -61,7 +61,7 @@
 							<div class="form-group">
 								<div class="checkbox">
 									<label>
-										<input type="checkbox" class="styled">
+										<input type="checkbox" required="" class="styled">
 										I Accept <a href="#">terms of service</a>
 									</label>
 								</div>

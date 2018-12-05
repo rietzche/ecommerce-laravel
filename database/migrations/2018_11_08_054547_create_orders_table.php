@@ -16,11 +16,16 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->string('code');
-            $table->integer('id_user');
-            $table->integer('id_product');
+            $table->unsignedInteger('id_user');
+            $table->unsignedInteger('id_product');
             $table->integer('quantity');
-            $table->integer('status');
+            $table->integer('price_total');
             $table->timestamps();
+        });
+
+        Schema::table('orders', function(Blueprint $kolom) {
+            $kolom->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $kolom->foreign('id_product')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

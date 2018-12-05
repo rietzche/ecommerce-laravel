@@ -6,12 +6,17 @@
 		<!-- foto detail produk -->
 		<div class="detail-gambar">
 			<div class="gambar-utama">
-				<img src="/uploads/foto-produk/{{(App\Picture::where('id_product', '=', $product->id))->value('picture')}}">
+				<img src="/uploads/foto-produk/{{(App\Picture::where('id_product', '=', $product->id))->value('picture')}}" id="myImg">
 			</div>
 			<div class="gambar-kecil">
 				{{! $pict = (App\Picture::where('id_product', '=', $product->id))->get() }}
 				@foreach($pict as $p)
-				<img src="/uploads/foto-produk/{{ $p->picture }}">
+				<img onclick="myFunct{{$p->id}}()" src="/uploads/foto-produk/{{ $p->picture }}">
+				<script>
+					function myFunct{{$p->id}}() {
+					    document.getElementById("myImg").src = "/uploads/foto-produk/{{ $p->picture }}";
+					}
+				</script>
 				@endforeach
 				<div class="clear"></div>
 			</div>
@@ -36,10 +41,10 @@
 			</div>
 			<div class="clear"></div>
 			<div class="bar-harga">
-				<h4 style="font-weight: bold;">Rp. {{ number_format($product->price,0 , "," , ".") }}</h4>
+				<h4 style="font-weight: bold;">Rp. {{ number_format($product->price, 0, "," , ".") }}</h4>
 			</div>
 
-			<div class="actgroup">
+			<!-- <div class="actgroup">
 				<h6 class="text-muted">Pilihan warna :</h6>
 				@for($i=1;$i<=3;$i++)
 				<div class="radio">
@@ -62,7 +67,8 @@
 					</label>
 				</div>
 				@endfor
-			</div>
+			</div> -->
+			
 			<div class="clear"></div>
 			<form action="/cart" method="post" style="float: left; margin-right: -40px">
 			@csrf

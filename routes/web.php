@@ -21,6 +21,12 @@ Route::get('/product/{id}', 'Product\ProductController@detail')->name('product')
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/panduan', function () {
+    return view('panduan');
+});
+Route::get('/kontak', function () {
+    return view('kontak');
+});
 
 Route::get('/admin/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
 Route::post('/admin/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
@@ -37,6 +43,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function()
     Route::get('tabel barang', 'Product\ProductController@indexadmin')->name('product.index');
     Route::get('/tambah barang', 'Product\ProductController@new')->name('product.new');
     Route::post('/product', 'Product\ProductController@create')->name('product.create');
+    Route::get('/edit barang/{id}', 'Product\ProductController@edit')->name('product.edit');
+    Route::post('/product update/{id}', 'Product\ProductController@update')->name('product.update');
     Route::delete('/product/{id}', 'Product\ProductController@delete')->name('product.delete');
 
     Route::get('edit barang', function(){

@@ -16,9 +16,15 @@ class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('order_code');
-            $table->integer('id_user');
+            $table->unsignedInteger('id_user');
             $table->string('proof');
+            $table->integer('status');
+            $table->integer('price_total');
             $table->timestamps();
+        });
+
+        Schema::table('transactions', function(Blueprint $kolom) {
+            $kolom->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

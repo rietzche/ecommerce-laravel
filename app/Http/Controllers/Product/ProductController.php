@@ -85,37 +85,18 @@ class ProductController extends BaseController
             'price' => $req->price,
         ]);
 
-        $file = $req->file('pictures');
-        $ext  = $file->getClientOriginalExtension();
-        $newName = rand(100000,1001238912).".".$ext;
-        $file->move('uploads/foto-produk',$newName);
+        $files = $req->file('pictures');
 
-        $this->picture->create([
-            'id_product' => $product->id,
-            'picture' => $newName, //base64_encode(file_get_contents($p)),
-
-        ]);
-
-        // if (is_array($pict) || is_object($pict))
-        // {
-        //     foreach ($pict as $p)
-        //     {
-        //         $this->picture->create([
-        //             'id_product' => $product->id,
-        //             'picture' => $newName, //base64_encode(file_get_contents($p)),
-
-        //         ]);
-        //     }
-        // }
-        // else
-        // {
-        //     $this->picture->create([
-        //         'id_product' => $product->id,
-                
-        //         'picture' => $newName, //base64_encode(file_get_contents($pict)),
-
-        //     ]);
-        // }
+        foreach ($files as $file) {
+            $ext  = $file->getClientOriginalExtension();
+            $newName = rand(100000,1001238912).".".$ext;
+            $file->move('uploads/foto-produk',$newName);
+            
+            $this->picture->create([
+                'id_product'=> $product->id,
+                'picture' => $newName,
+            ]);
+        }
 
         $this->stock->create([
             'id_product' => $product->id,
@@ -126,33 +107,47 @@ class ProductController extends BaseController
         return redirect()->back();
     }
 
-    public function edit()
+    public function edit($id)
     {
         $product = $this->product->find($id);
-        return view('product.edit', $product);
+        $categories = $this->category->browse();
+
+        return view('views_admin.barang_edit')
+        ->with('categories', $categories)
+        ->with('product', $product);
     }
 
     public function update(Request $req, $id)
-{
-        $file = $req->file('pictures');
-        $ext  = $file->getClientOriginalExtension();
-        $newName = rand(100000,1001238912).".".$ext;
-        $file->move('uploads/foto-produk',$newName);
-
+    {
         $product = $this->product->find($id);
         $product->update([
             'name' => $req->name,
             'id_category' => $req->category,
-            
-            // 'pictures' => $picts,
-
-            'picture' => $newName, //base64_encode(file_get_contents($p)),
-        
             'description' => $req->description,
             'price' => $req->price,
         ]);
 
-        return redirect('products');
+        $this->stock->where($product->id)->update([
+            'stock' => $req->stock,
+        ]);
+
+        $files = $req->file('pictures');
+        if ($files) {
+            $this->picture->whereAll($product->id)->delete();
+            foreach ($files as $file) {
+                $ext  = $file->getClientOriginalExtension();
+                $newName = rand(100000,1001238912).".".$ext;
+                $file->move('uploads/foto-produk',$newName);
+                
+                $this->picture->create([
+                    'id_product'=> $product->id,
+                    'picture' => $newName,
+                ]);
+            }   # code...
+        }
+
+        Alert::success('Merubah '.$product->name.'!', 'Berhasil');
+        return redirect()->back();
     }
 
     public function delete($id)

@@ -53,13 +53,10 @@
 
 						<div class="form-group">
 							<label>Gambar Produk :</label>
-							<input type="file" accept="image/x-png,image/gif,image/jpeg/*" name="pictures" class="form-control">
-							<input type="file" class="file-input-ajax" multiple="multiple">
+							<!-- <input type="file" accept="image/*" name="pictures" class="form-control" multiple="multiple"> -->
+							<input type="file" class="file-input-ajax" name="pictures[]" multiple="multiple" accept="image/*">
 						</div>
-
-						<!--<div class="form-group">
-							<label>Preview Gambar :</label>
-						</div> -->					
+		
 						<div class="form-group right">
 							<a href="{{URL::previous()}}" class="btn btn-danger">Batal</a>
 							<input type="submit" value="Tambahkan" class="btn btn-info">

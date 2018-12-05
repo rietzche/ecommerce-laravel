@@ -16,6 +16,11 @@ class StockService extends Controller
         return $this->newStock()->find($id);
     }
 
+    public function where($id)
+    {
+        return $this->newStock()->where('id_product', $id)->first();
+    }    
+
     public function create($req)
     {
         return $this->newStock()->create($req);
