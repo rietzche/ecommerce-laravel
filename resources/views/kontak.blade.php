@@ -34,7 +34,7 @@
 				      }
 
 				    </script>
-				    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDimKo7ZeQHmjMvHwazaXvy1TsDWe8u5y8&callback=initMap" async defer>
+				    <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer>
 				    	
 				    </script>
 			      	<p><span class="glyphicon glyphicon-map-marker"></span> Cibiru, Bandung, Jawa Barat, Indonesia</p>
