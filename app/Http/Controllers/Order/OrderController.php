@@ -54,7 +54,7 @@ class OrderController extends Controller
 
     public function pembayaran($code)
     {
-        $order = $this->order->browse()->where('code', $code);
+        $order = $this->order->code($code)->get();
 
         if(count($order) != 0)
         {

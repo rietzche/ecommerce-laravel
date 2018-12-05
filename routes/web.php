@@ -82,7 +82,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/pembayaran/{code}', 'Order\OrderController@pembayaran')->name('pembayaran');
     Route::post('/buy now', 'Cart\CartController@buyNow')->name('cart.buyNow');
-    Route::get('/transaction', 'Transaction\TransactionController@index')->name('transaction');
+    Route::get('/transaction/{code}', 'Transaction\TransactionController@index')->name('transaction');
+    Route::post('/transaction/{code}', 'Transaction\TransactionController@create')->name('transaction.create');
 });
 
 Route::get('/belanjaanku', 'Belanjaan\BelanjaanController@index')->name('belanjaanku');

@@ -20,19 +20,28 @@ class TransactionController extends BaseController
         $this->order = new OrderService;
     }
 
-    public function index()
+    public function index($code)
     {
-        $transactions = $this->transaction->browse();
-        return view('transaction.index', $transactions);
+        $orders = $this->order->code($code);
+        
+        return view('transaction.index')->with('orders', $orders)
+                                        ->with('code', $code);
     }
 
-    public function create(Request $req)
+    public function create(Request $req, $code)
     {
-        $status = 'paid off';
+        $orders = $this->order->code($code);
+        $status = 1;
         $this->transaction->create([
-            'code_order' => $req->code,
+            'code_order' => $code,
             'id_user' => Auth::user()->id,
-            'proof' => base64_encode($req->proof),
+            'proof' => $req->file('proof'),
+            'sender_name' => $req->sender_name,
+            'bank_from' => $req->bank_from,
+            'bank_for' => App\Rekening::find($orders->first()->bank)->nama_bank,
+            'method' => $req->method,
+            'price_total' => sum($orders->price_total),
+            'transfer_date' => $req->transfer_date,
         ]);
         foreach($this->order->code($req->code) as $order){
             $this->order->update([
@@ -40,6 +49,7 @@ class TransactionController extends BaseController
             ]);
         }
 
-        return redirect('transaction.index');
+        Alert::success('Melakukan transaksi pesanan, terimakasih telah belanja :)', 'Berhasil');
+        return redirect()->back();
     }
 }
