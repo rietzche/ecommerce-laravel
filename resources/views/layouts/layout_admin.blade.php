@@ -34,8 +34,6 @@
 	<!-- /theme JS files -->
 
 	<!-- Theme JS files -->
-	<script type="text/javascript" src="/assets/js/plugins/tables/datatables/datatables.min.js"></script>
-	<script type="text/javascript" src="/assets/js/plugins/forms/selects/select2.min.js"></script>
 	<script type="text/javascript" src="/assets/js/pages/datatables_basic.js"></script>
 	<!-- /theme JS files -->
 
@@ -48,12 +46,21 @@
 
 	<!-- /theme JS files -->
 
+
+	<!-- Theme JS files -->
+	<script type="text/javascript" src="/assets/js/plugins/tables/datatables/datatables.min.js"></script>
+	<script type="text/javascript" src="/assets/js/plugins/tables/datatables/extensions/buttons.min.js"></script>
+	<script type="text/javascript" src="/assets/js/plugins/tables/datatables/extensions/select.min.js"></script>
+	<!-- /theme JS files -->
+
 	<!-- Theme JS files -->
 	<script type="text/javascript" src="/assets/js/core/app.js"></script>
 	<script type="text/javascript" src="/assets/js/pages/uploader_bootstrap.js"></script>
 	<script type="text/javascript" src="/assets/js/pages/editor_ckeditor.js"></script>
 	<script type="text/javascript" src="/assets/js/pages/layout_fixed_custom.js"></script>
+	<script type="text/javascript" src="/assets/js/pages/datatables_extension_buttons_print.js"></script>
 	<!-- /theme JS files -->
+
 
 	<!-- sweet_alert -->
 	<link rel="stylesheet" href="/assets/sweetalert2/sweetalert2.min.css">

@@ -34,10 +34,9 @@
 				      }
 
 				    </script>
-				    <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer>
-				    	
+				    <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer>	    	
 				    </script>
-			      	<p><span class="glyphicon glyphicon-map-marker"></span> Cibiru, Bandung, Jawa Barat, Indonesia</p>
+			      	<p><span class="glyphicon glyphicon-map-marker"></span> Jalan green lake city, rukan blok i no. 12, Cipondoh, Kota Tanggera, Banten 15147</p>
 				</div>
 			</div>
 

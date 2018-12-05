@@ -8,7 +8,7 @@
 		</div>
 
 		<div class="table-responsive">
-			<table class="table datatable-basic text-nowrap">
+			<table class="table datatable-basic">
 				<thead>
 					<tr>
 						<th>No</th>
