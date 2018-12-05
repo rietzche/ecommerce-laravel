@@ -35,8 +35,9 @@ class OrderController extends Controller
         
         foreach($carts as $cart)
         {
-            $this->order->create([
-                'code' => rand(213908, 837129),
+            $code = rand(213908, 837129);
+            $order = $this->order->create([
+                'code' => $code,
                 'id_user' => $cart->id_user,
                 'id_product' => $cart->id_product,
                 'id_address' => $req->address,
@@ -47,13 +48,13 @@ class OrderController extends Controller
             ]);
             $this->cart->where(Auth::user()->id)->delete();
 
-            return redirect('/pembayaran');
+            return redirect('/pembayaran'.$code);
         }
     }
 
-    public function pembayaran()
+    public function pembayaran($code)
     {
-        $order = $this->order->browse()->where([['status', 'id_user'], [0, Auth::user()->id]]);
+        $order = $this->order->browse()->where('code', $code);
 
         if(count($order) != 0)
         {
