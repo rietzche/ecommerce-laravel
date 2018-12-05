@@ -18,7 +18,7 @@ class CartService extends Controller
 
     public function where($id)
     {
-        return $this->newCart()->where('id_user', $id)->get();
+        return $this->newCart()->where('id_user', $id);
     }
 
     public function find($id)

@@ -13,14 +13,14 @@
 		<h6 style="float: left;">Pilih alamat pengiriman</h6>
 		<select style="float: left; margin: 10px">
 			<option hidden="">Pilih</option>
-			<option>Alamat 1</option>
-			<option>Alamat 2</option>
+			@foreach($addresses as $address)
+			<option value="{{ $address->id }}">{{ $address->receiver_name }}</option>
+			@endforeach
 		</select>
 		<div class="clear"></div>
 	</div>
 	<!-- panel alamat -->
-
-<form action="/pembayaran" method="GET">
+	{{! $alamat = $address->first() }}
 	<!-- panel alamat -->
 	<div class="panel panel-flat">
 		<div class="panel-heading">
@@ -33,8 +33,8 @@
 				<tbody>
 					<tr>
 						<td>
-							<h6><b>Febri Ardi Saputra (082281059671)</b></h6>
-							<h6>Asrama Granada Kamar 7, jln. Lio Utara, No.25, Rt.001, Rw.010, Sebrang Pangkalan Bus Damri Cibiru, KOTA BANDUNG - CIBIRU, JAWA BARAT, ID 40614</h6>
+							<h6><b>{{ $alamat->receiver_name }} ({{$alamat->number_tlp}})</b></h6>
+							<h6>{{ $alamat->others }}, {{ $alamat->region }}, {{ $address->city }}, {{ $address->province }} {{ $address->zip_code }}</h6>
 						</td>
 						<td width="120"><a href="" style="float: right; margin-top: 30px">UBAH</a></td>
 					</tr>
@@ -205,30 +205,30 @@
 		</div>
 	</div>
 	<!-- panel opsi pengiriman -->
-</form>
 
 <!-- -------------------------------------------------------------  -->
 
 	<!-- modal tambah alamat-->
 	<div id="modal_tambah_alamat" class="modal fade">
+		<form action="{{ route('address.create') }}" method="post">
+		@csrf
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title">Tambah Alamat</h5>
 				</div>
-
 				<div class="modal-body">
 					<div class="form-group">
-						<input type="text" name="nm_penerima" placeholder="Nama Penerima" required="" class="form-control">
+						<input type="text" name="receiver_name" placeholder="Nama Penerima" required="" class="form-control">
 					</div>
 					<div class="form-group">
-						<input type="text" name="no_telp" placeholder="Nomor Telepon" required="" class="form-control">
+						<input type="text" name="number_tlp" placeholder="Nomor Telepon" required="" class="form-control">
 					</div>
 					<div class="form-group">
-						<input type="text" name="no_telp" placeholder="Kode Pos" required="" class="form-control">
+						<input type="text" name="zip_code" placeholder="Kode Pos" required="" class="form-control">
 					</div>
 					<div class="form-group">
-						<select class="form-control" name="provinsi" required="">
+						<select class="form-control" name="province" required="">
 							<option hidden="">Provinsi</option>
 							<option value="AZ">Arizona</option>
 							<option value="CO">Colorado</option>
@@ -245,7 +245,7 @@
 						</select>
 					</div>
 					<div class="form-group">
-						<select class="form-control" name="kota" required="">
+						<select class="form-control" name="city" required="">
 							<option hidden="">Kota</option>
 							<option value="AZ">Arizona</option>
 							<option value="CO">Colorado</option>
@@ -262,7 +262,7 @@
 						</select>
 					</div>
 					<div class="form-group">
-						<select class="form-control" class="kecamatan" required="">
+						<select class="form-control" name="region" required="">
 							<option hidden="">Kecamatan</option>
 							<option value="AZ">Arizona</option>
 							<option value="CO">Colorado</option>
@@ -279,16 +279,17 @@
 						</select>
 					</div>
 					<div class="form-group">
-						<input type="text" name="detail_alamat" placeholder="Nama gedung, jalan dan lainnya..." required="" class="form-control">
+						<input type="text" name="others" placeholder="Nama gedung, jalan dan lainnya..." required="" class="form-control">
 					</div>
 				</div>
-				
+
 				<div class="modal-footer">
 					<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Ok</button>
+					<button type="submit" class="btn btn-primary">Ok</button>
 				</div>
 			</div>
 		</div>
+		</form>
 	</div>
 	<!-- /modal tambah alamat -->
 </div>
