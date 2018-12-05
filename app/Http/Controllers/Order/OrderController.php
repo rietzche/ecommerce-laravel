@@ -10,6 +10,8 @@ use App\Http\Controllers\CartService;
 use App\Http\Controllers\AddressService;
 use App\Http\Controllers\OrderService;
 
+use Alert;
+
 class OrderController extends Controller
 {
     public function __construct()
@@ -51,6 +53,16 @@ class OrderController extends Controller
 
     public function pembayaran()
     {
-        return view('order.pembayaran');
+        $order = $this->order->browse()->where([['status', 'id_user'], [0, Auth::user()->id]]);
+
+        if(count($order) != 0)
+        {
+            return view('order.pembayaran')->with('order', $order);
+        }
+        else
+        {
+            Alert::error('Something gonna bad!', 'Ummm... :(');
+            return view('order.pembayaran')->with('order', $order);
+        }
     }
 }
