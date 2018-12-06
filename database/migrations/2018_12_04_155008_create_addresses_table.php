@@ -15,7 +15,7 @@ class CreateAddressesTable extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_user');
+            $table->unsignedInteger('id_user');
             $table->string('receiver_name');
             $table->string('number_tlp');
             $table->string('zip_code');
@@ -24,6 +24,9 @@ class CreateAddressesTable extends Migration
             $table->string('region');
             $table->string('others');
             $table->timestamps();
+        });
+        Schema::table('addresses', function(Blueprint $kolom) {
+            $kolom->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

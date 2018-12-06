@@ -31,6 +31,13 @@ class AddressController extends Controller
         return redirect()->back();
     }
 
+    public function edit($id){
+        $address = $this->address->find($id);
+
+        return view('order.address_edit')
+        ->with('address', $address);
+    }
+
     public function update(Request $req, $id)
     {
         $this->address->find($id)
@@ -45,13 +52,13 @@ class AddressController extends Controller
             'others' => $req->others,
         ]);
 
-        return redirect()->back();
+        return redirect('/checkout'); //redirect()->back();
     }
 
     public function delete($id)
     {
         $this->address->find($id)->delete();
 
-        return redirect()->back();
+        // return 'berhasil';//redirect('/checkout'); //redirect()->back();
     }
 }
