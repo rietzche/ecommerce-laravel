@@ -324,8 +324,7 @@
     </div>
     <!-- /modal tambah alamat -->
 </div>
-    
-    
+        
 @if(count($addresses)==0)
 <script type="text/javascript">
     $('#modal_tambah_alamat').modal('show');

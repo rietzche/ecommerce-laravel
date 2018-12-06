@@ -59,6 +59,6 @@ class AddressController extends Controller
     {
         $this->address->find($id)->delete();
 
-        return redirect()->back();
+        // return 'berhasil';//redirect('/checkout'); //redirect()->back();
     }
 }
