@@ -81,9 +81,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/address/{id}', 'Address\AddressController@update')->name('address.update');
     Route::delete('/address delete/{id}', 'Address\AddressController@delete')->name('address.delete');
 
-    Route::get('/pembayaran', 'Order\OrderController@pembayaran')->name('pembayaran');
+    Route::get('/pembayaran/{code}', 'Order\OrderController@pembayaran')->name('pembayaran');
     Route::post('/buy now', 'Cart\CartController@buyNow')->name('cart.buyNow');
-    Route::get('/transaction', 'Transaction\TransactionController@index')->name('transaction');
+    Route::get('/transaction/{code}', 'Transaction\TransactionController@index')->name('transaction');
+    Route::post('/transaction/{code}', 'Transaction\TransactionController@create')->name('transaction.create');
 });
 
 Route::get('/belanjaanku', 'Belanjaan\BelanjaanController@index')->name('belanjaanku');
