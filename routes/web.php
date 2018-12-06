@@ -75,6 +75,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('/cart/{id}', 'Cart\CartController@delete')->name('cart.delete');
 
     Route::get('/checkout', 'Order\OrderController@index')->name('order');
+    Route::post('/checkout', 'Order\OrderController@create')->name('order.create');
 
     Route::post('/address', 'Address\AddressController@create')->name('address.create');
     Route::get('/edit address/{id}', 'Address\AddressController@edit')->name('address.edit');

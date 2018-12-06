@@ -12,6 +12,8 @@ use App\Http\Controllers\TransactionService;
 
 use App\Http\Controllers\OrderService;
 
+use Alert;
+
 class TransactionController extends BaseController
 {
     public function __construct()
@@ -24,32 +26,46 @@ class TransactionController extends BaseController
     {
         $orders = $this->order->code($code);
         
-        return view('transaction.index')->with('orders', $orders)
+        if($orders->first()->status == 0)
+        {
+            return view('transaction.index')->with('orders', $orders)
                                         ->with('code', $code);
+        }
+        else
+        {
+            Alert::error('Something went wrong!', 'Ummmmm.. :(');
+            return view('home');
+        }
     }
 
     public function create(Request $req, $code)
     {
         $orders = $this->order->code($code);
-        $status = 1;
-        $this->transaction->create([
-            'code_order' => $code,
-            'id_user' => Auth::user()->id,
-            'proof' => $req->file('proof'),
-            'sender_name' => $req->sender_name,
-            'bank_from' => $req->bank_from,
-            'bank_for' => App\Rekening::find($orders->first()->bank)->nama_bank,
-            'method' => $req->method,
-            'price_total' => sum($orders->price_total),
-            'transfer_date' => $req->transfer_date,
-        ]);
-        foreach($this->order->code($req->code) as $order){
-            $this->order->update([
-                'status' => $status,
-            ]);
-        }
+            $status = 1;
+            $file = $req->file('proof');
+            $ext  = $file->getClientOriginalExtension();
+            $newName = rand(100000,1001238912).".".$ext;
+            $file->move('uploads/bukti_pembayaran',$newName);
 
-        Alert::success('Melakukan transaksi pesanan, terimakasih telah belanja :)', 'Berhasil');
-        return redirect()->back();
+            $this->transaction->create([
+                'order_code' => $code,
+                'id_user' => Auth::user()->id,
+                'proof' => $newName,
+                'sender_name' => $req->sender_name,
+                'bank_from' => $req->bank_from,
+                'bank_for' => \App\Rekening::find($orders->first()->bank)->nama_bank,
+                'method' => $req->method,
+                'price_total' => $orders->sum('price_total'),
+                'transfer_date' => $req->transfer_date,
+            ]);
+            foreach($this->order->code($req->code)->get() as $order){
+                $order->update([
+                    'status' => $status,
+                ]);
+            }
+
+            Alert::success('Melakukan transaksi pesanan, terimakasih telah belanja :)', 'Berhasil');
+            return redirect('/belanjaanku');
+        
     }
 }

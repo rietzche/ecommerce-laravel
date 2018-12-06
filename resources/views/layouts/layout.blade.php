@@ -39,6 +39,13 @@
 		<script type="text/javascript" src="/assets/js/plugins/uploaders/fileinput/plugins/sortable.min.js"></script>
 		<script type="text/javascript" src="/assets/js/plugins/uploaders/fileinput/fileinput.min.js"></script>
 		<script type="text/javascript" src="/assets/js/pages/uploader_bootstrap.js"></script>
+		
+		<script type="text/javascript" src="/assets/js/plugins/uploaders/fileinput/plugins/purify.min.js"></script>
+		<script type="text/javascript" src="/assets/js/plugins/uploaders/fileinput/plugins/sortable.min.js"></script>
+		<script type="text/javascript" src="/assets/js/plugins/uploaders/fileinput/fileinput.min.js"></script>
+
+		<script type="text/javascript" src="/assets/js/core/app.js"></script>
+		<script type="text/javascript" src="/assets/js/pages/uploader_bootstrap.js"></script>
 		<!-- /theme JS files -->
 
 		<script type="text/javascript" src="/assets/js/core/app.js"></script>

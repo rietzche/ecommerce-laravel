@@ -96,7 +96,7 @@
 		</div>
 		<!-- /basic table -->
 	</div>
-		
+	@if(count($carts) != 0)
 	<div class="footer-cart">
 		<div style="float: right;">
 			<h6>Subtotal untuk ({{count($carts)}}) Produk :</h6>	
@@ -105,6 +105,7 @@
 		</div>
 		<div class="clear"></div>
 	</div>
+	@endif
 </form>
 	<script>
 		function deleteCart(id){

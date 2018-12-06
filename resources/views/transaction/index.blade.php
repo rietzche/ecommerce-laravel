@@ -2,13 +2,14 @@
 
 @section('content')
 <div class="content">
-	<form action="{{ route('transaction.create', $code) }}" method="post">
+
+	<form action="{{ route('transaction.create', $code) }}" method="post" enctype="multipart/form-data">
 	@csrf
 	<div class="container-fluid pembayaran">
 		<div class="panel panel-flat">
 			<div style="padding: 0px 15px; border:1px solid #f2f2f2">
 				<h6 style="float: left;"><b>Total Pembayaran : </b></h6>
-				<h5 style="float: right; color: #ff6600">Rp. {{ $orders->sum('price_total') }}</h5>
+				<h5 style="float: right; color: #ff6600">Rp. {{ number_format($orders->sum('price_total'), 0, ",", ".") }}</h5>
 				<div class="clear"></div>
 			</div>
 			{{! $order = $orders->first() }}
@@ -29,7 +30,6 @@
 			<p class="text-muted">Upload foto bukti transfer Anda atau screenshot bukti dari Internet Banking. Shopee akan memeriksa bukti Anda dalam 24 jam.</p>
 		</div>
 	
-	<form action="" method="">
 		<div class="panel panel-flat">
 			<div style="padding: 10px">
 				<h6 class="panel-title bold">Info Rekening Bank</h6>			
@@ -39,7 +39,7 @@
 				<div class="panel-body">
 					<p class="text-semibold">Upload bukti transfer:</p>
 					<div class="dropzone" id="dropzone_multiple" style="width: 260px; margin: 0px auto">
-						<input type="file" class="file-input" data-show-caption="false" data-show-upload="false">
+						<input type="file" class="file-input-ajax" name="proof" multiple="multiple" accept="image/*">
 					</div>
 				</div>
 				<!-- /multiple file upload -->
@@ -88,7 +88,7 @@
 			<input type="submit" class="btn-upload-bukti1" style="width: 100%" value="Kirimkan">
 			<a href="{{ URL::previous() }}"><div class="btn-upload-bukti2">Batal</div></a>
 		</div>
-	</form>
 	</div>
+	</form>
 </div>
 @endsection
