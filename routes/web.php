@@ -77,7 +77,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/checkout', 'Order\OrderController@index')->name('order');
 
     Route::post('/address', 'Address\AddressController@create')->name('address.create');
-    Route::put('/address/{id}', 'Address\AddressController@update')->name('address.update');
+    Route::get('/edit address/{id}', 'Address\AddressController@edit')->name('address.edit');
+    Route::post('/address/{id}', 'Address\AddressController@update')->name('address.update');
     Route::delete('/address{id}', 'Address\AddressController@delete')->name('address.delete');
 
     Route::get('/pembayaran', 'Order\OrderController@pembayaran')->name('pembayaran');
