@@ -6,7 +6,7 @@
 		<div class="panel panel-flat">
 			<div class="panel-heading">
 				<h6 class="panel-title bold">Total Pembayaran&nbsp;:</h6>
-				<h1 class="panel-title" style="color: #ff6600;">Rp. {{ $order->sum() }}</h1>
+				<h1 class="panel-title" style="color: #ff6600;">Rp. {{ number_format($order->sum('price_total'), 0, ",", ".") }}</h1>
 				<p class="text-success">Bayar pesanan sesuai jumlah diatas</p>
 				<p class="text-muted">Dicek dalam 24 jam setelah bukti transfer diupload. Diwajibkan untuk membayar sesuai total pembayaran sebelum batas waktu berakhir.</p>
 			</div>
@@ -37,7 +37,7 @@
 			<p class="text-muted">Demi keamanan transaksi, mohon untuk tidak membagikan bukti atau konfirmasi pembayaran pesanan kepada siapapun, selain mengunggahnya diwebsite Shabby Organizer.</p>
 		</div>
 		<div>
-			<a href="/transaction"><div class="btn-upload-bukti1">Upload bukti transfer sekarang</div></a>
+			<a href="/transaction/{{ $code }}"><div class="btn-upload-bukti1">Upload bukti transfer sekarang</div></a>
 			<a href="/belanjaanku"><div class="btn-upload-bukti2">Upload bukti transfer nanti</div></a>
 		</div>
 	</div>

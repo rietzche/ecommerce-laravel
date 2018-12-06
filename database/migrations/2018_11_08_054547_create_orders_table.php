@@ -19,6 +19,9 @@ class CreateOrdersTable extends Migration
             $table->unsignedInteger('id_user');
             $table->unsignedInteger('id_product');
             $table->integer('id_address');
+            $table->integer('bank');
+            $table->string('courier');
+            $table->string('msg');
             $table->integer('quantity');
             $table->integer('status');
             $table->integer('price_total');

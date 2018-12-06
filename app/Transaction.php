@@ -7,7 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
     protected $fillable = [
-        'code_order', 'id_user', 'proof',
+        'order_code',
+        'id_user',
+        'proof',
+        'sender_name',
+        'bank_from',
+        'bank_for',
+        'method',
+        'price_total',
+        'transfer_date',
     ];
 
     function FKTransaction(){
