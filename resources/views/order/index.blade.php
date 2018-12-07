@@ -150,16 +150,17 @@
                         {{!! $tmp = 0 }}
                     </tr>
                     @endforeach
-                    <tr style="background-color: #fafdff;">
-                        <td><h6 style="float: right;color:#269900;margin-top: -20px">Opsi Pengiriman :</h6></td>
-                        <td>
-                            <h6><b>JNE REG</b></h6>
-                            <p>Diterima dalam 2-4 hari</p>
-                        </td>
-                        <td><a id="cek" data-toggle="modal" data-target="#modal_default">UBAH</a>
-                        </td>
-                        <td>Rp. 2.000</td>
-                    </tr>
+                    <tr id="maink"></tr>
+                        <tr id="m" style="background-color: #fafdff;">
+                                    <td><h6 style="float: right;color:#269900">Opsi Pengiriman :</h6></td>
+                                    <td>
+                                        <h6>Pilih opsi..</h6>
+                                        <p></p>
+                                    </td>
+                                    <td><a id="cek" data-toggle="modal" data-target="#modal_default">UBAH</a>
+                                    </td>
+                                    <td></td>
+                        </tr>
                     <tr style="background-color: #fafdff;">
                         <td></td>
                         <td></td>
@@ -183,14 +184,17 @@
                 <div class="modal-body">
                     <table>
                         <tbody>
-                            <div id="ongkir"></div>
+                        <div id="mainc">
+                        <div id="k">
+                        </div>
+                        </div>
                         </tbody>
                     </table>
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                    <button id="pilih" type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
                 </div>
             </div>
         </div>
@@ -235,11 +239,11 @@
                         </tr>
                         <tr>
                             <td><h6>Total Ongkos Kirim</h6></td>
-                            <td><h6>Rp. {{ number_format(2000, 0, ",", ".") }}</h6></td>
+                            <td><h6>Rp. <span id="ong">{{ number_format(0, 0, ",", ".") }}</span></h6></td>
                         </tr>
                         <tr>
                             <td><h6>Total Pembayaran</h6></td>
-                            <td><h4 style="font-weight: bold; color:#ff6600;">Rp. {{ number_format($jum+2000, 0, ",", ".") }}</h4></td>
+                            <td><h4 style="font-weight: bold; color:#ff6600;">Rp. <span id="jujum">{{ number_format($jum+0, 0, ",", ".") }}</span></h4></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -288,7 +292,7 @@
                           CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                           CURLOPT_CUSTOMREQUEST => "GET",
                           CURLOPT_HTTPHEADER => array(
-                            "key: 4289bb176b07351df63fc435affaa4e6"
+                            "key:  c7bcc0c5a39119bf4dd8a2a5b084dd1c "
                           ),
                         ));
             
@@ -357,16 +361,91 @@ $(document).ready(function(){
         //Mengambil value dari option select provinsi asal, kabupaten, kurir, berat kemudian parameternya dikirim menggunakan ajax 
         
         var kab = $('#kab').val();
+        var container = document.createElement("div");
+            container.id="k";
+        var i = 0;
           $.ajax({
             type : 'GET',
                url : 'http://localhost:8000/cek_ongkir',
                data :  {'kab_id' : kab},
                     success: function (data) {
+                        data.forEach(function(){
+                            $('#k').remove();
+                            $(container).append( 
+                            '<tr style="border-bottom: 1px solid #cccccc">'+
+                                    '<td>'+
+                                        '<input type="radio" name="courier" value="'+data[i].service+'">'+
+                                    '</td>'+
+                                    '<td>'+
+                                        '<img src="/assets/images/jne1.jpg" style="width: 100px; height: 60px; margin: 0px 20px 0px 10px">'+
+                                    '</td>'+
+                                    '<td>'+
+                                        '<div style="margin: 5px 150px 5px 5px">'+
+                                            '<h6><b>'+data[i].service+'</b></h6>'+
+                                            '<p class="text-muted">Diterima dalam '+data[i].etd+' hari</p>'+
+                                        '</div>'+
+                                    '</td>'+
+                                    '<td>'+
+                                        '<div style="margin: 5px; width: 100px;">'+
+                                            '<h6>Rp. '+data[i].cost+'</h6>'+
+                                        '</div>'+
+                                    '</td>'+
+                                '</tr>'
+                            );
+                            // ADD BOTH THE DIV ELEMENTS TO THE "main" CONTAINER.
+                            $('#mainc').after(container);
 
+                            i++;
+                        });
+                    }    
                     //jika data berhasil didapatkan, tampilkan ke dalam element div ongkir
-                    $("#ongkir").html(data);
-            }
           });
+    });
+
+    $('#pilih').click(function(){
+
+    //Mengambil value dari option select provinsi kemudian parameternya dikirim menggunakan ajax 
+        var checkval = $("input[name='courier']:checked").val();
+        var kab = $('#kab').val();
+        var container = document.createElement("tr");
+            container.id="m";
+        var i = 0;
+        var jum = 0;
+        if(checkval){
+            $.ajax({
+            type : 'GET',
+                url : 'http://localhost:8000/cek_ongkir',
+                data :  {'kab_id' : kab},
+                    success: function (data) {
+                        data.forEach(function(){
+                            if(data[i].service == checkval)
+                            {
+                                $('#m').remove();
+                                $(container).append(
+                                    '<td><h6 style="float: right;color:#269900;margin-top: -20px">Opsi Pengiriman :</h6></td>'+
+                                    '<td>'+
+                                        '<h6><b>'+checkval+'</b></h6>'+
+                                        '<p>Diterima dalam '+data[i].etd+' hari</p>'+
+                                    '</td>'+
+                                    '<td><a id="cek" data-toggle="modal" data-target="#modal_default">UBAH</a>'+
+                                    '</td>'+
+                                    '<td>Rp. '+data[i].cost+'</td>'
+                                );
+                                
+                                $('#maink').after(container);
+                                $('#ong').text(data[i].cost);
+                                jum = (parseInt(data[i].cost) * 1000) + {{ $jum }};
+
+                                var	reverse = jum.toString().split('').reverse().join(''),
+                                ribuan 	= reverse.match(/\d{1,3}/g);
+                                ribuan	= ribuan.join('.').split('').reverse().join('');
+                                $('#jujum').text(ribuan);
+                            }
+                            i++;
+                        });
+                    }
+            });
+        }
     });
 });
 </script>
