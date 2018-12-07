@@ -51,9 +51,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function()
         return view('views_admin.barang_edit');
     });
 
-    Route::get('tabel pesanan', function(){
-        return view('views_admin.pesanan_tabel');
-    });
+    Route::get('tabel pesanan', 'Admin\AdminController@order')->name('admin.order');
 
     Route::get('tabel pelanggan', function(){
         return view('views_admin.pelanggan_tabel');
@@ -86,9 +84,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/buy now', 'Cart\CartController@buyNow')->name('cart.buyNow');
     Route::get('/transaction/{code}', 'Transaction\TransactionController@index')->name('transaction');
     Route::post('/transaction/{code}', 'Transaction\TransactionController@create')->name('transaction.create');
+
+    Route::get('/belanjaanku', 'Belanjaan\BelanjaanController@index')->name('belanjaanku');
 });
 
-Route::get('/belanjaanku', 'Belanjaan\BelanjaanController@index')->name('belanjaanku');
 
 // ===============================ROUTE ADMIN====================================
 

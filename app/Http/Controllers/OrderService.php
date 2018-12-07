@@ -16,6 +16,11 @@ class OrderService extends Controller
         return $this->newOrder()->all();
     }
 
+    public function where($key, $req)
+    {
+        return $this->newOrder()->where($key, $req);
+    }
+
     public function find($id)
     {
         return $this->newOrder()->find($id);
