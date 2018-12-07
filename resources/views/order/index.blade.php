@@ -21,33 +21,33 @@
     </div>
     <!-- panel alamat -->
 
-	<script type="text/javascript">
-	$(document).ready(function() {
-	    $("#addrs").change(function(){
-	    	// CREATE A "DIV" ELEMENT.
-			var container = document.createElement("div");
-        	container.id="a";
+  <script type="text/javascript">
+  $(document).ready(function() {
+      $("#addrs").change(function(){
+        // CREATE A "DIV" ELEMENT.
+      var container = document.createElement("div");
+          container.id="a";
 
-        	@foreach($addresses as $d)
-	       	if ($(this).val() == "{{$d->id}}"){
+          @foreach($addresses as $d)
+          if ($(this).val() == "{{$d->id}}"){
                 // ADD TEXTBOX.
-            	$('#a').remove();
+              $('#a').remove();
                 $(container).append('<div class="col-sm-10">'+ 
-                	'<input type="hidden" name="addresId" value="{{ $d->id }}" readonly="" required="">'+
-                	'<h6><b>{{$d->receiver_name }} ({{$d->number_tlp }})</b></h6> '+
-                	'<h6>{{ $d->others }}, {{ $d->region }}, {{ $d->city }}, {{ $d->province }} {{ $d->zip_code }}</h6>'+
-                	'</div>'+
-                	'<div id="col-sm-2">'+
-                	'<a href="/edit address/{{ $d->id }}" style="float: right; margin-top: 30px">UBAH</a>'+
-                	'</div>'
+                  '<input type="hidden" name="addresId" value="{{ $d->id }}" readonly="" required="">'+
+                  '<h6><b>{{$d->receiver_name }} ({{$d->number_tlp }})</b></h6> '+
+                  '<h6>{{ $d->others }}, {{ $d->region }}, {{ $d->city }}, {{ $d->province }} {{ $d->zip_code }}</h6>'+
+                  '</div>'+
+                  '<div id="col-sm-2">'+
+                  '<a href="/edit address/{{ $d->id }}" style="float: right; margin-top: 30px">UBAH</a>'+
+                  '</div>'
                 );
                 // ADD BOTH THE DIV ELEMENTS TO THE "main" CONTAINER.
                 $('#main').after(container);
             }
             @endforeach
-	    });
-	});
-	</script>
+      });
+  });
+  </script>
 
 <form action="{{ route('order.create') }}" method="post">
     @csrf

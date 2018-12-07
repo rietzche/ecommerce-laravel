@@ -29,6 +29,7 @@ class OrderController extends Controller
         $rekening = \App\Rekening::all();
         return view('order.index')->with('carts', $carts)
                                 ->with('addresses', $addresses)
+                                ->with('resp', '')
                                 ->with('banks', $rekening);
     }
 
