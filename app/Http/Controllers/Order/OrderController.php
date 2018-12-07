@@ -24,7 +24,8 @@ class OrderController extends Controller
         $carts = $this->cart->where(Auth::user()->id)->get();
         $addresses = $this->address->where(Auth::user()->id);
         return view('order.index')->with('carts', $carts)
-                                ->with('addresses', $addresses);
+                                ->with('addresses', $addresses)
+                                ->with('resp', '');
     }
 
     public function create(Request $req)

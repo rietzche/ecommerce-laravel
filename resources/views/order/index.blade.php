@@ -21,33 +21,33 @@
     </div>
     <!-- panel alamat -->
 
-	<script type="text/javascript">
-	$(document).ready(function() {
-	    $("#addrs").change(function(){
-	    	// CREATE A "DIV" ELEMENT.
-			var container = document.createElement("div");
-        	container.id="a";
+  <script type="text/javascript">
+  $(document).ready(function() {
+      $("#addrs").change(function(){
+        // CREATE A "DIV" ELEMENT.
+      var container = document.createElement("div");
+          container.id="a";
 
-        	@foreach($addresses as $d)
-	       	if ($(this).val() == "{{$d->id}}"){
+          @foreach($addresses as $d)
+          if ($(this).val() == "{{$d->id}}"){
                 // ADD TEXTBOX.
-            	$('#a').remove();
+              $('#a').remove();
                 $(container).append('<div class="col-sm-10">'+ 
-                	'<input type="hidden" name="addresId" value="{{ $d->id }}" readonly="" required="">'+
-                	'<h6><b>{{$d->receiver_name }} ({{$d->number_tlp }})</b></h6> '+
-                	'<h6>{{ $d->others }}, {{ $d->region }}, {{ $d->city }}, {{ $d->province }} {{ $d->zip_code }}</h6>'+
-                	'</div>'+
-                	'<div id="col-sm-2">'+
-                	'<a href="/edit address/{{ $d->id }}" style="float: right; margin-top: 30px">UBAH</a>'+
-                	'</div>'
+                  '<input type="hidden" name="addresId" value="{{ $d->id }}" readonly="" required="">'+
+                  '<h6><b>{{$d->receiver_name }} ({{$d->number_tlp }})</b></h6> '+
+                  '<h6>{{ $d->others }}, {{ $d->region }}, {{ $d->city }}, {{ $d->province }} {{ $d->zip_code }}</h6>'+
+                  '</div>'+
+                  '<div id="col-sm-2">'+
+                  '<a href="/edit address/{{ $d->id }}" style="float: right; margin-top: 30px">UBAH</a>'+
+                  '</div>'
                 );
                 // ADD BOTH THE DIV ELEMENTS TO THE "main" CONTAINER.
                 $('#main').after(container);
             }
             @endforeach
-	    });
-	});
-	</script>
+      });
+  });
+  </script>
 
 <form action="" method="post">
     @csrf
@@ -57,20 +57,20 @@
             @if(count($addresses)!=0)
             {{! $alamat = $address->first() }}
             <div class="row">
-            	<div class="col-sm-12">
-            		<span style="color: #ff6600;font-size: 1.4em"><i class="glyphicon glyphicon-map-marker"></i>&nbsp;Alamat Pengiriman</span>
-            	</div>
-            	<div id="main"></div>
-            	<div id="a">
-                  	<div class="col-sm-10">
-	            		<input type="hidden" name="addresId" value="{{ $alamat->id }}" readonly="" required="">
-	            		<h6><b>{{ $alamat->receiver_name }} ({{$alamat->number_tlp}})</b></h6>
-	                    <h6>{{ $alamat->others }}, {{ $alamat->region }}, {{ $address->city }}, {{ $address->province }} {{ $address->zip_code }}</h6>
-	            	</div>
-	            	<div class="col-sm-2">
-	            		<a href="/edit address/{{ $alamat->id }}" style="float: right; margin-top: 30px">UBAH</a>
-	            	</div>
-            	</div>
+              <div class="col-sm-12">
+                <span style="color: #ff6600;font-size: 1.4em"><i class="glyphicon glyphicon-map-marker"></i>&nbsp;Alamat Pengiriman</span>
+              </div>
+              <div id="main"></div>
+              <div id="a">
+                    <div class="col-sm-10">
+                  <input type="hidden" name="addresId" value="{{ $alamat->id }}" readonly="" required="">
+                  <h6><b>{{ $alamat->receiver_name }} ({{$alamat->number_tlp}})</b></h6>
+                      <h6>{{ $alamat->others }}, {{ $alamat->region }}, {{ $address->city }}, {{ $address->province }} {{ $address->zip_code }}</h6>
+                </div>
+                <div class="col-sm-2">
+                  <a href="/edit address/{{ $alamat->id }}" style="float: right; margin-top: 30px">UBAH</a>
+                </div>
+              </div>
             </div>
             @endif
         </div>
