@@ -18,8 +18,12 @@ class CreateTransactionsTable extends Migration
             $table->string('order_code');
             $table->unsignedInteger('id_user');
             $table->string('proof');
-            $table->integer('status');
+            $table->string('sender_name');
+            $table->string('bank_from');
+            $table->string('bank_for');
+            $table->string('method');
             $table->integer('price_total');
+            $table->date('transfer_date');
             $table->timestamps();
         });
 

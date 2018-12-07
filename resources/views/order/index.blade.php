@@ -49,7 +49,7 @@
   });
   </script>
 
-<form action="" method="post">
+<form action="{{ route('order.create') }}" method="post">
     @csrf
     <!-- panel alamat -->
     <div class="panel panel-flat">
@@ -57,20 +57,20 @@
             @if(count($addresses)!=0)
             {{! $alamat = $address->first() }}
             <div class="row">
-              <div class="col-sm-12">
-                <span style="color: #ff6600;font-size: 1.4em"><i class="glyphicon glyphicon-map-marker"></i>&nbsp;Alamat Pengiriman</span>
-              </div>
-              <div id="main"></div>
-              <div id="a">
-                    <div class="col-sm-10">
-                  <input type="hidden" name="addresId" value="{{ $alamat->id }}" readonly="" required="">
-                  <h6><b>{{ $alamat->receiver_name }} ({{$alamat->number_tlp}})</b></h6>
-                      <h6>{{ $alamat->others }}, {{ $alamat->region }}, {{ $address->city }}, {{ $address->province }} {{ $address->zip_code }}</h6>
-                </div>
-                <div class="col-sm-2">
-                  <a href="/edit address/{{ $alamat->id }}" style="float: right; margin-top: 30px">UBAH</a>
-                </div>
-              </div>
+            	<div class="col-sm-12">
+            		<span style="color: #ff6600;font-size: 1.4em"><i class="glyphicon glyphicon-map-marker"></i>&nbsp;Alamat Pengiriman</span>
+            	</div>
+            	<div id="main"></div>
+            	<div id="a">
+                  	<div class="col-sm-10">
+	            		<input type="hidden" name="address" value="{{ $alamat->id }}" readonly="" required="">
+	            		<h6><b>{{ $alamat->receiver_name }} ({{$alamat->number_tlp}})</b></h6>
+	                    <h6>{{ $alamat->others }}, {{ $alamat->region }}, {{ $address->city }}, {{ $address->province }} {{ $address->zip_code }}</h6>
+	            	</div>
+	            	<div class="col-sm-2">
+	            		<a href="/edit address/{{ $alamat->id }}" style="float: right; margin-top: 30px">UBAH</a>
+	            	</div>
+            	</div>
             </div>
             @endif
         </div>
@@ -117,6 +117,8 @@
                     <tr style="background-color: #fafdff;">
                         <td><h6 style="float: right;color:#269900;margin-top: -20px">Opsi Pengiriman :</h6></td>
                         <td>
+                            {{! $courier = 'jne' }}
+                            <input type="hidden" name="courier" value="{{ $courier }}">
                             <h6><b>JNE REG</b></h6>
                             <p>Diterima dalam 2-4 hari</p>
                         </td>
@@ -192,13 +194,13 @@
             <div class="body-del-option">
                 <h6>Pilih Bank</h6>
                 <div style="float: left;">
-                    @for($i=0;$i<=3;$i++)
+                    @foreach($banks as $bank)
                     <div class="radio">
                         <label style="font-size: 14px">
-                            <input type="radio" name="warna" class="styled">Bank BCA
+                            <input type="radio" name="bank" class="styled" value="{{$bank->id}}">{{ $bank->nama_bank }}
                         </label>
                     </div>
-                    @endfor
+                    @endforeach
                     <div class="clear"></div>
                 </div>
                 <div class="clear"></div>
@@ -208,7 +210,7 @@
         <div class="foot-pesanan">
             <div class="left-pesanan">
                 <h6 class="text-muted">Pesan : </h6>
-                <textarea style="height: 100px; width:500px; resize: none;" placeholder="(Opsional) Tinggalkan pesan ke penjual"></textarea>
+                <textarea name="msg" style="height: 100px; width:500px; resize: none;" placeholder="(Opsional) Tinggalkan pesan ke penjual"></textarea>
             </div>
             <div class="right-pesanan">
                 <table style="width: 100%">

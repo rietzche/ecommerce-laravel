@@ -21,11 +21,13 @@
 					</tr>
 				</thead>
 				<tbody>
-					@for($i=1;$i<=3;$i++)
+					{{!! $i = 0 }}
+					@foreach($orders as $order)
+					{{! $o = \App\Order::where('code', $order->code)->first() }}
 					<tr>
 						<td>ORD{{$i}}</td>
-						<td><span class="text-muted">Muhammad Yusuf</span></td>
-						<td>{{date('d/m/Y')}}</td>
+						<td><span class="text-muted">{{ \App\User::find($o->id_user)->name }}</span></td>
+						<td>{{ $o->created_at->format('d-m-Y') }}</td>
 						<td>
 							<a href="javascript::void(0)" data-toggle="modal" data-target="#myModalTerms{{$i}}"><i class="icon-eye"></i> Lihat</a>
 							<!-- The Modal -->
@@ -37,15 +39,15 @@
 								        	<h6 class="modal-title">Bukti Transfer :</h6>
 								        </div>
 								        <div class="prev-buktiTransf">
-								        	<img src="/assets/images/placeholder.jpg">
+								        	<img src="/uploads/bukti_pembayaran/{{ \App\Transaction::where('order_code', $order->code)->first()->proof }}">
 								        </div>
 							    	</div>
 							    </div>
 							</div>
 							<!--End The Modal-->
 						</td>
-						<td><h6 class="text-semibold">Rp. 123.000</h6></td>
-						<td><span class="label bg-success-400">Belum Bayar</span></td>
+						<td><h6 class="text-semibold">Rp. {{ number_format(\App\Order::where('code', $order->code)->sum('price_total'), 0, ",", ".") }}</h6></td>
+						<td><span class="label bg-success-400">Sudah Bayar</span></td>
 						<td class="text-center">
 							<ul class="icons-list">
 								<li class="dropdown">
@@ -58,7 +60,8 @@
 							</ul>
 						</td>
 					</tr>
-					@endfor
+					{{! $i++ }}
+					@endforeach
 				</tbody>
 			</table>
 		</div>

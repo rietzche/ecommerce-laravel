@@ -8,10 +8,10 @@
 				<div class="tabbable">
 					<ul class="nav nav-tabs nav-tabs-highlight nav-justified">
 						<li class="active">
-							<a href="#highlighted-justified-tab1" style="font-size: 16px;" data-toggle="tab">Belum Bayar <span class="pop-up">(1)</span></a>
+							<a href="#highlighted-justified-tab1" style="font-size: 16px;" data-toggle="tab">Belum Bayar <span class="pop-up">({{ count($orders) }})</span></a>
 						</li>
 						<li>
-							<a href="#highlighted-justified-tab2" style="font-size: 16px;" data-toggle="tab">Belum Dikirimkan <span class="pop-up">(1)</span></a>
+							<a href="#highlighted-justified-tab2" style="font-size: 16px;" data-toggle="tab">Belum Dikirimkan <span class="pop-up">({{ count($orderx) }})</span></a>
 						</li>
 						<li>
 							<a href="#highlighted-justified-tab3" style="font-size: 16px;" data-toggle="tab">Belum Diterima <span class="pop-up">(1)</span></a>
@@ -27,7 +27,13 @@
 					<div class="tab-content">			
 						<!-- Belum Bayar -->
 						<div class="tab-pane active" id="highlighted-justified-tab1">
-							@for($i=0; $i<=2; $i++)
+							@if(count($orders) == 0)
+							<div class="panel-no-orders">
+								<img src="/assets/images/icon_list.png" >
+								<p class="text-muted">Belum ada pesanan</p>
+							</div>
+							@else
+							@foreach($orders as $order)
 								<table class="table">
 									<thead>
 										<tr>
@@ -38,51 +44,57 @@
 										</tr>
 									</thead>
 									<tbody>
-										@for($i=0; $i<=1; $i++)
+										{{! $od = \App\Order::where('code', $order->code)->get() }}
+										@foreach($od as $o)
+										{{! $product = \App\Product::find($o->id_product) }}
 										<tr>
 											<td style="width: 50%">
 												<div class="detail-cart">
 													<img src="/assets/images/1.jpg" style="width: 50px; height: 50px">
-													<p>SWEATER SUPREME VM Sweater Cardigan Polos Rajut ZIpper Hoodie Long Knitt Abu Muda X7O6Z (<b>Ukuran : 210x100</b> ) (<b>warna : merah</b>)</p>
+													<p>{{ $product->name }} (<b>Ukuran : 210x100</b> ) (<b>warna : merah</b>)</p>
 													<div class="clear"></div>
 												</div>
 											</td>
-											<td>Rp. 150.000</td>
+											<td>Rp. {{ number_format($product->price, 0, ",", ".") }}</td>
 											<td>
-												<p>1</p>
+												<p>{{ $o->quantity }}</p>
 											</td>
-											<td>Rp. 120.000</td>
+											<td>Rp. {{ number_format($o->price_total, 0, ",", ".") }}</td>
 										</tr>
-										@endfor
+										@endforeach
 									</tbody>
 								</table>
 
 								<div class="foot-table">
 									<div class="header">
-										<h1>Rp 11.000</h1>
+										<h1>Rp {{ number_format($od->sum('price_total'), 0, ",", ".") }}</h1>
 										<h6>Jumlah Harus Dibayar :</h6>
 									</div>
 									<div class="clear"></div>
 
 									<div class="footer-table">
-										<a href="/pembayaran" class="btn btn-info">Transfer Sekarang</a>
+										<a href="/pembayaran/{{ $order->code }}" class="btn btn-info">Transfer Sekarang</a>
 										<a href="" onclick="ConfirmDelete()" style="margin:0px 3px" class="btn btn-default">Batalkan Pesanan</a>
 									</div>
 									
 									<div class="clear"></div>
 								</div>
-							@endfor
+							@endforeach
+							@endif
 						</div>
 						<!-- /Belum Bayar -->
 						
 						<!-- Belum Dikirimkan -->
 						<div class="tab-pane" id="highlighted-justified-tab2">
+							@if(count($orderx) == 0)
 							<!-- jika tidak ada orderan -->
 							<div class="panel-no-orders">
 								<img src="/assets/images/icon_list.png" >
 								<p class="text-muted">Belum ada pesanan</p>
 							</div>
 							<!-- jika ada orderan -->
+							@else
+							@foreach($orderx as $order)
 							<div class="table-responsive">
 								<table class="table">
 									<thead>
@@ -95,28 +107,33 @@
 										</tr>
 									</thead>
 									<tbody>
-										@for($i=0; $i<=1; $i++)
+										{{! $od = \App\Order::where('code', $order->code)->get() }}
+										@foreach($od as $o)
+										{{! $product = \App\Product::find($o->id_product) }}
 										<tr>
 											<td style="width: 50%">
 												<div class="detail-cart">
 													<img src="/assets/images/1.jpg" style="width: 50px; height: 50px">
-													<p>SWEATER SUPREME VM Sweater Cardigan Polos Rajut ZIpper Hoodie Long Knitt Abu Muda X7O6Z (<b>Ukuran : 210x100</b> ) (<b>warna : merah</b>)</p>
+													<p>{{ $product->name }} (<b>Ukuran : 210x100</b> ) (<b>warna : merah</b>)</p>
 													<div class="clear"></div>
 												</div>
 											</td>
-											<td>Rp. 150.000</td>
+											<td>Rp. {{ number_format($product->price, 0, ",", ".") }}</td>
 											<td>
-												<p>1</p>
+												<p>{{ $o->quantity }}</p>
 											</td>
-											<td>Rp. 120.000</td>
+											<td>Rp. {{ number_format($od->sum('price_total'), 0, ",", ".") }}</td>
 											<td>
 												<span class="label label-info">sedang dikemas</span>
 											</td>
 										</tr>
-										@endfor
+										@endforeach
 									</tbody>
 								</table>
 							</div>
+							<br>
+							@endforeach
+							@endif
 						</div>
 						<!-- /Belum Dikirimkan -->
 
