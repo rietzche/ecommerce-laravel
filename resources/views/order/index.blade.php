@@ -7,6 +7,29 @@
     </div>
 </div>
 
+
+    <?php
+        //Get Data Kabupaten
+        $curl = curl_init();    
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => "http://api.rajaongkir.com/starter/city",
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => "",
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 30,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => "GET",
+          CURLOPT_HTTPHEADER => array(
+            "key: c7bcc0c5a39119bf4dd8a2a5b084dd1c"
+          ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+    ?>
+
 <div class="container" style="margin-bottom: 100px">
     <!-- panel alamat -->
     <div style="border: 1px solid #cccccc; background-color: #ffffff; padding: 0px 20px">
@@ -35,7 +58,15 @@
                 $(container).append('<div class="col-sm-10">'+ 
                   '<input type="hidden" name="addresId" value="{{ $d->id }}" readonly="" required="">'+
                   '<h6><b>{{$d->receiver_name }} ({{$d->number_tlp }})</b></h6> '+
-                  '<h6>{{ $d->others }}, {{ $d->region }}, {{ $d->city }}, {{ $d->province }} {{ $d->zip_code }}</h6>'+
+                  '<h6>{{ $d->others }}, {{ $d->region }}, '+
+                  '<input type="text" id="kab" value="{{ $d->city }}" style="display:none">'+
+                    {{! $data = json_decode($response, true) }}
+                    @for ($i=0; $i < count($data['rajaongkir']['results']); $i++)
+                        '{{{ ($data['rajaongkir']['results'][$i]['city_id'] == $d->city ? $data['rajaongkir']['results'][$i]['city_name'].", " : '') }}}'+
+                        '{{{ ($data['rajaongkir']['results'][$i]['city_id'] == $d->city ? $data['rajaongkir']['results'][$i]['province']." - " : '') }}}'+
+                    @endfor
+
+                  '{{ $d->zip_code }}</h6>'+
                   '</div>'+
                   '<div id="col-sm-2">'+
                   '<a href="/edit address/{{ $d->id }}" style="float: right; margin-top: 30px">UBAH</a>'+
@@ -55,7 +86,6 @@
     <div class="panel panel-flat">
         <div class="panel-heading">     
             @if(count($addresses)!=0)
-            {{! $alamat = $address->first() }}
             <div class="row">
             	<div class="col-sm-12">
             		<span style="color: #ff6600;font-size: 1.4em"><i class="glyphicon glyphicon-map-marker"></i>&nbsp;Alamat Pengiriman</span>
@@ -63,12 +93,18 @@
             	<div id="main"></div>
             	<div id="a">
                   	<div class="col-sm-10">
-	            		<input type="hidden" name="address" value="{{ $alamat->id }}" readonly="" required="">
-	            		<h6><b>{{ $alamat->receiver_name }} ({{$alamat->number_tlp}})</b></h6>
-	                    <h6>{{ $alamat->others }}, {{ $alamat->region }}, {{ $address->city }}, {{ $address->province }} {{ $address->zip_code }}</h6>
+	            		<input type="hidden" name="address" value="{{ $address->id }}" readonly="" required="">
+	            		<h6><b>{{ $address->receiver_name }} ({{$address->number_tlp}})</b></h6>
+	                    <h6>{{ $address->others }}, {{ $address->region }}, 
+                        <input type="text" id="kab" value="{{ $d->city }}" style="display:none">
+                        @for ($i=0; $i < count($data['rajaongkir']['results']); $i++)
+                            {{{ ($data['rajaongkir']['results'][$i]['city_id'] == $address->city ? $data['rajaongkir']['results'][$i]['city_name'].", " : '') }}}
+                            {{{ ($data['rajaongkir']['results'][$i]['city_id'] == $address->city ? $data['rajaongkir']['results'][$i]['province']." - " : '') }}}
+                        @endfor
+                        {{ $address->zip_code }}</h6>
 	            	</div>
 	            	<div class="col-sm-2">
-	            		<a href="/edit address/{{ $alamat->id }}" style="float: right; margin-top: 30px">UBAH</a>
+	            		<a href="/edit address/{{ $address->id }}" style="float: right; margin-top: 30px">UBAH</a>
 	            	</div>
             	</div>
             </div>
@@ -117,12 +153,10 @@
                     <tr style="background-color: #fafdff;">
                         <td><h6 style="float: right;color:#269900;margin-top: -20px">Opsi Pengiriman :</h6></td>
                         <td>
-                            {{! $courier = 'jne' }}
-                            <input type="hidden" name="courier" value="{{ $courier }}">
                             <h6><b>JNE REG</b></h6>
                             <p>Diterima dalam 2-4 hari</p>
                         </td>
-                        <td><a href="" data-toggle="modal" data-target="#modal_default">UBAH</a>
+                        <td><a id="cek" data-toggle="modal" data-target="#modal_default">UBAH</a>
                         </td>
                         <td>Rp. 2.000</td>
                     </tr>
@@ -149,27 +183,7 @@
                 <div class="modal-body">
                     <table>
                         <tbody>
-                            @for($i=0; $i<=1; $i++)
-                            <tr style="border-bottom: 1px solid #cccccc">
-                                <td>
-                                    <input type="radio" name="opsi1">
-                                </td>
-                                <td>
-                                    <img src="/assets/images/jne{{$i+1}}.jpg" style="width: 100px; height: 60px; margin: 0px 20px 0px 10px">
-                                </td>
-                                <td>
-                                    <div style="margin: 5px 150px 5px 5px">
-                                        <h6><b>JNE OKE</b></h6>
-                                        <p class="text-muted">Diterima dalam 2-4 hari</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div style="margin: 5px; width: 100px;">
-                                        <h6>Rp. 11.000</h6>
-                                    </div>
-                                </td>
-                            </tr>
-                            @endfor
+                            <div id="ongkir"></div>
                         </tbody>
                     </table>
                 </div>
@@ -261,55 +275,41 @@
                         <input type="text" name="zip_code" placeholder="Kode Pos" required="" class="form-control">
                     </div>
                     <div class="form-group">
-                        <select class="form-control" name="province" required="">
-                            <option hidden="">Provinsi</option>
-                            <option value="AZ">Arizona</option>
-                            <option value="CO">Colorado</option>
-                            <option value="ID">Idaho</option>
-                            <option value="WY">Wyoming</option>
-                            <option value="AL">Alabama</option>
-                            <option value="IA">Iowa</option>
-                            <option value="KS">Kansas</option>
-                            <option value="KY">Kentucky</option>
-                            <option value="CT">Connecticut</option>
-                            <option value="FL">Florida</option>
-                            <option value="MA">Massachusetts</option>
-                            <option value="WV">West Virginia</option>
+                        <?php 
+                        
+                        $curl = curl_init();
+
+                        curl_setopt_array($curl, array(
+                          CURLOPT_URL => "http://api.rajaongkir.com/starter/province",
+                          CURLOPT_RETURNTRANSFER => true,
+                          CURLOPT_ENCODING => "",
+                          CURLOPT_MAXREDIRS => 10,
+                          CURLOPT_TIMEOUT => 30,
+                          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                          CURLOPT_CUSTOMREQUEST => "GET",
+                          CURLOPT_HTTPHEADER => array(
+                            "key: 4289bb176b07351df63fc435affaa4e6"
+                          ),
+                        ));
+            
+                        $response = curl_exec($curl);
+                        $err = curl_error($curl);
+
+			            $data = json_decode($response, true);
+
+                        ?>
+                        <select id="provinsi" class="form-control" name="province" required="">
+                        @for ($i=0; $i < count($data['rajaongkir']['results']); $i++) {
+				            <option value='{{$data['rajaongkir']['results'][$i]['province_id']}}'>{{$data['rajaongkir']['results'][$i]['province']}}</option>
+                        @endfor
                         </select>
                     </div>
                     <div class="form-group">
-                        <select class="form-control" name="city" required="">
-                            <option hidden="">Kota</option>
-                            <option value="AZ">Arizona</option>
-                            <option value="CO">Colorado</option>
-                            <option value="ID">Idaho</option>
-                            <option value="WY">Wyoming</option>
-                            <option value="AL">Alabama</option>
-                            <option value="IA">Iowa</option>
-                            <option value="KS">Kansas</option>
-                            <option value="KY">Kentucky</option>
-                            <option value="CT">Connecticut</option>
-                            <option value="FL">Florida</option>
-                            <option value="MA">Massachusetts</option>
-                            <option value="WV">West Virginia</option>
+                        <select id="kabupaten" class="form-control" name="city" required="">
                         </select>
                     </div>
                     <div class="form-group">
-                        <select class="form-control" name="region" required="">
-                            <option hidden="">Kecamatan</option>
-                            <option value="AZ">Arizona</option>
-                            <option value="CO">Colorado</option>
-                            <option value="ID">Idaho</option>
-                            <option value="WY">Wyoming</option>
-                            <option value="AL">Alabama</option>
-                            <option value="IA">Iowa</option>
-                            <option value="KS">Kansas</option>
-                            <option value="KY">Kentucky</option>
-                            <option value="CT">Connecticut</option>
-                            <option value="FL">Florida</option>
-                            <option value="MA">Massachusetts</option>
-                            <option value="WV">West Virginia</option>
-                        </select>
+                        <input type="text" name="region" required="" class="form-control" placeholder="Kecamatan">
                     </div>
                     <div class="form-group">
                         <input type="text" name="others" placeholder="Nama gedung, jalan dan lainnya..." required="" class="form-control">
@@ -332,5 +332,43 @@
     $('#modal_tambah_alamat').modal('show');
 </script>
 @endif
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    $('#provinsi').change(function(){
+
+        //Mengambil value dari option select provinsi kemudian parameternya dikirim menggunakan ajax 
+        var prov = $('#provinsi').val();
+
+          $.ajax({
+            type : 'GET',
+               url : 'http://localhost:8000/cek_kabupaten',
+            data :  'prov_id=' + prov,
+                success: function (data) {
+
+                //jika data berhasil didapatkan, tampilkan ke dalam option select kabupaten
+                $("#kabupaten").html(data);
+            }
+          });
+    });
+
+    $("#cek").click(function(){
+        //Mengambil value dari option select provinsi asal, kabupaten, kurir, berat kemudian parameternya dikirim menggunakan ajax 
+        
+        var kab = $('#kab').val();
+          $.ajax({
+            type : 'GET',
+               url : 'http://localhost:8000/cek_ongkir',
+               data :  {'kab_id' : kab},
+                    success: function (data) {
+
+                    //jika data berhasil didapatkan, tampilkan ke dalam element div ongkir
+                    $("#ongkir").html(data);
+            }
+          });
+    });
+});
+</script>
 
 @endsection
