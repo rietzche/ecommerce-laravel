@@ -28,6 +28,11 @@
 								<div class="form-control-feedback">
 									<i class="icon-user-check text-muted"></i>
 								</div>
+								@if ($errors->has('name'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+								@endif
 							</div>
 							<div class="form-group has-feedback has-feedback-left">
 								<input type="text" class="form-control" name="no_tlp" placeholder="Nomor handphone">
@@ -41,6 +46,11 @@
 								<div class="form-control-feedback">
 									<i class="icon-mention text-muted"></i>
 								</div>
+								@if ($errors->has('email'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+								@endif
 							</div>
 
 							<div class="form-group has-feedback has-feedback-left">
@@ -48,6 +58,11 @@
 								<div class="form-control-feedback">
 									<i class="icon-user-lock text-muted"></i>
 								</div>
+								@if ($errors->has('password'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+								@endif
 							</div>
 
 							<div class="form-group has-feedback has-feedback-left">
