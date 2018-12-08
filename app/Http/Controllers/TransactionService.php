@@ -20,6 +20,11 @@ class TransactionService extends Controller
     {
         return $this->newTransaction()->find($id);
     }
+    
+    public function where($key, $req)
+    {
+        return $this->newTransaction()->where($key, $req);
+    }
 
     public function create($req)
     {

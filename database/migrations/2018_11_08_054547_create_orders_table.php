@@ -21,7 +21,7 @@ class CreateOrdersTable extends Migration
             $table->integer('id_address');
             $table->integer('bank');
             $table->string('courier');
-            $table->string('msg');
+            $table->string('msg')->nullable(true);
             $table->integer('quantity');
             $table->integer('status');
             $table->integer('price_total');

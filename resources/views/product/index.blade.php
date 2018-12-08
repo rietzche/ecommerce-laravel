@@ -46,6 +46,8 @@
 				<div class="clear"></div>
 			</div>
 			@foreach($products as $product)
+			{{! $jumRt = App\Rating::where('id_product', $product->id)->get() }}
+			{{! $rt = App\Rating::where('id_product', $product->id)->value('rate') }}
 			<a href="/product/{{ $product->id }}" class="panel-produk">
 				<div class="panel-img">
 					<img src="/uploads/foto-produk/{{ App\Picture::where('id_product', $product->id)->value('picture') }}" style="padding: 5px">
@@ -55,12 +57,12 @@
 					<p class="p-harga">Rp. {{ number_format($product->price,0 , "," , ".") }}</p>
 					<div style="float: right;">
 						<fieldset class="rating-sm">
-							<p class="text-muted text-star">(30)</p>
-						    <input type="radio" id="star5" name="rating" disabled="" value="5" /><label class = "full" for="star5" title="Sangat Baik"></label>
-						    <input type="radio" id="star4" name="rating" disabled="" value="4" /><label class = "full" for="star4" title="Baik"></label>
-						    <input type="radio" id="star3" name="rating" disabled="" value="3" checked="" /><label class = "full" for="star3" title="Standar"></label>
-						    <input type="radio" id="star2" name="rating" disabled="" value="2" /><label class = "full" for="star2" title="Kurang Baik"></label>
-						    <input type="radio" id="star1" name="rating" disabled="" value="1" /><label class = "full" for="star1" title="Tidak Baik"></label>
+							<p class="text-muted text-star">({{ count($jumRt) }})</p>
+						    <input type="radio" id="star5" disabled="" value="5" {{{ ($rt == 5 ? 'checked' : '') }}}/><label class = "full" for="star5" title="Sangat Baik"></label>
+						    <input type="radio" id="star4" disabled="" value="4" {{{ ($rt == 4 ? 'checked' : '') }}}/><label class = "full" for="star4" title="Baik"></label>
+						    <input type="radio" id="star3" disabled="" value="3" {{{ ($rt == 3 ? 'checked' : '') }}}/><label class = "full" for="star3" title="Standar"></label>
+						    <input type="radio" id="star2" disabled="" value="2" {{{ ($rt == 2 ? 'checked' : '') }}}/><label class = "full" for="star2" title="Kurang Baik"></label>
+						    <input type="radio" id="star1" disabled="" value="1" {{{ ($rt == 1 ? 'checked' : '') }}}/><label class = "full" for="star1" title="Tidak Baik"></label>
 						</fieldset>
 					</div>
 				</div>

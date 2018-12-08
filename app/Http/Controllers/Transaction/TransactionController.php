@@ -26,7 +26,7 @@ class TransactionController extends BaseController
     {
         $orders = $this->order->code($code);
         
-        if($orders->first()->status == 0)
+        if($orders->first()->status == 0 || $orders->first()->status == 2)
         {
             return view('transaction.index')->with('orders', $orders)
                                         ->with('code', $code);

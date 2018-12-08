@@ -14,7 +14,7 @@
 		</div>
 
 		<div class="panel-body">
-			<table class="table datatable-basic">
+			<table class="table datatable-button-print-basic">
 				<thead>
 					<tr>
 						<th>No</th>
