@@ -24,6 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/cek_kabupaten', 'HomeController@cekKabupaten')->name('cek_kabupaten');
 Route::get('/cek_ongkir', 'HomeController@cekOngkir')->name('cek_ongkir');
 Route::get('/cek_city', 'HomeController@cekCity')->name('cek_city');
+
 Route::get('/panduan', function () {
     return view('panduan');
 });
