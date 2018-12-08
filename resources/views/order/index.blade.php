@@ -236,6 +236,8 @@
                         </tr>
                         <tr>
                             <td><h6>Total Ongkos Kirim</h6></td>
+                            <input type="hidden" name="courier" value="jne">
+                            <input type="hidden" name="ongkir" value="2000">
                             <td><h6>Rp. {{ number_format(2000, 0, ",", ".") }}</h6></td>
                         </tr>
                         <tr>

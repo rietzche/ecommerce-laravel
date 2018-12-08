@@ -74,7 +74,7 @@
           <table border="1" width="100%">
             <tr>
               <td>Nama</td>
-              <td>{{App\Address::find($idAddress)->receiver_name}}</td>
+              <td>{{ App\Address::find($idAddress)->receiver_name }}</td>
             </tr>
             <tr>
               <td>Alamat</td>

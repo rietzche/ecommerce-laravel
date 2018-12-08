@@ -23,6 +23,7 @@
 						<th>Kategori</th>
 						<th>Harga</th>
 						<th>Stok</th>
+						<th>Berat</th>
 						<th class="text-center">Aksi</th>
 					</tr>
 				</thead>
@@ -36,6 +37,7 @@
 						<td>{{ App\Category::find($product->id_category)->name }}</td>
 						<td>Rp. {{ $product->price }}</td>
 						<td><span class="label label-info">{{ App\Stock::where('id_product', $product->id)->value('stock') }}</span></td>
+						<td>{{$product->weight}}</td>
 						<td class="text-center">
 							<a href="{{ route('product.edit', $product->id) }}" class="btn btn-info btn-sm"><i class="icon-pencil7"></i> Update</a>
 							<a class="btn btn-danger btn-sm"
