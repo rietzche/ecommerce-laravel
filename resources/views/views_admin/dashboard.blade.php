@@ -132,7 +132,7 @@
 						@if($tgl==$tglOrd)
 						<tr>
 							<td>{{$order->code}}</td>
-							<td><span class="text-muted">{{ App\user::find($o->id_user)->name }}</span></td>
+							<td><span class="text-muted">{{ \App\User::find($o->id_user)->name }}</span></td>
 							<td>{{ $tglOrd }}</td>
 							<td>
 								<a href="javascript::void(0)" data-toggle="modal" data-target="#myModal{{ $order->id }}"><i class="icon-eye"></i> Lihat</a>
