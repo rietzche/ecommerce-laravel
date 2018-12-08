@@ -38,22 +38,21 @@
 		<script type="text/javascript" src="/assets/js/plugins/uploaders/fileinput/plugins/purify.min.js"></script>
 		<script type="text/javascript" src="/assets/js/plugins/uploaders/fileinput/plugins/sortable.min.js"></script>
 		<script type="text/javascript" src="/assets/js/plugins/uploaders/fileinput/fileinput.min.js"></script>
-		<script type="text/javascript" src="/assets/js/pages/uploader_bootstrap.js"></script>
-		
-		<script type="text/javascript" src="/assets/js/plugins/uploaders/fileinput/plugins/purify.min.js"></script>
-		<script type="text/javascript" src="/assets/js/plugins/uploaders/fileinput/plugins/sortable.min.js"></script>
-		<script type="text/javascript" src="/assets/js/plugins/uploaders/fileinput/fileinput.min.js"></script>
-
-		<script type="text/javascript" src="/assets/js/core/app.js"></script>
-		<script type="text/javascript" src="/assets/js/pages/uploader_bootstrap.js"></script>
 		<!-- /theme JS files -->
 
 		<script type="text/javascript" src="/assets/js/core/app.js"></script>
+		<script type="text/javascript" src="/assets/js/pages/uploader_bootstrap.js"></script>
    		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	
 		<!-- sweet_alert -->
 		<link rel="stylesheet" href="/assets/sweetalert2/sweetalert2.min.css">
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+	
+		<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> -->
+  		
+
 	</head>
 
 	<body>	

@@ -8,43 +8,43 @@
 		</div>
 
 		<div class="table-responsive">
-			<table class="table datatable-basic text-nowrap">
+			<table class="table datatable-button-print-basic text-nowrap">
 				<thead>
 					<tr>
 						<th>No</th>
 						<th>ID Pelanggan</th>
-						<th>ID Barang</th>
+						<th>ID Produk</th>
 						<th>Nilai</th>
 						<th>Pesan</th>
 						<th>Waktu</th>
-						<th class="text-center" style="width: 20px;"><i class="icon-arrow-down12"></i></th>
+						<!-- <th class="text-center" style="width: 20px;"><i class="icon-arrow-down12"></i></th> -->
 					</tr>
 				</thead>
 				<tbody>
-					@for($i=1;$i<=3;$i++)
+					{{! $i=1 }}
+					@foreach($ratings as $rating)
 					<tr>
-						<td>{{$i}}</td>
-						<td>CSO{{$i}}</td>
-						<td>PSO{{$i}}</td>
+						<td>{{$i++}}</td>
+						<td>{{$rating->id_user }}</td>
+						<td>{{$rating->id_product }}</td>
 						<td>
 							<fieldset class="rating-sm">
-						       	<input type="radio" id="star5" name="rating" disabled="" value="5" /><label class = "full" for="star5" title="Sangat Baik"></label>
-							    <input type="radio" id="star4" name="rating" disabled="" value="4" /><label class = "full" for="star4" title="Baik"></label>
-							    <input type="radio" id="star3" name="rating" disabled="" value="3" checked="" /><label class = "full" for="star3" title="Standar"></label>
-							    <input type="radio" id="star2" name="rating" disabled="" value="2" /><label class = "full" for="star2" title="Kurang Baik"></label>
-							    <input type="radio" id="star1" name="rating" disabled="" value="1" /><label class = "full" for="star1" title="Tidak Baik"></label>
+							    <input type="radio" id="star5" value="5" disabled="" {{{ ($rating->rate == 5 ? 'checked' : '') }}}/><label class = "full" for="star5" title="Sangat Baik"></label>
+							    <input type="radio" id="star4" value="4" disabled="" {{{ ($rating->rate == 4 ? 'checked' : '') }}}/><label class = "full" for="star4" title="Baik"></label>
+							    <input type="radio" id="star3" value="3" disabled="" {{{ ($rating->rate == 3 ? 'checked' : '') }}}/><label class = "full" for="star3" title="Standar"></label>
+							    <input type="radio" id="star2" value="2" disabled="" {{{ ($rating->rate == 2 ? 'checked' : '') }}}/><label class = "full" for="star2" title="Kurang Baik"></label>
+							    <input type="radio" id="star1" value="1" disabled="" {{{ ($rating->rate == 1 ? 'checked' : '') }}}/><label class = "full" for="star1" title="Tidak Baik"></label>
 							</fieldset>
 							<div class="clear"></div>
-							<div class="text-muted">85 reviews</div>
 						</td>
 						<td>
-							<textarea cols="34" rows="3" readonly="">pesan dari customers</textarea>
+							<textarea cols="34" rows="3" readonly="">{{ $rating->review }}</textarea>
 						</td>
 						<td>
-							{{date('G:i:s')}}<br>
-							{{date('d/m/Y')}}
+							{{ date('G:i:s', strtotime($rating->created_at)) }}<br>
+							{{date('d/m/Y', strtotime($rating->created_at))}}
 						</td>
-						<td class="text-center">
+						<!-- <td class="text-center">
 							<ul class="icons-list">
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
@@ -54,9 +54,9 @@
 									</ul>
 								</li>
 							</ul>
-						</td>
+						</td> -->
 					</tr>
-					@endfor
+					@endforeach
 				</tbody>
 			</table>
 		</div>

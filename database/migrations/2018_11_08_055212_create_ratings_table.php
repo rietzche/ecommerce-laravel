@@ -18,7 +18,7 @@ class CreateRatingsTable extends Migration
             $table->unsignedInteger('id_product');
             $table->unsignedInteger('id_user');
             $table->integer('rate');
-            $table->string('review');
+            $table->text('review')->nullable(true);
             $table->timestamps();
         });
 

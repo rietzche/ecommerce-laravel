@@ -38,32 +38,55 @@
 				<!-- Multiple file upload -->
 				<div class="panel-body">
 					<p class="text-semibold">Upload bukti transfer:</p>
+					<!-- js show image -->
+			          	<script type="text/javascript">
+			            function readURL(input) {
+			              if (input.files && input.files[0]) {
+			                var reader = new FileReader();
+
+			                reader.onload = function(e) {
+			                  $('#cek-gambar')
+			                    .attr('src', e.target.result);
+			                };
+			                reader.readAsDataURL(input.files[0]);
+			              }
+			            }
+			          	</script>
+			          <!--end-->
+
 					<div class="dropzone" id="dropzone_multiple" style="width: 260px; margin: 0px auto">
-						<input type="file" class="file-input-ajax" name="proof" multiple="multiple" accept="image/*">
+						<input type="file" name="proof" class="form-control" onchange="readURL(this);" accept="image/*" required="">
+			            <img id="cek-gambar" src="#" alt="" width="100%" height="100%">
+						<!-- <input type="file" class="file-input" name="proof" multiple="multiple" accept="image/*"> -->
 					</div>
+
+			        <div class="form-group">
+			        	
+			        </div>
 				</div>
 				<!-- /multiple file upload -->
+
 			</div>
 		</div>
 		<div class="panel panel-flat">
 			<div style="padding: 0px 15px; border:1px solid #f2f2f2">
 				<h6 style="float: left;">Nama Rekening pengirim</h6>
-				<input type="text" name="sender_name" style="float: right; width: 70%; border:none; margin-top: 11px" placeholder="Masukan nama pengirim">
+				<input type="text" name="sender_name" style="float: right; width: 70%; border:none; margin-top: 11px" placeholder="Masukan nama pengirim" required="">
 				<div class="clear"></div>
 			</div>
 			<div style="padding: 0px 15px; border:1px solid #f2f2f2">
 				<h6 style="float: left;">Transfer dari Bank</h6>
-				<input type="text" name="bank_from" style="float: right; width: 70%; border:none; margin-top: 11px" placeholder="Masukan nama bank">
+				<input type="text" name="bank_from" style="float: right; width: 70%; border:none; margin-top: 11px" placeholder="Masukan nama bank" required="">
 				<div class="clear"></div>
 			</div>
 			<div style="padding: 0px 15px; border:1px solid #f2f2f2">
 				<h6 style="float: left;">Transfer ke Bank </h6>
-				<input type="text" readonly="" style="float: right; width: 70%; border:none; margin-top: 11px" value="{{ $bank->nama_bank }}">
+				<input type="text" readonly="" style="float: right; width: 70%; border:none; margin-top: 11px" value="{{ $bank->nama_bank }}" required="">
 				<div class="clear"></div>
 			</div>
 			<div style="padding: 0px 15px; border:1px solid #f2f2f2">
 				<h6 style="float: left;">Metode Transfer </h6>
-				<select name="method" style="float: right; width: 70.5%; background: #ffffff; border:none; margin-top: 11px">
+				<select name="method" required="" style="float: right; width: 70.5%; background: #ffffff; border:none; margin-top: 11px">
 					<option selected disabled hidden>Pilih Metode</option>
 					<option value="atm">Transfer ATM</option>
 					<option value="ibanking">iBanking</option>
@@ -73,12 +96,12 @@
 			</div>
 			<div style="padding: 0px 15px; border:1px solid #f2f2f2">
 				<h6 style="float: left;">Jumlah Ditransfer (Rp) </h6>
-				<input type="text" readonly="" style="float: right; width: 70%; border:none; margin-top: 11px" value="Rp. {{ $orders->sum('price_total') }}">
+				<input type="text" readonly="" required="" style="float: right; width: 70%; border:none; margin-top: 11px" value="Rp. {{ $orders->sum('price_total') }}">
 				<div class="clear"></div>
 			</div>
 			<div style="padding: 0px 15px; border:1px solid #f2f2f2">
 				<h6 style="float: left;">Tanggal Transfer </h6>
-				<input type="date" name="transfer_date" style="float: right; width: 70%; border:none; margin-top: 11px" value="{{ date('Y-m-d') }}">
+				<input type="date" required="" name="transfer_date" style="float: right; width: 70%; border:none; margin-top: 11px" value="{{ date('Y-m-d') }}">
 				<div class="clear"></div>
 			</div>
 		</div>

@@ -43,7 +43,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function()
     Route::put('/category/{id}', 'Category\CategoryController@update')->name('category.update');
     Route::delete('/category/{id}', 'Category\CategoryController@delete')->name('category.delete');
 
-    Route::get('tabel barang', 'Product\ProductController@indexadmin')->name('product.index');
+    Route::get('/tabel barang', 'Product\ProductController@indexadmin')->name('product.index');
     Route::get('/tambah barang', 'Product\ProductController@new')->name('product.new');
     Route::post('/product', 'Product\ProductController@create')->name('product.create');
     Route::get('/edit barang/{id}', 'Product\ProductController@edit')->name('product.edit');
@@ -54,19 +54,26 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function()
         return view('views_admin.barang_edit');
     });
 
-    Route::get('tabel pesanan', 'Admin\AdminController@order')->name('admin.order');
-
-    Route::get('tabel pelanggan', function(){
-        return view('views_admin.pelanggan_tabel');
-    });
+    Route::get('/tabel pesanan/{status}', 'Admin\AdminController@order')->name('admin.order');
+    Route::put('/batal pesanan/{code}', 'Pesanan\PesananController@cancelPesanan')->name('pesanan.batal');
+    Route::put('/tolak pesanan/{code}', 'Pesanan\PesananController@tolakBukti')->name('pesanan.tolak');
+    Route::put('/verif pesanan/{code}', 'Pesanan\PesananController@verifBukti')->name('pesanan.verif');
+    Route::put('/dikirim pesanan/{code}', 'Pesanan\PesananController@dikirimPesanan')->name('pesanan.dikirim');
+    Route::put('/terkirim pesanan/{code}', 'Pesanan\PesananController@terkirimPesanan')->name('pesanan.terkirim');
+    Route::get('/invoice pesanan/{code}', 'Pesanan\PesananController@invoicePesanan')->name('pesanan.invoice');
+    
+    Route::get('/tabel pelanggan', 'Admin\AdminController@pelanggan')->name('admin.pelanggan');
+    Route::delete('/pelanggan/{id}', 'Admin\AdminController@deletePelanggan')->name('admin.hapususer');
+    Route::get('/tabel penilaian', 'Admin\AdminController@penilaian')->name('admin.penilaian');
 
     Route::get('tabel penjualan', function(){
         return view('views_admin.penjualan_tabel');
     });
-
-    Route::get('tabel penilaian', function(){
-        return view('views_admin.penilaian_tabel');
-    });
+    
+    Route::get('/tabel rekening', 'Rekening\RekeningController@index')->name('rekening.index');
+    Route::post('/rekening', 'Rekening\RekeningController@create')->name('rekening.create');
+    Route::put('/rekening/{id}', 'Rekening\RekeningController@update')->name('rekening.update');
+    Route::delete('/rekening/{id}', 'Rekening\RekeningController@delete')->name('rekening.delete');
 });
 
 Route::group(['middleware' => ['auth']], function () {
@@ -89,6 +96,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/transaction/{code}', 'Transaction\TransactionController@create')->name('transaction.create');
 
     Route::get('/belanjaanku', 'Belanjaan\BelanjaanController@index')->name('belanjaanku');
+    Route::put('/cancel pesanan/{code}', 'Pesanan\PesananController@cancelPesanan')->name('pesanan.cancel');
+    Route::put('/pesanan diterima/{code}', 'Pesanan\PesananController@terkirimPesanan')->name('pesanan.diterima');
+
+    Route::post('/rating', 'Product\RatingController@create')->name('rating.create');
+    Route::put('/rating/{id}', 'Product\RatingController@update')->name('rating.update');
 });
 
 

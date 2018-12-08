@@ -43,9 +43,7 @@
 	<script type="text/javascript" src="/assets/js/plugins/uploaders/fileinput/plugins/purify.min.js"></script>
 	<script type="text/javascript" src="/assets/js/plugins/uploaders/fileinput/plugins/sortable.min.js"></script>
 	<script type="text/javascript" src="/assets/js/plugins/uploaders/fileinput/fileinput.min.js"></script>
-
 	<!-- /theme JS files -->
-
 
 	<!-- Theme JS files -->
 	<script type="text/javascript" src="/assets/js/plugins/tables/datatables/datatables.min.js"></script>
@@ -55,12 +53,11 @@
 
 	<!-- Theme JS files -->
 	<script type="text/javascript" src="/assets/js/core/app.js"></script>
+	<script type="text/javascript" src="/assets/js/pages/datatables_extension_buttons_print.js"></script>
 	<script type="text/javascript" src="/assets/js/pages/uploader_bootstrap.js"></script>
 	<script type="text/javascript" src="/assets/js/pages/editor_ckeditor.js"></script>
 	<script type="text/javascript" src="/assets/js/pages/layout_fixed_custom.js"></script>
-	<script type="text/javascript" src="/assets/js/pages/datatables_extension_buttons_print.js"></script>
 	<!-- /theme JS files -->
-
 
 	<!-- sweet_alert -->
 	<link rel="stylesheet" href="/assets/sweetalert2/sweetalert2.min.css">
@@ -163,12 +160,16 @@
 								<li>
 									<a href="javascript:void(0)"><i class="glyphicon glyphicon-list-alt"></i> <span>Pesanan</span></a>
 									<ul>
-										<li {{{ (Request::is('admin/tabel pesanan/*') ? 'class=active' : '') }}}>
-											<a href="/admin/tabel pesanan">Terbaru</a></li>
-										<li {{{ (Request::is('admin/tabel pesanan/*') ? 'class=active' : '') }}}>
-											<a href="/admin/tabel pesanan">Sedang Dikirim</a></li>
-										<li {{{ (Request::is('admin/tabel pesanan/*') ? 'class=active' : '') }}}>
-											<a href="/admin/tabel pesanan">Terkirim</a></li>
+										<li {{{ (Request::is('admin/tabel pesanan/pending') ? 'class=active' : '') }}}>
+											<a href="/admin/tabel pesanan/pending">Pending</a></li>
+										<li {{{ (Request::is('admin/tabel pesanan/terbaru') ? 'class=active' : '') }}}>
+											<a href="/admin/tabel pesanan/terbaru">Terbaru</a></li>
+										<li {{{ (Request::is('admin/tabel pesanan/dikirim') ? 'class=active' : '') }}}>
+											<a href="/admin/tabel pesanan/dikirim">Sedang Dikirim</a></li>
+										<li {{{ (Request::is('admin/tabel pesanan/terkirim') ? 'class=active' : '') }}}>
+											<a href="/admin/tabel pesanan/terkirim">Terkirim</a></li>
+										<li {{{ (Request::is('admin/tabel pesanan/dibatalkan') ? 'class=active' : '') }}}>
+											<a href="/admin/tabel pesanan/dibatalkan">Dibatalkan</a></li>
 									</ul>
 								</li>
 
@@ -181,6 +182,7 @@
 										<li {{{ (Request::is('admin/tabel barang') ? 'class=active' : '') }}}><a href="/admin/tabel barang">Data Produk</a></li>
 									</ul>
 								</li>
+								<li {{{ (Request::is('admin/tabel rekening') ? 'class=active' : '') }}}><a href="/admin/tabel rekening"><i class="fa fa-credit-card"></i> <span>Rekening</span></a></li>
 								<li {{{ (Request::is('admin/tabel penjualan') ? 'class=active' : '') }}}><a href="/admin/tabel penjualan"><i class="icon-cart2"></i> <span>Penjualan</span></a></li>
 								<li {{{ (Request::is('admin/tabel penilaian') ? 'class=active' : '') }}}><a href="/admin/tabel penilaian"><i class="icon-stars"></i> <span>Penilaian Produk</span></a></li>
 								<!-- /Main -->

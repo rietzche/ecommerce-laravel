@@ -12,6 +12,7 @@ use App\Http\Controllers\OrderService;
 
 use Alert;
 use App\Order;
+use App\Stock;
 
 class OrderController extends Controller
 {
@@ -52,6 +53,15 @@ class OrderController extends Controller
                 'status' => 0,
                 'price_total' => $cart->quantity * \App\Product::find($cart->id_product)->price,
             ]);
+            $st = Stock::where('id_product', $cart->id_product)->first();
+            $minStock = $cart->quantity;
+            $sisaStock = $st->stock - $minStock;
+
+            $s = Stock::Where('id_product', $cart->id_product);
+            $s->update([
+                'stock'=> $sisaStock,
+            ]);
+
         }
         $this->cart->where(Auth::user()->id)->delete();
 
@@ -62,7 +72,7 @@ class OrderController extends Controller
     {
         $order = $this->order->code($code)->get();
 
-        if($order->first()->status == 0)
+        if($order->first()->status == 0 || $order->first()->status == 2)
         {
             if(count($order) != 0)
             {

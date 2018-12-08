@@ -8,7 +8,7 @@
 		</div>
 
 		<div class="table-responsive">
-			<table class="table datatable-basic">
+			<table class="table datatable-button-print-basic">
 				<thead>
 					<tr>
 						<th>No</th>

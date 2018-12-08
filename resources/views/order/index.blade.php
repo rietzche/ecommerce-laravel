@@ -79,7 +79,6 @@
       });
   });
   </script>
-
 <form action="{{ route('order.create') }}" method="post">
     @csrf
     <!-- panel alamat -->
@@ -108,6 +107,8 @@
 	            	</div>
             	</div>
             </div>
+            @else
+                <h5 class="text-center text-muted">Alamat Kosong</h5>
             @endif
         </div>
         <div class="panel-body" style="border-top: 1px solid #cccccc; padding-top: 10px">
@@ -137,7 +138,7 @@
                         <td style="width: 600px">
                             <div class="detail-cart">
                                 <img src="/uploads/foto-produk/{{ App\Picture::where('id_product', $product->id)->first()->picture }}" style="width: 50px; height: 50px">
-                                <p>{{ $product->name }} (<b>Ukuran : 210x100</b> ) (<b>warna : merah</b>)</p>
+                                <p>{{ $product->name }} <!-- (<b>Ukuran : 210x100</b> ) (<b>warna : merah</b>) --></p>
                                 <div class="clear"></div>
                             </div>
                         </td>
@@ -211,7 +212,7 @@
                     @foreach($banks as $bank)
                     <div class="radio">
                         <label style="font-size: 14px">
-                            <input type="radio" name="bank" class="styled" value="{{$bank->id}}">{{ $bank->nama_bank }}
+                            <input type="radio" name="bank" required="" class="styled" value="{{$bank->id}}">{{ $bank->nama_bank }}
                         </label>
                     </div>
                     @endforeach
@@ -326,7 +327,35 @@
     </div>
     <!-- /modal tambah alamat -->
 </div>
-        
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#addrs").change(function(){
+        // CREATE A "DIV" ELEMENT.
+        var container = document.createElement("div");
+          container.id="a";
+
+          @foreach($addresses as $d)
+          if ($(this).val() == "{{$d->id}}"){
+                // ADD TEXTBOX.
+              $('#a').remove();
+                $(container).append('<div class="col-sm-10">'+ 
+                  '<input type="hidden" name="address" value="{{ $d->id }}" readonly="" required="">'+
+                  '<h6><b>{{$d->receiver_name }} ({{$d->number_tlp }})</b></h6> '+
+                  '<h6>{{ $d->others }}, {{ $d->region }}, {{ $d->city }}, {{ $d->province }} {{ $d->zip_code }}</h6>'+
+                  '</div>'+
+                  '<div id="col-sm-2">'+
+                  '<a href="/edit address/{{ $d->id }}" style="float: right; margin-top: 30px">UBAH</a>'+
+                  '</div>'
+                );
+                // ADD BOTH THE DIV ELEMENTS TO THE "main" CONTAINER.
+                $('#main').after(container);
+            }
+            @endforeach
+        });
+    });
+</script>
+
 @if(count($addresses)==0)
 <script type="text/javascript">
     $('#modal_tambah_alamat').modal('show');

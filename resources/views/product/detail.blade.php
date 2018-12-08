@@ -22,7 +22,8 @@
 			</div>
 		</div>
 		<!-- foto detail produk -->
-
+		{{! $Ratings = App\Rating::where('id_product', $product->id)->get() }}
+		{{! $rt = App\Rating::where('id_product', $product->id)->value('rate') }}
 		<!-- form action produk -->
 		<div class="form-action-produk">
 			<h4>{{ $product->name }}</h4>
@@ -30,12 +31,12 @@
 				<p style="margin-bottom: -5px">Penilaian produk</p>
 				<div class="text-nowrap" style="float:left; margin-top: 5px">
 					<fieldset class="rating-sm">
-						<p class="text-muted text-star">(30)</p>
-					    <input type="radio" id="star5" name="rating" disabled="" value="5" /><label class = "full" for="star5" title="Sangat Baik"></label>
-					    <input type="radio" id="star4" name="rating" disabled="" value="4" /><label class = "full" for="star4" title="Baik"></label>
-					    <input type="radio" id="star3" name="rating" disabled="" value="3" checked="" /><label class = "full" for="star3" title="Standar"></label>
-					    <input type="radio" id="star2" name="rating" disabled="" value="2" /><label class = "full" for="star2" title="Kurang Baik"></label>
-					    <input type="radio" id="star1" name="rating" disabled="" value="1" /><label class = "full" for="star1" title="Tidak Baik"></label>
+						<p class="text-muted text-star">({{ count($Ratings) }})</p>
+					    <input type="radio" id="star5" value="5" disabled="" {{{ ($rt == 5 ? 'checked' : '') }}}/><label class = "full" for="star5" title="Sangat Baik"></label>
+					    <input type="radio" id="star4" value="4" disabled="" {{{ ($rt == 4 ? 'checked' : '') }}}/><label class = "full" for="star4" title="Baik"></label>
+					    <input type="radio" id="star3" value="3" disabled="" {{{ ($rt == 3 ? 'checked' : '') }}}/><label class = "full" for="star3" title="Standar"></label>
+					    <input type="radio" id="star2" value="2" disabled="" {{{ ($rt == 2 ? 'checked' : '') }}}/><label class = "full" for="star2" title="Kurang Baik"></label>
+					    <input type="radio" id="star1" value="1" disabled="" {{{ ($rt == 1 ? 'checked' : '') }}}/><label class = "full" for="star1" title="Tidak Baik"></label>
 					</fieldset>
 				</div>
 			</div>
@@ -76,12 +77,15 @@
 					<h6 class="text-muted" style="float: left;">Kuantitas : </h6>
 					<div class="btnGroup">
 						<button type="button" onclick="btKurang()" class="btJum"><i class="icon-minus3"></i></button>
-						<input type="text" autocomplete="off" id="jumlah" class="inJum" value="1" name="quantity">
+						<input type="text" autocomplete="off" onkeyup="limit()" id="jumlah" class="inJum" value="1" name="quantity">
 						<button type="button" onclick="btTambah()" class="btJum"><i class="icon-plus3"></i></button>
 						{{! $stock = App\Stock::where('id_product', $product->id)->first() }}
 						<p class="text-muted">Tersisa {{ $stock->stock }} buah</p>
 					</div>
 					<script>
+						@if($stock->stock==0)
+						document.getElementById('jumlah').value = 0;
+						@endif
 						function btKurang() {
 							n = 0;
 							n1 = eval(document.getElementById('jumlah').value);
@@ -91,6 +95,18 @@
 								document.getElementById('jumlahN').value = n;
 							}
 						}
+
+						function limit(){
+							n2 = parseInt({{ $stock->stock }});
+							n1 = eval(document.getElementById('jumlah').value);
+							if ( n1 > n2 )
+							{
+								document.getElementById('jumlah').value = n2;
+								document.getElementById('jumlahN').value = n2;
+							}
+
+						}
+
 						function btTambah() {
 							n = 0;
 							n2 = parseInt({{ $stock->stock }});
@@ -108,15 +124,25 @@
 				<input type="hidden" name="product" value="{{ $product->id }}">
 
 				<div class="clear"></div>
+				@if($stock->stock > 0)
 				<button type="submit" class="btnCart"><i class="icon-cart-add" style="font-size: 18px"></i> Masukkan Keranjang</button>
+				@else
+				<a class="btnCart"><i class="icon-cart-add" style="font-size: 18px"></i> Masukkan Keranjang</a>
+				@endif
 			</form>
 
+			@if($stock->stock > 0)
 			<form action="/buy now" method="POST" style="float: left;margin-top: 97px">
 				@csrf
 				<input type="hidden" name="product" value="{{ $product->id }}">
-				<input type="hidden" autocomplete="off" id="jumlahN" class="inJum" value="1" name="quantity">
+				<input type="hidden" autocomplete="off" onkeyup="limit()" id="jumlahN" class="inJum" value="1" name="quantity">
 				<input type="submit" class="btnBuy" value="Beli Sekarang">
 			</form>
+			@else
+			<div style="float: left;margin-top: 98px">
+				<a type="submit" class="btnBuy">Beli Sekarang</a>
+			</div>
+			@endif
 
 			<div class="clear"></div>
 				<hr>
@@ -135,29 +161,28 @@
 				<h5 class="panel-title">Penilaian Produk</h5>
 			</div>
 		</div>
-		@for($i=0;$i<=2;$i++)
+		@foreach($Ratings as $rt)
 		<div class="review-panel">
 			<img src="/assets/images/placeholder.jpg">		
 			<div class="review-coment">			
-				<p>Febri Ardi Saputra</p>
+				<p>{{ App\User::find($rt->id_user)->name }}</p>
 				<div class="text-nowrap" style="margin-top: -10px">
 					<fieldset class="rating-sm">
-					    <input type="radio" id="star5" name="rating" disabled="" value="5" /><label class = "full" for="star5" title="Sangat Baik"></label>
-					    <input type="radio" id="star4" name="rating" disabled="" value="4" /><label class = "full" for="star4" title="Baik"></label>
-					    <input type="radio" id="star3" name="rating" disabled="" value="3" checked="" /><label class = "full" for="star3" title="Standar"></label>
-					    <input type="radio" id="star2" name="rating" disabled="" value="2" /><label class = "full" for="star2" title="Kurang Baik"></label>
-					    <input type="radio" id="star1" name="rating" disabled="" value="1" /><label class = "full" for="star1" title="Tidak Baik"></label>
+					    <input type="radio" id="star5" value="5" disabled="" {{{ ($rt->rate == 5 ? 'checked' : '') }}}/><label class = "full" for="star5" title="Sangat Baik"></label>
+					    <input type="radio" id="star4" value="4" disabled="" {{{ ($rt->rate == 4 ? 'checked' : '') }}}/><label class = "full" for="star4" title="Baik"></label>
+					    <input type="radio" id="star3" value="3" disabled="" {{{ ($rt->rate == 3 ? 'checked' : '') }}}/><label class = "full" for="star3" title="Standar"></label>
+					    <input type="radio" id="star2" value="2" disabled="" {{{ ($rt->rate == 2 ? 'checked' : '') }}}/><label class = "full" for="star2" title="Kurang Baik"></label>
+					    <input type="radio" id="star1" value="1" disabled="" {{{ ($rt->rate == 1 ? 'checked' : '') }}}/><label class = "full" for="star1" title="Tidak Baik"></label>
 					</fieldset>
 					<div class="clear"></div>
 				</div>
-				<p style="margin-top: 5px">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. </p>
-				<p class="text-muted">{{date('Y-m-d G:i')}}</p>
+				<p style="margin-top: 5px">{{ $rt->review }} </p>
+				<p class="text-muted">{{ date('Y-m-d G:i', strtotime($rt->created_at)) }}</p>
 			</div>
 			<div class="clear"></div>
 			<hr>
 		</div>
-		@endfor
+		@endforeach
 	</div>
 </div>
 @endsection

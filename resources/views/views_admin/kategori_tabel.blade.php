@@ -11,7 +11,7 @@
 				</div>
 				<div class="panel-body">
 					<div class="form-group">
-						<input type="text" name="name" placeholder="masukan nama kategori" class="form-control">
+						<input type="text" name="name" required="" placeholder="masukan nama kategori" class="form-control">
 					</div>
 					<div class="form-group right">
 						<input type="submit" value="Tambahkan" class="btn btn-info">
@@ -53,7 +53,7 @@
 								<td>KSO{{$category->id}}</td>
 								@csrf
 								@method('PUT')
-								<td><input type="text" value="{{ $category->name }}" name="name" class="form-control"></td>
+								<td><input type="text" value="{{ $category->name }}" required="" name="name" class="form-control"></td>
 								<td class="text-center">
 									<button type="submit" class="btn btn-info btn-sm"><i class="icon-pencil7"></i> Update</button>
 									<a class="btn btn-danger btn-sm"

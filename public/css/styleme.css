@@ -728,12 +728,21 @@ a.text-tab {
   background-color: #fafdff;
 }
 
-.foot-table > .header {
+.foot-table > .msg {
+  float: left; 
+  padding: 20px
+}
+
+.foot-table > .foot-action {
+  float: right;
+}
+
+.foot-action > .header {
   padding: 20px; 
   float: right;
 }
 
-.foot-table > .header > h1{
+.foot-action > .header > h1{
   color: #ff6600;
   float: right; 
   font-weight: bold;
@@ -741,7 +750,7 @@ a.text-tab {
   margin-right: 85px  
 }
 
-.foot-table > .header > h6{
+.foot-action > .header > h6{
   color: #999999;
   float: right;
   margin-right: 10px;
