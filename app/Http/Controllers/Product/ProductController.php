@@ -83,6 +83,7 @@ class ProductController extends BaseController
             'id_category' => $req->category,
             'description' => $req->description,
             'price' => $req->price,
+            'weight' => $req->weight,
         ]);
 
         $files = $req->file('pictures');
@@ -125,6 +126,7 @@ class ProductController extends BaseController
             'id_category' => $req->category,
             'description' => $req->description,
             'price' => $req->price,
+            'weight' => $req->weight,
         ]);
 
         $this->stock->where($product->id)->update([

@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('id_category');
             $table->string('description');
             $table->integer('price');
+            $table->integer('weight');
             $table->timestamps();
         });
 

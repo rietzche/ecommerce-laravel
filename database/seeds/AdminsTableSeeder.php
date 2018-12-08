@@ -33,6 +33,7 @@ class AdminsTableSeeder extends Seeder
                 'description' => 'Lemari ini merupakan lemari terunik yang ada di toko ini.',
                 'id_category' => 1,
                 'price'       => 283000,
+                'weight'      => 500,
             ],
         ]);
 
