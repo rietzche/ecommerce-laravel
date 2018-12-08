@@ -16,6 +16,31 @@
     </style>
   </head>
   <body>
+
+    <?php
+        //Get Data Kabupaten
+        $curl = curl_init();    
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => "http://api.rajaongkir.com/starter/city",
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => "",
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 30,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => "GET",
+          CURLOPT_HTTPHEADER => array(
+            "key: c7bcc0c5a39119bf4dd8a2a5b084dd1c"
+          ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+    ?>
+
+
+    {{! $data = json_decode($response, true) }}
     {{! $idUser = App\Order::where('code', $code)->value('id_user') }}
     {{! $idAddress = App\Order::where('code', $code)->value('id_address') }}
     <div>
@@ -35,7 +60,11 @@
             <table style="float: right;">
               <tr>
                 <td>Kota Tujuan</td><td>:</td>
-                <td> {{ App\Address::where('id_user', $idUser)->value('city') }} </td>
+                <td>
+                @for($i=0; $i < count($data['rajaongkir']['results']); $i++)
+                              {{{ ($data['rajaongkir']['results'][$i]['city_id'] == \App\Address::where('id_user', $idUser)->value('city') ? $data['rajaongkir']['results'][$i]['city_name'].", " : '') }}}
+                @endfor  
+              </td>
               </tr>
               <tr>
                 <td>Jasa Kirim</td><td>:</td>
@@ -78,7 +107,15 @@
             </tr>
             <tr>
               <td>Alamat</td>
-              <td>{{App\Address::find($idAddress)->others}}, {{App\Address::find($idAddress)->region}}, {{App\Address::find($idAddress)->valuecity}}, {{App\Address::find($idAddress)->province}}, {{App\Address::find($idAddress)->value('zip_code')}}</td>
+              {{! $data = json_decode($response, true) }}
+              <td>
+                {{App\Address::find($idAddress)->others}}, {{App\Address::find($idAddress)->region}}, 
+                @for($i=0; $i < count($data['rajaongkir']['results']); $i++)
+                              {{{ ($data['rajaongkir']['results'][$i]['city_id'] == \App\Address::find($idAddress)->city ? $data['rajaongkir']['results'][$i]['city_name'].", " : '') }}}
+                              {{{ ($data['rajaongkir']['results'][$i]['city_id'] == \App\Address::find($idAddress)->city ? $data['rajaongkir']['results'][$i]['province'].", " : '') }}}
+                @endfor
+                {{App\Address::find($idAddress)->value('zip_code')}}
+              </td>
             </tr>
             <tr>
               <td>Kota</td>
