@@ -88,12 +88,12 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown dropdown-user">
 					<a class="dropdown-toggle" data-toggle="dropdown">
-						<img src="/assets/images/placeholder.jpg" alt="">
+						<img src="/assets/images/logo.jpg" alt="">
 						<span>{{ Auth::user()->name }}</span>
 						<i class="caret"></i>
 					</a>
 					<ul class="dropdown-menu dropdown-menu-right">
-						<li><a href="#"><i class="icon-cog5"></i> Account settings</a></li>
+						<li><a href="{{ route('admin.setting') }}"><i class="icon-cog5"></i> Account settings</a></li>
 						<li>
 							<a href="{{ route('logout') }}"
 										onclick="event.preventDefault();
@@ -127,18 +127,18 @@
 					<div class="sidebar-user">
 						<div class="category-content">
 							<div class="media">
-								<a href="#" class="media-left"><img src="/assets/images/placeholder.jpg" class="img-circle img-sm" alt=""></a>
+								<a href="" class="media-left"><img src="/assets/images/logo.jpg" class="img-circle img-sm" alt=""></a>
 								<div class="media-body">
-									<span class="media-heading text-semibold">Victoria Baker</span>
+									<span class="media-heading text-semibold">{{ Auth::user()->name }}</span>
 									<div class="text-size-mini text-muted">
-										<i class="icon-pin text-size-small"></i> &nbsp;Santa Ana, CA
+										{{ Auth::user()->email }}
 									</div>
 								</div>
 
 								<div class="media-right media-middle">
 									<ul class="icons-list">
 										<li>
-											<a href="#"><i class="icon-cog3"></i></a>
+											<a href="{{ route('admin.setting') }}"><i class="icon-cog3"></i></a>
 										</li>
 									</ul>
 								</div>
