@@ -18,7 +18,7 @@ Route::get('/', function () {
 Route::get('/products', 'Product\ProductController@index')->name('products');
 Route::get('/product/{id}', 'Product\ProductController@detail')->name('product');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/cek_kabupaten', 'HomeController@cekKabupaten')->name('cek_kabupaten');
@@ -74,7 +74,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function()
     Route::delete('/rekening/{id}', 'Rekening\RekeningController@delete')->name('rekening.delete');
 });
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['verified']], function () {
     Route::get('/carts', 'Cart\CartController@index')->name('carts');
     Route::post('/cart', 'Cart\CartController@create')->name('cart.create');
     Route::put('/cart', 'Cart\CartController@update')->name('cart.update');
