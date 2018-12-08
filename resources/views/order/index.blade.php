@@ -240,8 +240,9 @@
                         </tr>
                         <tr>
                             <td><h6>Total Ongkos Kirim</h6></td>
-                            <input type="hidden" name="courier" value="jne">
+                            
                             <input type="hidden" name="ongkir" value="2000">
+
                             <td><h6>Rp. <span id="ong">{{ number_format(0, 0, ",", ".") }}</span></h6></td>
                         </tr>
                         <tr>
@@ -458,6 +459,7 @@ $(document).ready(function(){
                                         '<h6><b>'+checkval+'</b></h6>'+
                                         '<p>Diterima dalam '+data[i].etd+' hari</p>'+
                                     '</td>'+
+                                    '<input type="hidden" name="courier" value="'+checkval+'">'+
                                     '<td><a id="cek" data-toggle="modal" data-target="#modal_default">UBAH</a>'+
                                     '</td>'+
                                     '<td>Rp. '+data[i].cost+'</td>'
