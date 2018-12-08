@@ -64,8 +64,7 @@
                     @for ($i=0; $i < count($data['rajaongkir']['results']); $i++)
                         '{{{ ($data['rajaongkir']['results'][$i]['city_id'] == $d->city ? $data['rajaongkir']['results'][$i]['city_name'].", " : '') }}}'+
                         '{{{ ($data['rajaongkir']['results'][$i]['city_id'] == $d->city ? $data['rajaongkir']['results'][$i]['province']." - " : '') }}}'+
-                    @endfor
-
+                    @endfor  
                   '{{ $d->zip_code }}</h6>'+
                   '</div>'+
                   '<div id="col-sm-2">'+
@@ -79,6 +78,7 @@
       });
   });
   </script>
+
 <form action="{{ route('order.create') }}" method="post">
     @csrf
     <!-- panel alamat -->
@@ -96,7 +96,7 @@
                         <h6><b>{{ $address->receiver_name }} ({{$address->number_tlp}})</b></h6>
                         <h6>{{ $address->others }}, {{ $address->region }}, 
                         <input type="text" id="kab" value="{{ $d->city }}" style="display:none">
-                        @for ($i=0; $i < count($data['rajaongkir']['results']); $i++)
+                        @for($i=0; $i < count($data['rajaongkir']['results']); $i++)
                             {{{ ($data['rajaongkir']['results'][$i]['city_id'] == $address->city ? $data['rajaongkir']['results'][$i]['city_name'].", " : '') }}}
                             {{{ ($data['rajaongkir']['results'][$i]['city_id'] == $address->city ? $data['rajaongkir']['results'][$i]['province']." - " : '') }}}
                         @endfor
@@ -340,36 +340,6 @@
     </div>
     <!-- /modal tambah alamat -->
 </div>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $("#addrs").change(function(){
-        // CREATE A "DIV" ELEMENT.
-        var container = document.createElement("div");
-          container.id="a";
-
-          @foreach($addresses as $d)
-          if ($(this).val() == "{{$d->id}}"){
-                // ADD TEXTBOX.
-              $('#a').remove();
-                $(container).append('<div class="col-sm-10">'+ 
-                  '<input type="hidden" name="address" value="{{ $d->id }}" readonly="" required="">'+
-                  '<h6><b>{{$d->receiver_name }} ({{$d->number_tlp }})</b></h6> '+
-                  '<h6>{{ $d->others }}, {{ $d->region }}, {{ $d->city }}, {{ $d->province }} {{ $d->zip_code }}</h6>'+
-                  '</div>'+
-                  '<div id="col-sm-2">'+
-                  '<a href="/edit address/{{ $d->id }}" style="float: right; margin-top: 30px">UBAH</a>'+
-                  '</div>'
-                );
-                // ADD BOTH THE DIV ELEMENTS TO THE "main" CONTAINER.
-                $('#main').after(container);
-            }
-            @endforeach
-        });
-    });
-</script>
-
-
 
 @if(count($addresses)==0)
 <script type="text/javascript">
