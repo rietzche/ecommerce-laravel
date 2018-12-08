@@ -28,8 +28,11 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('views_admin.dashboard');
+{       $orders = Order::select('code', DB::raw('count(*) as product_count'))
+            ->groupBy('code')->get();
+
+        return view('views_admin.dashboard')
+        ->with('orders', $orders);
     }
 
     public function order($status)

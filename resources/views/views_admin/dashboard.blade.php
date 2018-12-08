@@ -1,6 +1,7 @@
 @extends('layouts.layout_admin')
 
 @section('content')
+{{! $cekTgl = \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d') }}
 <!-- Dashboard Content-->
 <div class="row">
 	<div class="col-lg-9">
@@ -122,15 +123,21 @@
 								<span class="progress-meter" id="today-progress" data-progress="30"></span>
 							</td>
 						</tr>
-						@for($i=1;$i<=3;$i++)
+						@foreach($orders as $order)
+						<div style="display: none;">
+							{{!! $o = \App\Order::where('code', $order->code)->first() }}
+							{{ $tgl = date('d/m/Y') }}
+							{{ $tglOrd = date('d/m/Y', strtotime($o->created_at))}}
+						</div>
+						@if($tgl==$tglOrd)
 						<tr>
-							<td>ORD{{$i}}</td>
-							<td><span class="text-muted">Muhammad Yusuf</span></td>
-							<td>{{date('d/m/Y')}}</td>
+							<td>{{$order->code}}</td>
+							<td><span class="text-muted">{{ App\user::find($o->id_user)->name }}</span></td>
+							<td>{{ $tglOrd }}</td>
 							<td>
-								<a href="javascript::void(0)" data-toggle="modal" data-target="#myModalTerms{{$i}}"><i class="icon-eye"></i> Lihat</a>
+								<a href="javascript::void(0)" data-toggle="modal" data-target="#myModal{{ $order->id }}"><i class="icon-eye"></i> Lihat</a>
 								<!-- The Modal -->
-								<div class="modal" id="myModalTerms{{$i}}" role="dialog">
+								<div class="modal" id="myModal{{ $order->id }}" role="dialog">
 								    <div class="modal-dialog modal-xs">
 								    	<div class="modal-content">
 									        <!-- Modal Header -->
@@ -145,10 +152,10 @@
 								</div>
 								<!--End The Modal-->
 							</td>
-							<td><h6 class="text-semibold">Rp. 123.000</h6></td>
+							<td><h6 class="text-semibold">Rp. {{ number_format($o->price_total, '0',',','.') }}</h6></td>
 							<td><span class="label bg-success-400">Belum Bayar</span></td>
 							<td class="text-center">
-								<ul class="icons-list">
+								<!-- <ul class="icons-list">
 									<li class="dropdown">
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
 										<ul class="dropdown-menu dropdown-menu-right">
@@ -156,10 +163,11 @@
 											<li><a href="#"><i class="icon-pencil7"></i> Update</a></li>
 										</ul>
 									</li>
-								</ul>
+								</ul> -->
 							</td>
 						</tr>
-						@endfor
+						@endif
+						@endforeach
 					</tbody>
 				</table>
 			</div>
