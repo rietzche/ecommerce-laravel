@@ -53,7 +53,6 @@
 	
 		<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> -->
   		
-
 	</head>
 
 	<body>
@@ -104,7 +103,7 @@
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle text-info" data-toggle="dropdown">{{ Auth::user()->name }}</a>
 					<ul class="dropdown-menu dropdown-menu-right">
-						<li><a href="#" class="text-info">Profile</a></li>
+						<li><a href="{{ route('akun.setting') }}" class="text-info">Profile</a></li>
 						<li>
 							<a class="text-info" href="{{ route('logout') }}"
 								onclick="event.preventDefault();
@@ -165,10 +164,10 @@
 				<div class="foot-element" style="margin-top: -10px; margin-left: 30px">
 					<h6>Temukan kami di :</h6>
 					<ul class="contact-us">
-						<li><a href=""><img src="/assets/images/brands/facebook.png"></a></li>
-						<li><a href=""><img src="/assets/images/brands/twitter.png"></a></li>
-						<li><a href=""><img src="/assets/images/brands/insta.png"></a></li>
-						<li><a href=""><img src="/assets/images/brands/whatsapp.png"></a></li>
+						<li><a href="" target="_blank"><img src="/assets/images/brands/facebook.png"></a></li>
+						<li><a href="" target="_blank"><img src="/assets/images/brands/twitter.png"></a></li>
+						<li><a href="https://www.instagram.com/organizershabby" target="_blank"><img src="/assets/images/brands/insta.png"></a></li>
+						<li><a href="https://api.whatsapp.com/send?phone=6281931334482&text=Halo admin saya mau mengetahui lebih lanjut tentang shabby organizer" target="_blank"><img src="/assets/images/brands/whatsapp.png"></a></li>
 						<li><a href=""><img src="/assets/images/brands/gmail.png"></a></li>
 					</ul>
 				</div>

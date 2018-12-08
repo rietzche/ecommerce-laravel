@@ -12,11 +12,11 @@
 							<li>Social Media</li>
 							<li><a href=""><img src="/assets/images/brands/facebook.png">Shabby Organizer</a></li>
 							<li><a href=""><img src="/assets/images/brands/twitter.png">@orgShabby</a></li>
-							<li><a href="https://www.instagram.com/organizershabby"><img src="/assets/images/brands/insta.png">@organizershabby</a></li><hr>
+							<li><a href="https://www.instagram.com/organizershabby" target="_blank"><img src="/assets/images/brands/insta.png">@organizershabby</a></li><hr>
 							<li>E-mail</li>
 							<li><img src="/assets/images/brands/gmail.png">shabby.org@gmail.com</li><hr>
 							<li>Contact</li>
-							<li><img src="/assets/images/brands/whatsapp.png">+62 8132 231 12321</li>
+							<li><a href="https://api.whatsapp.com/send?phone=6281931334482&text=Halo admin saya mau mengetahui lebih lanjut tentang shabby organizer" target="_blank""><img src="/assets/images/brands/whatsapp.png">+62 8132 231 12321</a></li>
 							<li><img src="/assets/images/brands/line.png">@shabbyOrg</li>
 						</ul>
 					</div>

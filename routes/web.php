@@ -38,6 +38,8 @@ Route::post('/admin/login', 'Auth\AdminLoginController@login')->name('admin.logi
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function()
 {
     Route::get('/', 'Admin\AdminController@index')->name('admin');
+    Route::get('/settings account', 'Admin\AdminController@setting')->name('admin.setting');
+    Route::put('/settings account/{id}', 'Admin\AdminController@update')->name('admin.update');
     Route::get('/dashboard', 'Admin\AdminController@index')->name('admin.home');
     Route::get('/tabel kategori', 'Category\CategoryController@index')->name('category.index');
     Route::post('/category', 'Category\CategoryController@create')->name('category.create');
@@ -50,10 +52,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function()
     Route::get('/edit barang/{id}', 'Product\ProductController@edit')->name('product.edit');
     Route::post('/product update/{id}', 'Product\ProductController@update')->name('product.update');
     Route::delete('/product/{id}', 'Product\ProductController@delete')->name('product.delete');
-
-    Route::get('edit barang', function(){
-        return view('views_admin.barang_edit');
-    });
 
     Route::get('/tabel pesanan/{status}', 'Admin\AdminController@order')->name('admin.order');
     Route::put('/batal pesanan/{code}', 'Pesanan\PesananController@cancelPesanan')->name('pesanan.batal');
@@ -75,6 +73,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function()
 });
 
 Route::group(['middleware' => ['verified']], function () {
+    Route::get('/account settings', function(){
+        return view('auth.settings');
+    })->name('akun.setting');
+
+    Route::put('/account settings/{id}', 'User\UserController@update')->name('user.update');
+
     Route::get('/carts', 'Cart\CartController@index')->name('carts');
     Route::post('/cart', 'Cart\CartController@create')->name('cart.create');
     Route::put('/cart', 'Cart\CartController@update')->name('cart.update');

@@ -62,7 +62,7 @@
                 <td>Kota Tujuan</td><td>:</td>
                 <td>
                 @for($i=0; $i < count($data['rajaongkir']['results']); $i++)
-                              {{{ ($data['rajaongkir']['results'][$i]['city_id'] == \App\Address::where('id_user', $idUser)->value('city') ? $data['rajaongkir']['results'][$i]['city_name'].", " : '') }}}
+                              {{{ ($data['rajaongkir']['results'][$i]['city_id'] == \App\Address::where('id_user', $idUser)->value('city') ? $data['rajaongkir']['results'][$i]['city_name']."" : '') }}}
                 @endfor  
               </td>
               </tr>
@@ -119,7 +119,11 @@
             </tr>
             <tr>
               <td>Kota</td>
-              <td>{{App\Address::where('id_user', $idUser)->value('city')}}</td>
+              <td>
+                @for($i=0; $i < count($data['rajaongkir']['results']); $i++)
+                  {{{ ($data['rajaongkir']['results'][$i]['city_id'] == \App\Address::where('id_user', $idUser)->value('city') ? $data['rajaongkir']['results'][$i]['city_name']."" : '') }}}
+                @endfor  
+              </td>
             </tr>
           </table>
         </div>

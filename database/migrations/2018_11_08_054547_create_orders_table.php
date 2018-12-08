@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->string('code');
             $table->unsignedInteger('id_user');
             $table->unsignedInteger('id_product');
-            $table->integer('id_address')->index();
+            $table->unsignedInteger('id_address')->index();
             $table->integer('bank');
             $table->string('courier');
             $table->string('msg')->nullable(true);

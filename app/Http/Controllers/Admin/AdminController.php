@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 use Alert;
+use App\Admin;
 use App\Order;
 use App\Rating;
 use App\User;
@@ -34,6 +36,23 @@ class AdminController extends Controller
 
         return view('views_admin.dashboard')
         ->with('orders', $orders);
+    }
+
+    public function setting(){
+        return view('views_admin.akun_edit');
+    }
+
+    public function update(Request $req, $id){
+        $admin = Admin::find($id);
+        $admin->name = $req->name;
+        $admin->email = $req->email;
+        if ($req->password!='') {
+            $admin->password = Hash::make($req->password);
+        }
+        $admin->save();
+
+        Alert::success('Memperbarui data admin!', 'Berhasil');
+        return redirect()->back();
     }
 
     public function order($status)

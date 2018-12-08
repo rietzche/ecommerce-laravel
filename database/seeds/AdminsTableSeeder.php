@@ -24,6 +24,8 @@ class AdminsTableSeeder extends Seeder
         App\Category::insert([
             [
                 'name'    => 'Organizer',
+                'created_at'  => \Carbon\Carbon::now('Asia/Jakarta'),
+                'updated_at'  => \Carbon\Carbon::now('Asia/Jakarta')
             ],
         ]);
 
@@ -33,15 +35,19 @@ class AdminsTableSeeder extends Seeder
                 'description' => 'Lemari ini merupakan lemari terunik yang ada di toko ini.',
                 'id_category' => 1,
                 'price'       => 283000,
-                'weight'      => 500,
+                'weight'      => 800,
+                'created_at'  => \Carbon\Carbon::now('Asia/Jakarta'),
+                'updated_at'  => \Carbon\Carbon::now('Asia/Jakarta')
             ],
         ]);
 
         App\Stock::insert([
             [
-                'id_product' => 1,
-                'stock'      => 200,
-                'terjual'      => 0,
+                'id_product'  => 1,
+                'stock'       => 200,
+                'terjual'     => 0,
+                'created_at'  => \Carbon\Carbon::now('Asia/Jakarta'),
+                'updated_at'  => \Carbon\Carbon::now('Asia/Jakarta')
             ],
         ]);
 
@@ -49,6 +55,8 @@ class AdminsTableSeeder extends Seeder
             [
                 'id_product' => 1,
                 'picture'    => 'thumbnail.png',
+                'created_at'  => \Carbon\Carbon::now('Asia/Jakarta'),
+                'updated_at'  => \Carbon\Carbon::now('Asia/Jakarta')
             ],
         ]);
 
@@ -58,6 +66,8 @@ class AdminsTableSeeder extends Seeder
                 'nama_rekening' => 'Shabby Organizer',
                 'cabang'        => 'Tangerang',
                 'no_rekening'   => '0068649676100',
+                'created_at'  => \Carbon\Carbon::now('Asia/Jakarta'),
+                'updated_at'  => \Carbon\Carbon::now('Asia/Jakarta')
             ],
         ]);
     }
