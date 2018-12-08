@@ -1,7 +1,7 @@
 @extends('layouts.layout_admin')
 
 @section('content')
-{{! $cekTgl = \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d') }}
+{{! $month = date('m') }}
 <!-- Dashboard Content-->
 <div class="row">
 	<div class="col-lg-9">
@@ -17,7 +17,7 @@
                 	<div style="float: left;width: 70px; height:70px; margin-right: 10px">
                 		<img src="/assets/images/members-icon.png" width="100%" height="100%">
                 	</div>
-					<h3 class="no-margin">3,450</h3>
+					<h3 class="no-margin">{{ number_format(count(App\User::all()),'0',',','.') }}</h3>
 					Pelanggan
 				</div>
 			</div>
@@ -36,7 +36,7 @@
                 	<div style="float: left;width: 90px; height:70px; margin-right: 10px">
                 		<img src="/assets/images/product-icon.png" width="100%" height="100%">
                 	</div>
-					<h3 class="no-margin">3,450</h3>
+					<h3 class="no-margin">{{ number_format(count(App\Product::all()),'0',',','.') }}</h3>
 					Produk
 				</div>
 			</div>
@@ -55,7 +55,7 @@
                 	<div style="float: left;width: 70px; height:70px; margin-right: 10px">
                 		<img src="/assets/images/cart.png" width="100%" height="100%">
                 	</div>
-					<h3 class="no-margin">3,450</h3>
+					<h3 class="no-margin">{{ App\Stock::sum('terjual') }}</h3>
 					Penjualan
 				</div>
 			</div>
@@ -74,14 +74,21 @@
 				<div class="row text-center">
 					<div class="col-md-6">
 						<div class="content-group">
-							<h5 class="text-semibold no-margin"><i class="icon-calendar5 position-left text-slate"></i> 5,689</h5>
+							<h5 class="text-semibold no-margin"><i class="icon-calendar5 position-left text-slate"></i>
+								{{ App\Stock::sum('terjual') }}
+
+								{{! App\Stock::select('terjual')->groupBy(function($date) {return \Carbon\Carbon::parse($date->created_at)->format('W');}) }}
+
+							</h5>
 							<span class="text-muted text-size-small">orders weekly</span>
 						</div>
 					</div>
 
 					<div class="col-md-6">
 						<div class="content-group">
-							<h5 class="text-semibold no-margin"><i class="icon-calendar52 position-left text-slate"></i> 32,568</h5>
+							<h5 class="text-semibold no-margin"><i class="icon-calendar52 position-left text-slate"></i> 
+								{{ App\Stock::whereMonth('created_at', $month)->sum('terjual') }}
+							</h5>
 							<span class="text-muted text-size-small">orders monthly</span>
 						</div>
 					</div>
@@ -144,8 +151,13 @@
 									        <div class="modal-header">
 									        	<h6 class="modal-title">Bukti Transfer :</h6>
 									        </div>
+									        <div style="display: none;">
+									        	{{! $gmbr = \App\Transaction::where('order_code', $order->code)->first() }}
+									        </div>
 									        <div class="prev-buktiTransf">
-									        	<img src="/assets/images/placeholder.jpg">
+										        @if($gmbr!='')
+										        	<img src="/uploads/bukti_pembayaran/{{$gmbr->proof }}">
+										        @endif
 									        </div>
 								    	</div>
 								    </div>
@@ -153,7 +165,23 @@
 								<!--End The Modal-->
 							</td>
 							<td><h6 class="text-semibold">Rp. {{ number_format($o->price_total, '0',',','.') }}</h6></td>
-							<td><span class="label bg-success-400">Belum Bayar</span></td>
+							<td>
+								@if($o->status==0)
+								<span class="label bg-success-400">Belum Bayar</span>
+								@elseif($o->status==1)
+								<span class="label bg-info-400">Sudah Bayar</span>
+								@elseif($o->status==2)
+								<span class="label bg-danger-400">Pembayaran Ditolak</span>
+								@elseif($o->status==3)
+								<span class="label bg-info-400">Sedang Dikemas</span>
+								@elseif($o->status==4)
+								<span class="label bg-info-400">Sedang Dikirim</span>
+								@elseif($o->status==5)
+								<span class="label bg-success-400">Terkirim</span>
+								@elseif($o->status==-1)
+								<span class="label bg-danger-400">Dibatalkan</span>
+								@endif
+							</td>
 							<td class="text-center">
 								<!-- <ul class="icons-list">
 									<li class="dropdown">

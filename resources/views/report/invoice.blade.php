@@ -98,14 +98,14 @@
             </tr>
             <tr>
               {{! $idProduct = App\Order::where('code', $code)->value('id_product') }}
-              <td>{{App\Product::find($idProduct)->value('name')}}</td>
-              <td> {{ App\Order::where('code', $code)->value('quantity') }} </td>
+              <td>{{ App\Product::find($idProduct)->value('name') }}</td>
+              <td>{{ $q = App\Order::where('code', $code)->value('quantity') }}</td>
             </tr>
           </table>
         </div>
         <div style="border:1px solid black; padding: 10px">
-          <span><b>Estimasi Ongkos Kirim : </b>Rp. 25.000</span><br>
-          <span><b>Total Berat : </b>650</span>
+          <span><b>Estimasi Ongkos Kirim : </b>Rp. {{ number_format(App\Order::where('code', $code)->value('ongkir'), '0',',','.') }}</span><br>
+          <span><b>Total Berat : </b>{{ App\Product::find($idProduct)->value('weight') * $q }} gram</span>
         </div>
 
       </div>

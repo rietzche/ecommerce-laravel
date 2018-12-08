@@ -8,27 +8,27 @@
 </div>
 
 
-    <?php
-        //Get Data Kabupaten
-        $curl = curl_init();    
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => "http://api.rajaongkir.com/starter/city",
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => "",
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 30,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => "GET",
-          CURLOPT_HTTPHEADER => array(
-            "key: c7bcc0c5a39119bf4dd8a2a5b084dd1c"
-          ),
-        ));
+<?php
+    //Get Data Kabupaten
+    $curl = curl_init();    
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => "http://api.rajaongkir.com/starter/city",
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => "",
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 30,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => "GET",
+      CURLOPT_HTTPHEADER => array(
+        "key: c7bcc0c5a39119bf4dd8a2a5b084dd1c"
+      ),
+    ));
 
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
 
-        curl_close($curl);
-    ?>
+    curl_close($curl);
+?>
 
 <div class="container" style="margin-bottom: 100px">
     <!-- panel alamat -->

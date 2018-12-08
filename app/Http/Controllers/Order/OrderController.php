@@ -55,12 +55,14 @@ class OrderController extends Controller
                 'price_total' => $cart->quantity * \App\Product::find($cart->id_product)->price,
             ]);
             $st = Stock::where('id_product', $cart->id_product)->first();
-            $minStock = $cart->quantity;
-            $sisaStock = $st->stock - $minStock;
+            $quant = $cart->quantity;
+            $sisaStock = $st->stock - $quant;
+            $terjual = $st->terjual + $quant;
 
             $s = Stock::Where('id_product', $cart->id_product);
             $s->update([
-                'stock'=> $sisaStock,
+                'stock'   => $sisaStock,
+                'terjual' => $terjual,
             ]);
 
         }

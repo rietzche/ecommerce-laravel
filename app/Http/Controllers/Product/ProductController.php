@@ -102,6 +102,7 @@ class ProductController extends BaseController
         $this->stock->create([
             'id_product' => $product->id,
             'stock' => $req->stock,
+            'terjual' => 0,
         ]);
 
         Alert::success('Menambahkan '.$product->name.' pada daftar', 'Berhasil');

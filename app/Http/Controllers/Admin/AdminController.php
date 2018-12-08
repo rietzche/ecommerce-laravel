@@ -66,7 +66,8 @@ class AdminController extends Controller
         return view('views_admin.pesanan_tabel')->with('orders', $orders);
     }
    
-    public function penilaian(){
+    public function penilaian()
+    {
 
         $ratings = Rating::all();
 
@@ -75,7 +76,8 @@ class AdminController extends Controller
 
     }
 
-    public function pelanggan(){
+    public function pelanggan()
+    {
 
         $members = User::all();
 
@@ -84,11 +86,22 @@ class AdminController extends Controller
 
     }
     
-    public function deletePelanggan($id){
+    public function deletePelanggan($id)
+    {
         User::find($id)->delete();
 
         Alert::success('Menghapus '.$category->name.' dari daftar!', 'Berhasil');
         return redirect()->back();
+    }
+
+    
+    public function penjualan() 
+    {       
+        $orders = Order::select('id_product', DB::raw('count(*) as product_count'))
+            ->groupBy('id_product')->get();
+
+        return view('views_admin.penjualan_tabel')
+        ->with('orders', $orders);
     }
 
 }
