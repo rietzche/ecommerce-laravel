@@ -16,13 +16,14 @@ class CreateCartsTable extends Migration
         Schema::create('carts', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('id_user');
-            $table->integer('id_product');
+            $table->unsignedInteger('id_product');
             $table->integer('quantity');
             $table->timestamps();
         });
 
         Schema::table('carts', function(Blueprint $kolom) {
             $kolom->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $kolom->foreign('id_product')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

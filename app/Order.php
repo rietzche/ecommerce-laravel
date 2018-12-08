@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $fillable = [
-        'code', 'id_product', 'id_user', 'status', 'quantity', 'id_address', 'bank', 'price_total', 'msg', 'courier',
+        'code', 'id_product', 'id_user', 'status', 'quantity', 'id_address', 'bank', 'price_total', 'msg', 'courier', 'ongkir'
     ];
 
     function FKOrder1(){

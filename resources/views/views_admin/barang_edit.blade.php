@@ -49,6 +49,13 @@
 									<input type="number" name="price" class="form-control" value="{{ $product->price }}" required="" placeholder="">
 								</div>
 							</div>
+							<div class="form-group col-sm-12">
+								<label>Berat :</label>
+								<div class="input-group">
+									<input type="text" name="weight" class="form-control" required="" placeholder="">
+									<span class="input-group-addon"><b>gram</b></span>
+								</div>
+							</div>
 						</div>
 
 						<div class="form-group">

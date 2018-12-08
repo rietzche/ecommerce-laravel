@@ -158,7 +158,7 @@
 			
 			<div style="padding-top: 40px; float: right;">
 				<div style="margin-left: 30px; float: left;">
-					<img src="assets/images/logo_dark.png" alt="" style="float: left;width:220px; height:35px">
+					<img src="/assets/images/logo_dark.png" alt="" style="float: left;width:220px; height:35px">
 				</div>
 
 				<div class="foot-element" style="margin-top: -10px; margin-left: 30px">

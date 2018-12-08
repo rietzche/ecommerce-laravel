@@ -51,6 +51,7 @@ class OrderController extends Controller
                 'msg' => $req->msg,
                 'quantity' => $cart->quantity,
                 'status' => 0,
+                'ongkir' => $req->ongkir,
                 'price_total' => $cart->quantity * \App\Product::find($cart->id_product)->price,
             ]);
             $st = Stock::where('id_product', $cart->id_product)->first();
