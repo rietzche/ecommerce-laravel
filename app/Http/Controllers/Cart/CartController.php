@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller as BaseController;
 use App\Http\Controllers\CartService;
 
 use Alert;
+use Illuminate\Support\Facades\Session;
 
 use App\Cart;
 
@@ -48,8 +49,8 @@ class CartController extends BaseController
                 'quantity' => $req->quantity,
             ]);
     
-            alert()->success('Menambahkan ke keranjang!', 'Berhasil');
-            return redirect()->back();
+            Session::flash('success', 'Menambahkan ke keranjang!');
+            return redirect()->back()->with('success', 'Menambahkan ke keranjang!');
         }
         elseif( $condition == false )
         {

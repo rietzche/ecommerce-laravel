@@ -19,6 +19,13 @@
 		<link href="/assets/css/colors.css" rel="stylesheet" type="text/css">
 		<!-- /global stylesheets -->
 
+		<!-- Core JS files -->
+		<script type="text/javascript" src="/assets/js/plugins/loaders/pace.min.js"></script>
+		<script type="text/javascript" src="/assets/js/core/libraries/jquery.min.js"></script>
+		<script type="text/javascript" src="/assets/js/core/libraries/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/assets/js/plugins/loaders/blockui.min.js"></script>
+		<!-- /core JS files -->
+
 		<!-- Theme JS files -->
 		<script type="text/javascript" src="/assets/js/plugins/ui/prism.min.js"></script>
 		<!-- /theme JS files -->
@@ -43,7 +50,6 @@
 		<link rel="stylesheet" href="/assets/sweetalert2/sweetalert2.min.css">
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-
 		<!-- Core JS files -->
 		<script type="text/javascript" src="/assets/js/plugins/loaders/pace.min.js"></script>
 		<script type="text/javascript" src="/assets/js/core/libraries/jquery.min.js"></script>
@@ -52,7 +58,20 @@
 		<!-- /core JS files -->
 	
 		<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> -->
-  		
+		  
+		<script
+        src="https://code.jquery.com/jquery-2.1.4.js"
+        integrity="sha256-siFczlgw4jULnUICcdm9gjQPZkw/YPDqhQ9+nAOScE4="
+        crossorigin="anonymous"></script>
+        <!-- Latest compiled and minified CSS -->
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="/js/pnotify.custom.min.js"></script>
+		<link href="/css/pnotify.custom.min.css" media="all" rel="stylesheet" type="text/css" />
 
 	</head>
 
@@ -85,7 +104,7 @@
 
 			<ul class="nav navbar-nav navbar-right">
 				<li>
-					<form class="form-search">
+					<form action="/search" class="form-search" method="get">
 						<input type="text" name="q" class="in-search" placeholder="Search here..">	
 						<button type="submit" style="outline: none; " class="btn-search"><i class="glyphicon glyphicon-search"></i></button>
 						<div class="clear"></div>
@@ -179,5 +198,26 @@
 			<p>Copyright &copy; 2018 Granada projects.</p>
 		</div>
 	</footer>
+
+	<script type="text/javascript">
+	$(function(){
+		@if(Session::has('success'))
+			new PNotify({
+				title: 'Berhasil',
+				text: 'Menambah barang ke keranjang.',
+				type: 'success',
+				});
+			});
+		@endif
+
+		@if(Session::has('welcome'))
+			new PNotify({
+				title: 'Selamat Datang',
+				text: 'Di website Shabby Organizer :)',
+				type: 'success',
+				});
+			});
+		@endif
+	</script>
 	</body>
 </html>

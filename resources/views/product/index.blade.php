@@ -1,6 +1,7 @@
 @extends('layouts.layout')
 
 @section('content')
+
 <!-- Grid -->
 <div class="content">
 	<div class="row">	
@@ -20,7 +21,7 @@
 							<div class="category-content no-padding">
 								<ul class="navigation navigation-alt navigation-accordion">
 									@foreach($categories as $category)
-									<li><a href="" class="text-info">{{ $category->name }}</a></li>
+									<li><a href="/products/{{ $category->id }}" class="text-info">{{ $category->name }}</a></li>
 									@endforeach
 								</ul>
 							</div>
@@ -35,8 +36,8 @@
 		<div class="col-sm-9">
 			<div class="bar-action">
 				<h6>Urutkan</h6>
-				<a href="">Terbaru</a>
-				<a href="">Terlaris</a>
+				<a href="/products terbaru">Terbaru</a>
+				<a href="/products terlaris">Terlaris</a>
 				<select class="dropdown-harga">
 					<option hidden>Harga</option>
 					<option>Harga Tertinggi</option>

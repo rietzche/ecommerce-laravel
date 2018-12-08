@@ -37,6 +37,47 @@ class ProductController extends BaseController
                                     ->with('categories', $categories);
     }
 
+    public function indexcat($filter)
+    {
+        $products = \App\Product::where('id_category', $filter)->get();
+        $categories = $this->category->browse();
+        return view('product.index')->with('products', $products)
+                                    ->with('categories', $categories);
+    }
+
+    public function indexterbaru()
+    {
+        $products = \App\Product::latest()->get();
+        $categories = $this->category->browse();
+        return view('product.index')->with('products', $products)
+                                    ->with('categories', $categories);
+    }
+
+    public function indexterlaris()
+    {
+        $products= [];
+        $terjual = \App\Stock::orderBy('terjual', 'desc')->get();
+
+        foreach($terjual as $t)
+        {
+            array_merge($products, [
+                \App\Product::find($t->id_product)
+            ]);
+        }
+        $categories = $this->category->browse();
+        return view('product.index')->with('products', $products)
+                                    ->with('categories', $categories);
+    }
+
+    public function search(Request $req)
+    {
+        $search = $req->q;
+        $products = \App\Product::where('name', 'like', '%'.$search.'%')->get();
+        $categories = $this->category->browse();
+        return view('product.index')->with('products', $products)
+                                    ->with('categories', $categories);
+    }
+
     public function indexadmin()
     {
         $products = $this->product->browse();
