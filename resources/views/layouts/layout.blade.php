@@ -48,20 +48,13 @@
 		<link rel="stylesheet" href="/assets/sweetalert2/sweetalert2.min.css">
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-		<!-- Style CSS -->
-		<link rel="stylesheet" href="/world/style.css">
 	
 		<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> -->
   		
 
 	</head>
 
-	<body>	
-	<div id="preloader">
-		<div class="preload-content">
-			<div id="world-load"></div>
-		</div>
-	</div>
+	<body>
 	@include('sweet::alert')
 	<!-- Default navbar -->
 	<div class="navbar navbar-default navbar-component" style="padding: 15px">
@@ -184,14 +177,5 @@
 			<p>Copyright &copy; 2018 Granada projects.</p>
 		</div>
 	</footer>
-
-
-
-		<!-- jQuery (Necessary for All JavaScript Plugins) -->
-		<script src="/world/js/jquery/jquery-2.2.4.min.js"></script>
-		<script src="/world/js/popper.min.js"></script>
-		<script src="/world/js/bootstrap.min.js"></script>
-		<script src="/world/js/plugins.js"></script>
-		<script src="/world/js/active.js"></script>
 	</body>
 </html>

@@ -81,7 +81,7 @@
 
 									<div class="foot-action">
 										<div class="header">
-											<h1>Rp {{ number_format($od->sum('price_total'), 0, ",", ".") }}</h1>
+											<h1>Rp {{ number_format($od->sum('price_total') + $od->first()->ongkir, 0, ",", ".") }}</h1>
 											<h6>Jumlah Harus Dibayar :</h6>
 										</div>
 										<div class="clear"></div>
@@ -159,7 +159,7 @@
 
 									<div class="foot-action">
 										<div class="header">
-											<h1>Rp {{ number_format($od->sum('price_total'), 0, ",", ".") }}</h1>
+											<h1>Rp {{ number_format($od->sum('price_total') + $od->first()->ongkir, 0, ",", ".") }}</h1>
 											<h6>Total Belanja :</h6>
 										</div>
 										<div class="clear"></div>
@@ -257,7 +257,7 @@
 
 									<div class="foot-action">
 										<div class="header">
-											<h1>Rp {{ number_format($od->sum('price_total'), 0, ",", ".") }}</h1>
+											<h1>Rp {{ number_format($od->sum('price_total') + $od->first()->ongkir, 0, ",", ".") }}</h1>
 											<h6>Total Belanja :</h6>
 										</div>
 										<div class="clear"></div>

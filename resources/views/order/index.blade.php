@@ -56,7 +56,7 @@
                 // ADD TEXTBOX.
               $('#a').remove();
                 $(container).append('<div class="col-sm-10">'+ 
-                  '<input type="hidden" name="addresId" value="{{ $d->id }}" readonly="" required="">'+
+                  '<input type="hidden" name="address" value="{{ $d->id }}" readonly="" required="">'+
                   '<h6><b>{{$d->receiver_name }} ({{$d->number_tlp }})</b></h6> '+
                   '<h6>{{ $d->others }}, {{ $d->region }}, '+
                   '<input type="text" id="kab" value="{{ $d->city }}" style="display:none">'+
@@ -131,6 +131,8 @@
                 </thead>
                 <tbody>
                     {{!! $tmp = 0 }}
+                    {{!! $weight = 0 }}
+                    {{!! $weighttot = 0}}
                     {{!! $jum = 0 }}
                     @foreach($carts as $cart)
                     {{! $product = App\Product::find($cart->id_product) }}
@@ -149,13 +151,17 @@
                         <td>Rp. {{ number_format($tmp = $product->price * $cart->quantity, 0, ",", ".") }}</td>
                         {{! $jum = $jum + $tmp }}
                         {{!! $tmp = 0 }}
+
+                        {{! $weight = $product->weight + $cart->quantity }}
+                        {{! $weighttot = $weighttot + $weight }}
+
                     </tr>
                     @endforeach
                     <tr id="maink"></tr>
                         <tr id="m" style="background-color: #fafdff;">
                                     <td><h6 style="float: right;color:#269900">Opsi Pengiriman :</h6></td>
                                     <td>
-                                        <h6>Pilih opsi..</h6>
+                                        <h6>Pilih opsi..<input type="text" value="" required style="display:none"></h6>
                                         <p></p>
                                     </td>
                                     <td><a id="cek" data-toggle="modal" data-target="#modal_default">UBAH</a>
@@ -173,6 +179,8 @@
         </div>
     </div>
     <!-- panel produk dibeli -->
+
+    <input type="text" id="weight" style="display:none" value="{{ $weighttot }}">
 
     <!-- modal pengiriman-->
     <div id="modal_default" class="modal fade">
@@ -240,8 +248,6 @@
                         </tr>
                         <tr>
                             <td><h6>Total Ongkos Kirim</h6></td>
-                            
-                            <input type="hidden" name="ongkir" value="2000">
 
                             <td><h6>Rp. <span id="ong">{{ number_format(0, 0, ",", ".") }}</span></h6></td>
                         </tr>
@@ -393,13 +399,14 @@ $(document).ready(function(){
         //Mengambil value dari option select provinsi asal, kabupaten, kurir, berat kemudian parameternya dikirim menggunakan ajax 
         
         var kab = $('#kab').val();
+        var weight = $('#weight').val();
         var container = document.createElement("div");
             container.id="k";
         var i = 0;
           $.ajax({
             type : 'GET',
                url : 'http://localhost:8000/cek_ongkir',
-               data :  {'kab_id' : kab},
+               data :  {'kab_id' : kab, 'berat' : weight},
                     success: function (data) {
                         data.forEach(function(){
                             $('#k').remove();
@@ -439,6 +446,7 @@ $(document).ready(function(){
     //Mengambil value dari option select provinsi kemudian parameternya dikirim menggunakan ajax 
         var checkval = $("input[name='courier']:checked").val();
         var kab = $('#kab').val();
+        var weight = $('#weight').val();
         var container = document.createElement("tr");
             container.id="m";
         var i = 0;
@@ -447,7 +455,7 @@ $(document).ready(function(){
             $.ajax({
             type : 'GET',
                 url : 'http://localhost:8000/cek_ongkir',
-                data :  {'kab_id' : kab},
+                data :  {'kab_id' : kab, 'berat' : weight},
                     success: function (data) {
                         data.forEach(function(){
                             if(data[i].service == checkval)
@@ -462,6 +470,7 @@ $(document).ready(function(){
                                     '<input type="hidden" name="courier" value="'+checkval+'">'+
                                     '<td><a id="cek" data-toggle="modal" data-target="#modal_default">UBAH</a>'+
                                     '</td>'+
+                                    '<input type="hidden" name="ongkir" value="'+data[i].cost * 1000+'">'+
                                     '<td>Rp. '+data[i].cost+'</td>'
                                 );
                                 
