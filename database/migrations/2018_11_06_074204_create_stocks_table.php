@@ -17,6 +17,7 @@ class CreateStocksTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('id_product');
             $table->integer('stock');
+            $table->integer('terjual');
             $table->timestamps();
         });
 

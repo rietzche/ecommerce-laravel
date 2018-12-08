@@ -66,10 +66,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function()
     Route::get('/tabel pelanggan', 'Admin\AdminController@pelanggan')->name('admin.pelanggan');
     Route::delete('/pelanggan/{id}', 'Admin\AdminController@deletePelanggan')->name('admin.hapususer');
     Route::get('/tabel penilaian', 'Admin\AdminController@penilaian')->name('admin.penilaian');
-
-    Route::get('tabel penjualan', function(){
-        return view('views_admin.penjualan_tabel');
-    });
+    Route::get('/tabel penjualan', 'Admin\AdminController@penjualan')->name('admin.penjualan');
     
     Route::get('/tabel rekening', 'Rekening\RekeningController@index')->name('rekening.index');
     Route::post('/rekening', 'Rekening\RekeningController@create')->name('rekening.create');

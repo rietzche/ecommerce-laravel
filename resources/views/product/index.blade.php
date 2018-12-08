@@ -46,8 +46,10 @@
 				<div class="clear"></div>
 			</div>
 			@foreach($products as $product)
-			{{! $jumRt = App\Rating::where('id_product', $product->id)->get() }}
-			{{! $rt = App\Rating::where('id_product', $product->id)->value('rate') }}
+			<div style="display: none;">
+				{{! $jumRt = App\Rating::where('id_product', $product->id)->get() }}
+				{{! $rt = App\Rating::where('id_product', $product->id)->value('rate') }}
+			</div>
 			<a href="/product/{{ $product->id }}" class="panel-produk">
 				<div class="panel-img">
 					<img src="/uploads/foto-produk/{{ App\Picture::where('id_product', $product->id)->value('picture') }}" style="padding: 5px">

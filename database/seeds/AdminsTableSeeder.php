@@ -41,6 +41,7 @@ class AdminsTableSeeder extends Seeder
             [
                 'id_product' => 1,
                 'stock'      => 200,
+                'terjual'      => 0,
             ],
         ]);
 

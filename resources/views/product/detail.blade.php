@@ -22,8 +22,10 @@
 			</div>
 		</div>
 		<!-- foto detail produk -->
-		{{! $Ratings = App\Rating::where('id_product', $product->id)->get() }}
-		{{! $rt = App\Rating::where('id_product', $product->id)->value('rate') }}
+		<div style="display: none;">
+			{{! $Ratings = App\Rating::where('id_product', $product->id)->get() }}
+			{{! $rt = App\Rating::where('id_product', $product->id)->value('rate') }}
+		</div>
 		<!-- form action produk -->
 		<div class="form-action-produk">
 			<h4>{{ $product->name }}</h4>
