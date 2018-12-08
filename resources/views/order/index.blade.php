@@ -86,26 +86,26 @@
         <div class="panel-heading">     
             @if(count($addresses)!=0)
             <div class="row">
-            	<div class="col-sm-12">
-            		<span style="color: #ff6600;font-size: 1.4em"><i class="glyphicon glyphicon-map-marker"></i>&nbsp;Alamat Pengiriman</span>
-            	</div>
-            	<div id="main"></div>
-            	<div id="a">
-                  	<div class="col-sm-10">
-	            		<input type="hidden" name="address" value="{{ $address->id }}" readonly="" required="">
-	            		<h6><b>{{ $address->receiver_name }} ({{$address->number_tlp}})</b></h6>
-	                    <h6>{{ $address->others }}, {{ $address->region }}, 
+                <div class="col-sm-12">
+                    <span style="color: #ff6600;font-size: 1.4em"><i class="glyphicon glyphicon-map-marker"></i>&nbsp;Alamat Pengiriman</span>
+                </div>
+                <div id="main"></div>
+                <div id="a">
+                    <div class="col-sm-10">
+                        <input type="hidden" name="address" value="{{ $address->id }}" readonly="" required="">
+                        <h6><b>{{ $address->receiver_name }} ({{$address->number_tlp}})</b></h6>
+                        <h6>{{ $address->others }}, {{ $address->region }}, 
                         <input type="text" id="kab" value="{{ $d->city }}" style="display:none">
                         @for ($i=0; $i < count($data['rajaongkir']['results']); $i++)
                             {{{ ($data['rajaongkir']['results'][$i]['city_id'] == $address->city ? $data['rajaongkir']['results'][$i]['city_name'].", " : '') }}}
                             {{{ ($data['rajaongkir']['results'][$i]['city_id'] == $address->city ? $data['rajaongkir']['results'][$i]['province']." - " : '') }}}
                         @endfor
                         {{ $address->zip_code }}</h6>
-	            	</div>
-	            	<div class="col-sm-2">
-	            		<a href="/edit address/{{ $address->id }}" style="float: right; margin-top: 30px">UBAH</a>
-	            	</div>
-            	</div>
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="/edit address/{{ $address->id }}" style="float: right; margin-top: 30px">UBAH</a>
+                    </div>
+                </div>
             </div>
             @else
                 <h5 class="text-center text-muted">Alamat Kosong</h5>
@@ -273,7 +273,7 @@
     <div id="modal_tambah_alamat" class="modal fade" role="dialog">
         <form action="{{ route('address.create') }}" method="post">
         @csrf
-        <div class="modal-dialog">
+        <div class="modal-dialog ">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Tambah Alamat</h5>
@@ -309,12 +309,12 @@
                         $response = curl_exec($curl);
                         $err = curl_error($curl);
 
-			            $data = json_decode($response, true);
+                        $data = json_decode($response, true);
 
                         ?>
                         <select id="provinsi" class="form-control" name="province" required="">
                         @for ($i=0; $i < count($data['rajaongkir']['results']); $i++) {
-				            <option value='{{$data['rajaongkir']['results'][$i]['province_id']}}'>{{$data['rajaongkir']['results'][$i]['province']}}</option>
+                            <option value='{{$data['rajaongkir']['results'][$i]['province_id']}}'>{{$data['rajaongkir']['results'][$i]['province']}}</option>
                         @endfor
                         </select>
                     </div>
@@ -369,6 +369,8 @@
     });
 </script>
 
+
+
 @if(count($addresses)==0)
 <script type="text/javascript">
     $('#modal_tambah_alamat').modal('show');
@@ -376,7 +378,6 @@
 @endif
 
 <script type="text/javascript">
-
 $(document).ready(function(){
     $('#provinsi').change(function(){
 
@@ -478,9 +479,9 @@ $(document).ready(function(){
                                 $('#ong').text(data[i].cost);
                                 jum = (parseInt(data[i].cost) * 1000) + {{ $jum }};
 
-                                var	reverse = jum.toString().split('').reverse().join(''),
-                                ribuan 	= reverse.match(/\d{1,3}/g);
-                                ribuan	= ribuan.join('.').split('').reverse().join('');
+                                var reverse = jum.toString().split('').reverse().join(''),
+                                ribuan  = reverse.match(/\d{1,3}/g);
+                                ribuan  = ribuan.join('.').split('').reverse().join('');
                                 $('#jujum').text(ribuan);
                             }
                             i++;
