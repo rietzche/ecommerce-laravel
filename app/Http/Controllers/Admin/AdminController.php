@@ -28,7 +28,8 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-{       $orders = Order::select('code', DB::raw('count(*) as product_count'))
+    {       
+        $orders = Order::select('code', DB::raw('count(*) as product_count'))
             ->groupBy('code')->get();
 
         return view('views_admin.dashboard')

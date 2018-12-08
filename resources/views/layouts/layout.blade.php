@@ -6,23 +6,18 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Shabby Organizer</title>
 
+		<link rel="stylesheet" type="text/css" href="/css/styleme.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 		<!-- Global stylesheets -->
 		<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
 		<link href="/assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+		<link href="/assets/css/icons/fontawesome/styles.min.css" rel="stylesheet" type="text/css">
 		<link href="/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
 		<link href="/assets/css/core.css" rel="stylesheet" type="text/css">
 		<link href="/assets/css/components.css" rel="stylesheet" type="text/css">
 		<link href="/assets/css/colors.css" rel="stylesheet" type="text/css">
 		<!-- /global stylesheets -->
-		<link rel="stylesheet" type="text/css" href="/css/styleme.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-		<!-- Core JS files -->
-		<script type="text/javascript" src="/assets/js/plugins/loaders/pace.min.js"></script>
-		<script type="text/javascript" src="/assets/js/core/libraries/jquery.min.js"></script>
-		<script type="text/javascript" src="/assets/js/core/libraries/bootstrap.min.js"></script>
-		<script type="text/javascript" src="/assets/js/plugins/loaders/blockui.min.js"></script>
-		<!-- /core JS files -->
 
 		<!-- Theme JS files -->
 		<script type="text/javascript" src="/assets/js/plugins/ui/prism.min.js"></script>
@@ -48,6 +43,13 @@
 		<link rel="stylesheet" href="/assets/sweetalert2/sweetalert2.min.css">
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+
+		<!-- Core JS files -->
+		<script type="text/javascript" src="/assets/js/plugins/loaders/pace.min.js"></script>
+		<script type="text/javascript" src="/assets/js/core/libraries/jquery.min.js"></script>
+		<script type="text/javascript" src="/assets/js/core/libraries/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/assets/js/plugins/loaders/blockui.min.js"></script>
+		<!-- /core JS files -->
 	
 		<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> -->
   		
