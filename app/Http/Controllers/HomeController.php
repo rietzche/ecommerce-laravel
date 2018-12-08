@@ -40,7 +40,7 @@ class HomeController extends Controller
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => "GET",
         CURLOPT_HTTPHEADER => array(
-            "key: 4289bb176b07351df63fc435affaa4e6"
+            "key: 5b3064c12abedc8e773ee938e0aa11a0"
         ),
         ));
 
@@ -74,7 +74,7 @@ class HomeController extends Controller
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => "GET",
         CURLOPT_HTTPHEADER => array(
-            "key: 4289bb176b07351df63fc435affaa4e6"
+            "key: 5b3064c12abedc8e773ee938e0aa11a0"
         ),
         ));
 
@@ -102,12 +102,15 @@ class HomeController extends Controller
             'jne', 'tiki', 'pos',
         ];
 
+        $alamat = $req->kab_id;
+        $weight = $req->berat;
+
         foreach($services as $serv)
         {
             $asal = 1;
-            $id_kabupaten = 27;
+            $id_kabupaten = $alamat;
             $kurir = $serv;
-            $berat = 20;
+            $berat = $weight;
 
             $curl = curl_init();
             curl_setopt_array($curl, array(
@@ -121,7 +124,7 @@ class HomeController extends Controller
             CURLOPT_POSTFIELDS => "origin=".$asal."&destination=".$id_kabupaten."&weight=".$berat."&courier=".$kurir."",
             CURLOPT_HTTPHEADER => array(
                 "content-type: application/x-www-form-urlencoded",
-                "key:  c7bcc0c5a39119bf4dd8a2a5b084dd1c "
+                "key:  5b3064c12abedc8e773ee938e0aa11a0 "
             ),
             ));
 

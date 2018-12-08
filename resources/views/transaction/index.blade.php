@@ -9,7 +9,7 @@
 		<div class="panel panel-flat">
 			<div style="padding: 0px 15px; border:1px solid #f2f2f2">
 				<h6 style="float: left;"><b>Total Pembayaran : </b></h6>
-				<h5 style="float: right; color: #ff6600">Rp. {{ number_format($orders->sum('price_total'), 0, ",", ".") }}</h5>
+				<h5 style="float: right; color: #ff6600">Rp. {{ number_format($orders->sum('price_total') + $orders->first()->ongkir, 0, ",", ".") }}</h5>
 				<div class="clear"></div>
 			</div>
 			{{! $order = $orders->first() }}
@@ -96,7 +96,7 @@
 			</div>
 			<div style="padding: 0px 15px; border:1px solid #f2f2f2">
 				<h6 style="float: left;">Jumlah Ditransfer (Rp) </h6>
-				<input type="text" readonly="" required="" style="float: right; width: 70%; border:none; margin-top: 11px" value="Rp. {{ $orders->sum('price_total') }}">
+				<input type="text" readonly="" required="" style="float: right; width: 70%; border:none; margin-top: 11px" value="Rp. {{ number_format($orders->sum('price_total') + $orders->first()->ongkir, 0, ',', '.') }}">
 				<div class="clear"></div>
 			</div>
 			<div style="padding: 0px 15px; border:1px solid #f2f2f2">

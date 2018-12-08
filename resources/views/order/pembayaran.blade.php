@@ -6,7 +6,7 @@
 		<div class="panel panel-flat">
 			<div class="panel-heading">
 				<h6 class="panel-title bold">Total Pembayaran&nbsp;:</h6>
-				<h1 class="panel-title" style="color: #ff6600;">Rp. {{ number_format($order->sum('price_total'), 0, ",", ".") }}</h1>
+				<h1 class="panel-title" style="color: #ff6600;">Rp. {{ number_format($order->sum('price_total') + $order->first()->ongkir, 0, ",", ".") }}</h1>
 				<p class="text-success">Bayar pesanan sesuai jumlah diatas</p>
 				<p class="text-muted">Dicek dalam 24 jam setelah bukti transfer diupload. Diwajibkan untuk membayar sesuai total pembayaran sebelum batas waktu berakhir.</p>
 			</div>
