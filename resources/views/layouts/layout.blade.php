@@ -58,8 +58,7 @@
 		<!-- /core JS files -->
 	
 		<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> -->
-<<<<<<< HEAD
-		  
+
 		<script
         src="https://code.jquery.com/jquery-2.1.4.js"
         integrity="sha256-siFczlgw4jULnUICcdm9gjQPZkw/YPDqhQ9+nAOScE4="
@@ -74,9 +73,6 @@
         <script type="text/javascript" src="/js/pnotify.custom.min.js"></script>
 		<link href="/css/pnotify.custom.min.css" media="all" rel="stylesheet" type="text/css" />
 
-=======
-  		
->>>>>>> 847f5e280f68656e82e15fc6c1ca14c7c5c09dda
 	</head>
 
 	<body>
