@@ -19,7 +19,9 @@ Route::get('/', function () {
 });
 
 Route::get('/products', 'Product\ProductController@index')->name('products');
+
 Route::get('/search', 'Product\ProductController@search')->name('search');
+
 Route::get('/products/{filter}', 'Product\ProductController@indexcat')->name('products');
 Route::get('/products terbaru', 'Product\ProductController@indexterbaru')->name('products');
 Route::get('/products terlaris', 'Product\ProductController@indexterlaris')->name('products');
