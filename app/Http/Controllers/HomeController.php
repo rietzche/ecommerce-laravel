@@ -145,6 +145,7 @@ class HomeController extends Controller
             foreach($data['rajaongkir']['results'][0]['costs'] as $dat)
             {
                 array_push($respon, [
+                    'image' => $serv.'1.jpg',
                     'service' => strtoupper($serv).' '.$dat['service'],
                     'etd' =>  $dat['cost'][0]['etd'],
                     'cost' => number_format($dat['cost'][0]['value'], 0, ",", ".")

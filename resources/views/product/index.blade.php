@@ -38,15 +38,50 @@
 				<h6>Urutkan</h6>
 				<a href="/products terbaru">Terbaru</a>
 				<a href="/products terlaris">Terlaris</a>
-				<select class="dropdown-harga">
+				
+				<select id="hargaDropdown" class="dropdown-harga">
 					<option hidden>Harga</option>
-					<option>Harga Tertinggi</option>
-					<option>Harga Terendah</option>
+					<option value="1">Harga Tertinggi</option>
+					<option value="2">Harga Terendah</option>
 				</select>
 
 				<div class="clear"></div>
 			</div>
-			@foreach($products as $product)
+
+			<div id="main"></div>
+			<div id="a">
+				{{! $prod = $products }}
+			</div>
+
+			<script type="text/javascript">
+				$(document).ready(function() {
+				    $("#hargaDropdown").change(function(){
+				    	// CREATE A "DIV" ELEMENT.
+			        	var container = document.createElement("div");
+			        	
+				       	if ($(this).val() == "1"){
+			                // ADD TEXTBOX.
+			            	$('#a').remove(); 
+			                $(container).append('<div id="a"></div>'
+			                );
+			                // ADD BOTH THE DIV ELEMENTS TO THE "main" CONTAINER.
+			                $('#main').after(container);
+			            }
+
+						else if ($(this).val() == "2"){
+			                // ADD TEXTBOX.
+			            	$('#a').remove(); 
+			                $(container).append('<div id="a"></div>'
+			                );
+			                // ADD BOTH THE DIV ELEMENTS TO THE "main" CONTAINER.
+			                $('#main').after(container);
+			            }
+						// location.reload();
+				    });
+				});
+			</script>
+
+			@foreach($prod as $product)
 			<div style="display: none;">
 				{{! $jumRt = App\Rating::where('id_product', $product->id)->get() }}
 				{{! $rt = App\Rating::where('id_product', $product->id)->value('rate') }}

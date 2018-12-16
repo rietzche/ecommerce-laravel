@@ -60,10 +60,11 @@ class ProductController extends BaseController
 
         foreach($terjual as $t)
         {
-            array_merge($products, [
+            array_push($products,
                 \App\Product::find($t->id_product)
-            ]);
+            );
         }
+        // dd($products);
         $categories = $this->category->browse();
         return view('product.index')->with('products', $products)
                                     ->with('categories', $categories);

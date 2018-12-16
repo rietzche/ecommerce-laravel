@@ -104,11 +104,13 @@
 
 			<ul class="nav navbar-nav navbar-right">
 				<li>
+					
 					<form action="/search" class="form-search" method="get">
 						<input type="text" name="q" class="in-search" placeholder="Search here..">	
 						<button type="submit" style="outline: none; " class="btn-search"><i class="glyphicon glyphicon-search"></i></button>
 						<div class="clear"></div>
 					</form>
+
 				</li>
 				@guest
 				<li>

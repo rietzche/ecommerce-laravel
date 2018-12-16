@@ -16,8 +16,8 @@
                             </div>
                         @endif
 
-                        {{ __('Before proceeding, please check your email for a verification link.') }}
-                        {{ __('If you did not receive the email') }}, <a class="alert-link" href="{{ route('verification.resend') }}">{{ __('click here to request another') }}</a>.
+                        {{ __('Sebelum memperoses, silahkan cek email anda untuk melakukan verifikasi.') }}
+                        {{ __('jika anda belum menerima email ') }},  <u><a class="alert-link" href="{{ route('verification.resend') }}">{{ __('klik disini') }}</a>.</u>
                     </div>
                 </div>
             </div>

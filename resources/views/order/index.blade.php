@@ -387,7 +387,7 @@ $(document).ready(function(){
                                         '<input type="radio" name="courier" value="'+data[i].service+'">'+
                                     '</td>'+
                                     '<td>'+
-                                        '<img src="/assets/images/jne1.jpg" style="width: 100px; height: 60px; margin: 0px 20px 0px 10px">'+
+                                        '<img src="/assets/images/'+data[i].image+'" style="width: 100px; height: 60px; margin: 0px 20px 0px 10px">'+
                                     '</td>'+
                                     '<td>'+
                                         '<div style="margin: 5px 150px 5px 5px">'+
